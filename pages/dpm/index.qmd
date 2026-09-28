@@ -1,0 +1,40 @@
+---
+title: "Part 1 · Learn the Dirichlet process mixture"
+description: "A ladder from a two-cell mixture to the collapsed Gibbs sampler, after Broderick's MLSS 2016 lectures and 2012 tutorial."
+---
+
+Nine rungs, from why a mixture with a fixed number of cells is not enough, through the
+Beta and Dirichlet distributions, the paintbox, stick-breaking, the urn and the Chinese
+restaurant process, to the Dirichlet process mixture and a sampler that fits it. Each rung
+is a page with one or more widgets; click a rung to open it. The badges come from the
+[catalog](../../catalog.qmd).
+
+{{< include _ladder.md >}}
+
+| Rung | Page | Catalog | What it shows |
+|---|---|---|---|
+| 0 | [Why nonparametric Bayes?](why-nonparametric.qmd) | P-00 | A finite mixture fixes K cells; K = ∞ keeps unbroken mass for new cells |
+| 1–2 | [Beta and Dirichlet](beta-dirichlet.qmd) | P-01, P-02 | Random weight vectors: small a is all-or-nothing, large a is even; the ternary view at K = 3 |
+| 3 | [Paintbox](paintbox.qmd) | P-03, P-04 | Uniform drops on a K = 1000 Dirichlet partition: many components, few clusters, the order-of-appearance staircase |
+| 4 | [Stick-breaking](stick-breaking.qmd) | P-05, P-17 | How alpha splits a unit stick into weights: E[w_1] = 1/(1 + alpha), Pr(w_1 > .5) = 0.5^alpha |
+| 5 | [Hoppe urn to stick-breaking](urn-to-sticks.qmd) | P-06 | Colour shares of Hoppe's urn converge to a stick-breaking draw; the first colour's share is Beta(1, alpha) |
+| 6 | [Chinese restaurant process](crp.qmd) | P-07, P-08 | Units join clusters in proportion to size, or open a new one in proportion to alpha; how K_N grows |
+| 6 | [EPPF and exchangeability](eppf.qmd) | P-14 | The seating probability is a product of CRP factors that no arrival order changes |
+| 6 | [K_J as a random variable, and exercises](exercises.qmd) | P-15 | 100 replicated restaurants against the Antoniak pmf; five exercises answered by the engine |
+| 7 | [DP mixture, generated](dpmm.qmd) | P-09 | Lazy stick-breaking: N, components created and clusters grow at different speeds |
+| 7 | [Distributions and DP atoms](dp-and-atoms.qmd) | P-10, P-11, P-12 | Beta, Dirichlet, GEM and DP draws under one alpha; a DP draw G and its repeating samples; finite K_N stops at K, the DP's keeps growing |
+| 8 | [Collapsed Gibbs sampler](crp-gibbs.qmd) | P-13 | Posterior = CRP prior weight × fit, one point at a time; three starts; alpha = 0.01 is a strong prior |
+
+::: {.callout-note appearance="simple"}
+## Attribution
+
+The ladder follows Tamara Broderick's lectures *Nonparametric Bayesian statistics*
+(Machine Learning Summer School, Cádiz, 2016, parts I–III) and her 2012 tutorial *Clusters
+and features from combinatorial stochastic processes*, and borrows their visual conventions:
+the staircase stick, the piece colours (blue, orange, green, purple, red, yellow), grey for
+components that exist but hold no data, white for unbroken mass, and a red marker for a
+uniform draw. Her `bnp_tutorial` R demonstrations are licensed GPL-3 and **are not ported**:
+every widget here re-implements the mathematics in this site's MIT-licensed engine. Some
+comparison layouts follow the visual grammar of Ryan Giordano's presentations. Full list:
+[ATTRIBUTION.md](https://github.com/joonho112/dpprior-explorer/blob/main/ATTRIBUTION.md).
+:::

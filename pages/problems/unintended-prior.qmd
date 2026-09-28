@@ -1,0 +1,47 @@
+---
+title: "The unintended prior"
+subtitle: "Catalog M-03 · paper Figure 1"
+description: "A Gamma hyperprior calibrated to 'about five clusters' can also imply that a random unit has nearly even odds of belonging to a majority cluster."
+toc: false
+---
+
+An analyst who expects "about five groups" among J = 50 sites can calibrate a Gamma
+hyperprior on the concentration parameter to that judgment. Gamma(1.60, 1.22) does it:
+its implied number of clusters has mean 5.05 and SD 3.06, matching a negative-binomial
+target with those moments. The same hyperprior also fixes the *sizes* of the clusters,
+and there it says something the analyst probably did not intend.
+
+```{=html}
+<div id="w-unintended" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/unintended-prior.js"></script>
+<script>
+  window.__dpxUnintended = DPX["unintended-prior"].mountWidget(document.getElementById("w-unintended"), {});
+</script>
+```
+
+## Two readings of one prior
+
+- **Count view (Panel A).** The bars are the prior distribution of K_50, the number of
+  occupied clusters among the 50 sites: mean 5.05, median 4, 90% interval [1, 11]. The
+  circles are the negative-binomial target with the same mean and SD.
+- **Weight view (Panel B).** W_SB is the population share of the cluster that a
+  randomly chosen site belongs to. Its tail is closed-form,
+  Pr(W_SB > t) = (b / (b − log(1 − t)))^a: .487 above one half and .183 above .9.
+- **In Chinese-restaurant language:** pick one of the 50 sites at random; with
+  probability .49 it sits at a table that holds more than half of the whole population.
+  "About five clusters" and "one cluster holds most of the mass" hold at the same time.
+
+Set a = 1 and b = 1 (the "vague" default) and the tails move to .591 and .303. Change J
+and watch the count view move while the weight view does not: the weight tail involves
+only a and b.
+
+::: {.callout-note appearance="simple"}
+K_J is the number of fitted components (occupied clusters) among the J units. These are
+prior quantities. W_SB is not the largest weight; Pr(W_max > .5) is bounded between
+Pr(W_SB > .5) and twice that value (Proposition 1 of the paper).
+:::
+
+Standalone version: [embed/unintended-prior.html](../../embed/unintended-prior.html),
+for example `?a=1&b=1&J=100`.

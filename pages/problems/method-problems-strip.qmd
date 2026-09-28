@@ -1,0 +1,44 @@
+---
+title: "DORO, SCAL and SSI side by side"
+subtitle: "Catalog M-04"
+description: "Three published rules for choosing the Gamma hyperprior, each with an implication its users may not intend."
+toc: false
+---
+
+Each rule below solves a reasonable-sounding problem. Read in the count view and the
+weight view together, each one also says something else.
+
+```{=html}
+<div id="w-strip" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/method-problems-strip.js"></script>
+<script>
+  window.__dpxStrip = DPX["method-problems-strip"].mountWidget(document.getElementById("w-strip"), {});
+</script>
+```
+
+- **DORO-Unif** (after Dorazio, 2009) chooses Gamma(a, b) to minimise the Kullback–Leibler
+  divergence from a flat count target, here on {1, …, 2 mu_K − 1}. A Gamma-mixed count
+  distribution is hump-shaped, so the best it can do still puts about .07 on a single
+  cluster and leaks about .07 beyond the target's support (J = 100, mu_K = 5:
+  Gamma(2.434, 2.461)). The paper keeps it only as an external reference because the fit
+  fails its adequacy checks.
+- **SCAL** (Murugiah & Sweeting, 2012) fixes P(K_m = 1) = .34 and
+  P(K_m ≥ ⌈2 ln m⌉) = .15 at every sample size m. The prior probability of complete
+  homogeneity therefore never moves off .34. Their shortcut a = b = exp(−0.033 m) does
+  move: at m = 100 it gives P(K = 1) = .834, a near-certain single cluster.
+- **SSI-Weight** fixes the weight tails, Pr(W_SB > .5) = .25 and Pr(W_SB > .9) = .05, with
+  no count target: Gamma(2.179, 0.780). The expected number of clusters then grows from
+  6.44 at J = 25 to 20.9 at J = 5000.
+- **Vague Gamma(1, 1)**, for comparison, gives P(K_100 = 1) = .168 and Pr(W_SB > .5) = .591.
+
+::: {.callout-note appearance="simple"}
+All four panels are prior statements. K_J is the number of fitted components among the J
+units (m in SCAL's notation). The (a, b) values come from `r-export/02_methods_catalog.R`
+(DPprior 2.0.0); probabilities are recomputed on the page. The stale value .824 for the
+SCAL shortcut came from a coarse quadrature; the correct value is .834.
+:::
+
+Standalone version: [embed/method-problems-strip.html](../../embed/method-problems-strip.html)
+(for example `?J=500` for DORO at the vocabulary size).

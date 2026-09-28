@@ -1,0 +1,68 @@
+---
+title: "Why the exact computation is cheap"
+subtitle: "Catalog C-10, C-12, C-11"
+description: "Three facts that let every number on this site be computed live: K_J given alpha is a sum of Bernoulli draws, the Gamma mixture is a finite sum over a grid, and so a calibration is a Newton solve in milliseconds."
+toc: false
+---
+
+Every number on this site is computed in your browser, exactly, while you move a slider.
+Three facts make that possible.
+
+## 1. Given alpha, the number of clusters is a sum of coin flips
+
+In the Chinese restaurant process, unit i opens a new table with probability
+p_i = alpha / (alpha + i − 1), independently of the other units. So K_J = B_1 + … + B_J with
+B_i ~ Bernoulli(p_i). Its mean and variance are sums, and its pmf is a convolution that takes
+J² steps. At alpha = 1 and J = 500 the convolution lands on the Antoniak pmf from Stirling
+numbers to within 1e-10, and E K_500 = H_500 = 6.79.
+
+```{=html}
+<div id="w-bsum" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/bernoulli-sum.js"></script>
+<script>
+  window.__dpxBsum = DPX["bernoulli-sum"].mountWidget(document.getElementById("w-bsum"), { J: 500, alpha: 1 });
+</script>
+```
+
+## 2. Over alpha, the prior is a finite mixture
+
+A Gamma prior on alpha mixes these pmfs. On a quadrature grid of alpha nodes the mixture is a
+weighted sum, and a few hundred nodes are enough: below, the J = 50 TSMM prior
+Gamma(1.4082, 1.0770) starts at 20 nodes; drag the node count up and watch the error vanish.
+
+```{=html}
+<div id="w-mix" class="dpx-host column-page"></div>
+<script src="../../js/bundles/gamma-mixing.js"></script>
+<script>
+  window.__dpxMixFast = DPX["gamma-mixing"].mountWidget(document.getElementById("w-mix"), { a: 1.4082, b: 1.077, J: 50, n: 20 });
+</script>
+```
+
+## 3. So a calibration takes milliseconds
+
+TSMM needs the mean and variance of K_J and their derivatives, each one pass over that grid, and
+Newton needs about six passes. The badges below time it in this browser.
+
+```{=html}
+<div id="w-time" class="dpx-host column-page"></div>
+<script src="../../js/bundles/timing-badges.js"></script>
+<script>
+  window.__dpxTime = DPX["timing-badges"].mountWidget(document.getElementById("w-time"), {});
+</script>
+```
+
+Because a calibration costs milliseconds, J and mu_K can be swept freely: the "Sweep" button
+calibrates 150 targets at once. MCMC is still needed to fit the model to data (the paper's
+simulation admitted 57,151 fits, each started with four chains of 12,000 iterations), but not
+to choose the prior.
+
+::: {.callout-note appearance="simple"}
+The gamma-mixing widget is the same file as on [the Gamma mixing page](../bridge/gamma-mixing.qmd)
+(catalog C-12), mounted here with a different starting prior. Times vary by device; they are
+medians of five runs after a warm-up.
+:::
+
+Standalone versions: [embed/bernoulli-sum.html](../../embed/bernoulli-sum.html) (for example
+`?J=500&alpha=1`) and [embed/timing-badges.html](../../embed/timing-badges.html).

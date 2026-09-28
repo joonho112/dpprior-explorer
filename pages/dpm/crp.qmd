@@ -1,0 +1,80 @@
+---
+title: "The Chinese restaurant process"
+subtitle: "Catalog P-07 · after Broderick (MLSS 2016, part II)"
+description: "Units arrive one at a time and join existing clusters in proportion to their size, or open a new one in proportion to alpha."
+toc: false
+---
+
+Imagine the J units of a study (sites, schools, studies) arriving one at a time at a
+restaurant with infinitely many tables. The first sits at table 1. Unit n + 1 joins an
+occupied table k with probability n_k / (alpha + n), where n_k is the number already
+there, and opens a new table with probability alpha / (alpha + n). Large tables attract
+more newcomers ("the rich get richer"), and alpha works like a pseudo-count for the
+tables nobody has sat at yet.
+
+```{=html}
+<div id="w-crp" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/crp.js"></script>
+<script>
+  window.__dpxCrp = DPX["crp"].mountWidget(document.getElementById("w-crp"), { alpha: 1 });
+</script>
+```
+
+## What to try
+
+- **alpha = 1, Seat 1 eight times.** The factor strip below the bar reproduces
+  Broderick's example: the probability of a seating is the product of one factor per
+  arrival, alpha/alpha for the first, then n_k/(alpha + n) or alpha/(alpha + n).
+- **Seat 100 at alpha = 0.01, then at alpha = 2.** With a tiny alpha nearly everyone
+  ends up at one table; with alpha = 2 a handful of tables share the room.
+- **The STAR read-out.** With J = 79 schools, the 79th school opens a new cluster with
+  probability alpha/(alpha + 78): 1.3% at alpha = 1 and 6.0% at alpha = 5. By then the
+  expected number of clusters is E(K_79 | alpha) = Σ alpha/(alpha + i − 1).
+- **Say sites and clusters** relabels the picture in the language of a multisite study.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, Cádiz, part II; 2012 tutorial); re-implemented from the
+mathematics. The seating is seeded, so the same seed and alpha reproduce the same
+restaurant. Keyboard: Tab to the controls; Enter seats one more.
+:::
+
+Standalone version: [embed/crp.html](../../embed/crp.html) (for example `?alpha=0.5`).
+
+## How K_N grows (P-08)
+
+Follow the number of occupied tables K_N as customers keep arriving. Its expectation
+E[K_N] = Σ alpha/(alpha + n − 1) grows like alpha log N: slowly, but without bound. At a
+fixed N, the exact distribution of K_N is the Antoniak distribution, which is exactly
+what the rest of the site calls the prior of K_J for a study with J = N units.
+
+```{=html}
+<div id="w-growth" class="dpx-host column-page"></div>
+<script src="../../js/bundles/crp-growth.js"></script>
+<script>
+  window.__dpxGrowth = DPX["crp-growth"].mountWidget(document.getElementById("w-growth"), { alpha: 1, N: 100 });
+</script>
+```
+
+At alpha = 1 and N = 100, E[K_100] = 5.19: the average of the black curve and the mean of
+the bars in panel B are the same number. Add 1000 customers and switch the N axis to log:
+the staircase follows alpha log N. The dotted guides mark N = 48, 79 and 500, the sizes of
+the paper's three applications.
+
+Standalone version: [embed/crp-growth.html](../../embed/crp-growth.html) (`?alpha=2&J=500`).
+
+## The same idea as a video (A-16)
+
+Seventy-nine arrivals at alpha = 1 and at alpha = 5, side by side: a few large tables against
+many small ones.
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: 79 customers seated by the Chinese restaurant process with alpha = 1 and alpha = 5">
+  <source src="../../media/crp_growth.mp4" type="video/mp4">
+  <a href="../../media/crp_growth.mp4">Download the video (mp4, 13 s)</a>
+</video>
+```
+
+More videos: [Videos for talks](../media.qmd).

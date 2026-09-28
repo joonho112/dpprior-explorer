@@ -1,0 +1,28 @@
+# --- build tooling ---
+node_modules/
+engine/node_modules/
+engine/dist/
+.quarto/
+/.luarc.json
+*.log
+.DS_Store
+
+# --- local scratch ---
+_scratch/
+verification/_smoke/
+# r-export run logs name local paths (r-export/README.md)
+r-export/logs/
+# the history audit's report describes one clone's history; write it before a push, do not commit it
+verification/history_audit.md
+
+# --- reference material: never commit ---
+# The Broderick (2012 tutorial; MLSS 2016 slides and bnp_tutorial-master, GPL-3)
+# and Giordano presentation folders live one level up, outside this repository.
+# These patterns guard against an accidental copy into the repo.
+Tamara Broderick_*/
+ryan-giordano-presentations/
+bnp_tutorial-master/
+*.webloc
+
+/.quarto/
+**/*.quarto_ipynb

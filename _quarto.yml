@@ -1,0 +1,176 @@
+project:
+  type: website
+  output-dir: docs
+  pre-render: scripts/pre-render.ts
+  post-render: scripts/post-render.ts
+  # Only these sources are Quarto documents. engine/ (TypeScript + node_modules),
+  # verification/, catalog/schema/, embed/ and the Markdown contracts
+  # (README, CONTRACT, ATTRIBUTION, DEPLOY) are never rendered.
+  render:
+    - "index.qmd"
+    - "catalog.qmd"
+    - "learning-paths.qmd"
+    - "pages/**/*.qmd"
+    - "!engine/"
+    - "!verification/"
+    - "!catalog/schema/"
+    - "!embed/"
+  # Copied verbatim into docs/ so widgets, embeds and data resolve by relative path.
+  # Leading "/" anchors each glob at the project root; without it Quarto matched
+  # "js/**" and "data/**" inside engine/node_modules/*/src/ as well (Step 3.6).
+  resources:
+    - "/js/**"
+    - "/data/**"
+    - "/media/**"
+    - "/apps/**"
+    - "/embed/**"
+    - "/styles/**"
+    - "/catalog/catalog.json"
+    - "/catalog/thumbs/**"
+
+website:
+  title: "DPprior Explorer"
+  description: "Interactive visualizations for design-conditional prior elicitation in Dirichlet process mixtures."
+  site-url: "https://joonho112.github.io/dpprior-explorer/"
+  repo-url: "https://github.com/joonho112/dpprior-explorer"
+  page-navigation: true
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "1 · Learn the DPM"
+        menu:
+          - text: "Overview"
+            href: pages/dpm/index.qmd
+          - text: "Why nonparametric Bayes? (P-00)"
+            href: pages/dpm/why-nonparametric.qmd
+          - text: "Beta and Dirichlet (P-01, P-02)"
+            href: pages/dpm/beta-dirichlet.qmd
+          - text: "Paintbox (P-03, P-04)"
+            href: pages/dpm/paintbox.qmd
+          - text: "Stick-breaking (P-05)"
+            href: pages/dpm/stick-breaking.qmd
+          - text: "Hoppe urn to stick-breaking (P-06)"
+            href: pages/dpm/urn-to-sticks.qmd
+          - text: "Chinese restaurant process (P-07)"
+            href: pages/dpm/crp.qmd
+          - text: "EPPF and exchangeability (P-14)"
+            href: pages/dpm/eppf.qmd
+          - text: "K_J as a random variable + exercises (P-15)"
+            href: pages/dpm/exercises.qmd
+          - text: "DP mixture, generated (P-09)"
+            href: pages/dpm/dpmm.qmd
+          - text: "Distributions and DP atoms (P-10, P-11, P-12)"
+            href: pages/dpm/dp-and-atoms.qmd
+          - text: "Collapsed Gibbs sampler (P-13)"
+            href: pages/dpm/crp-gibbs.qmd
+      - text: "2 · CRP bridge"
+        menu:
+          - text: "Overview"
+            href: pages/bridge/index.qmd
+          - text: "One alpha, two lenses (C-04)"
+            href: pages/bridge/two-lenses.qmd
+          - text: "Gamma mixing (C-12)"
+            href: pages/bridge/gamma-mixing.qmd
+          - text: "The unintended prior in 1000 restaurants (M-05)"
+            href: pages/bridge/crp-unintended.qmd
+          - text: "Dominance: ribbon, order, W_max band (M-17, M-18, C-16)"
+            href: pages/bridge/dominance.qmd
+          - text: "Collapse (M-06)"
+            href: pages/bridge/collapse.qmd
+          - text: "What Gamma(1, 1) actually says (M-07)"
+            href: pages/bridge/gamma11.qmd
+      - text: "3 · Default problems"
+        menu:
+          - text: "Overview and method timeline (M-08)"
+            href: pages/problems/index.qmd
+          - text: "Same default, different J (M-01, M-02)"
+            href: pages/problems/defaults-drift.qmd
+          - text: "The unintended prior (M-03)"
+            href: pages/problems/unintended-prior.qmd
+          - text: "DORO, SCAL and SSI side by side (M-04)"
+            href: pages/problems/method-problems-strip.qmd
+          - text: "DORO explorer (M-09)"
+            href: pages/problems/doro.qmd
+          - text: "SCAL explorer (M-10)"
+            href: pages/problems/scal.qmd
+          - text: "SSI explorer and the K* = 30 overlay (M-11, A-10)"
+            href: pages/problems/ssi.qmd
+          - text: "Other defaults: Gamma(eps, eps), K_n-diffuse, Jeffreys, Stirling-gamma (M-12 to M-14, M-19)"
+            href: pages/problems/other-defaults.qmd
+          - text: "The method map; transported vs recalibrated (M-15, M-16)"
+            href: pages/problems/method-map.qmd
+      - text: "4 · DPprior"
+        menu:
+          - text: "Overview"
+            href: pages/dpprior/index.qmd
+          - text: "The workflow, step by step (C-13)"
+            href: pages/dpprior/workflow.qmd
+          - text: "Reporting the prior (C-14)"
+            href: pages/dpprior/checklist.qmd
+          - text: "Worked example, J = 50 (C-15)"
+            href: pages/dpprior/worked-example-j50.qmd
+          - text: "Elicit: from what you expect to a prior (C-05)"
+            href: pages/dpprior/elicitation.qmd
+          - text: "Calibrate a count target (C-02)"
+            href: pages/dpprior/calibrator.qmd
+          - text: "Where a Gamma prior exists (C-06)"
+            href: pages/dpprior/feasibility.qmd
+          - text: "Stage 1, then Stage 2: the Newton path (C-07)"
+            href: pages/dpprior/stage1-stage2.qmd
+          - text: "The Dual-Anchor frontier (C-08)"
+            href: pages/dpprior/dual-anchor.qmd
+          - text: "Two anchors, one prior (C-09)"
+            href: pages/dpprior/two-anchors.qmd
+          - text: "Why it is fast (C-10, C-11)"
+            href: pages/dpprior/why-fast.qmd
+          - text: "Confidence and the tails: Table 2 (C-03)"
+            href: pages/dpprior/vif-sensitivity.qmd
+          - text: "TSMM checked against R (C-01)"
+            href: pages/dpprior/tsmm-parity.qmd
+          - text: "The alpha sweep in plotly and ggiraph (X-02)"
+            href: pages/dpprior/plotly-alpha-sweep.qmd
+      - text: "5 · Evidence"
+        menu:
+          - text: "Overview"
+            href: pages/applications/index.qmd
+          - text: "Project STAR: 79 schools (A-01, A-02)"
+            href: pages/applications/star.qmd
+          - text: "Bangert-Drowns: 48 studies (A-03)"
+            href: pages/applications/bangert-drowns.qmd
+          - text: "A vocabulary test: 500 respondents (A-04, A-05)"
+            href: pages/applications/vocabulary-rasch.qmd
+          - text: "The partition moves, the effects do not (A-11, A-12)"
+            href: pages/applications/partition-vs-effects.qmd
+          - text: "The simulation (A-06 to A-09)"
+            href: pages/applications/simulation.qmd
+          - text: "Released data (A-13)"
+            href: pages/applications/data.qmd
+          - text: "Static fallbacks for talks (A-14, A-15)"
+            href: pages/applications/talk-fallbacks.qmd
+          - text: "Videos for talks (P-17, A-16)"
+            href: pages/media.qmd
+    right:
+      - text: "Learning paths"
+        href: learning-paths.qmd
+      - text: "Vocabulary"
+        href: pages/vocabulary.qmd
+      - text: "Tools"
+        href: pages/tools.qmd
+      - text: "Catalog"
+        href: catalog.qmd
+  page-footer:
+    left: "DPprior Explorer · code MIT · released summaries CC BY 4.0"
+    right: "Lee (2026), arXiv:2602.06301"
+
+format:
+  html:
+    theme: cosmo
+    css:
+      - styles/tokens.css
+      - styles/widgets.css
+    toc: true
+    lang: en
+    include-in-header:
+      - text: |
+          <script>document.documentElement.setAttribute("data-theme", "light");</script>

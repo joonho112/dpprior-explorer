@@ -1,0 +1,215 @@
+/*
+ * DPprior Explorer design tokens.
+ *
+ * Structure follows the IRW reliability webapp (src/styles/tokens.css): one
+ * light :root block, one dark block under prefers-color-scheme, validated by
+ * scripts/validate_palette.js. Three colour families live here:
+ *
+ *   --dp-*   DPprior identity, taken from DPprior Studio (utils_plotting.R).
+ *   --m-*    method roles, taken from the paper's exhibits (Okabe-Ito role
+ *            palette in the replication package, exhibits/style.R), so a
+ *            widget's "Vague" or "Dual-Anchor" line has the paper's colour.
+ *   --b-*    stick pieces / CRP tables in Broderick's order
+ *            (blue, orange, green, purple, red, yellow), after Broderick
+ *            (MLSS 2016; 2012 tutorial). Grey = generated but unused,
+ *            white = remaining mass, red marker = a uniform draw.
+ *
+ * Hue is never the only channel. Method lines also carry the paper's
+ * linetype/shape redundancy (see CONTRACT.md, "Colour and accessibility"),
+ * stick pieces are outlined, and every chart has a text alternative.
+ *
+ * Theme selection:
+ *   - default: light tokens;
+ *   - OS dark mode: dark tokens, unless <html data-theme="light">;
+ *   - <html data-theme="dark"> forces dark tokens (embed pages: ?theme=dark).
+ * Site pages (Quarto, light theme) set data-theme="light" in the header so a
+ * dark OS never paints dark widgets on a light page.
+ *
+ * The dark block appears twice (media query and [data-theme="dark"]). The
+ * validator checks that the two copies are identical. Re-validate after any
+ * change:  node scripts/validate_palette.js
+ */
+
+:root {
+  color-scheme: light;
+
+  /* --- DPprior identity (Studio) --- */
+  --dp-teal: #1b9aaa;
+  --dp-blue: #2f6f9f;
+  --dp-green: #2e7d5b;
+  --dp-gold: #c98a12;
+  --dp-red: #c94634;
+  --dp-slate: #40515c;
+
+  /* --- method roles (paper exhibits, Okabe-Ito) --- */
+  --m-vague: #e69f00;
+  --m-doro: #56b4e9;
+  --m-tsmm: #439c6c;
+  --m-da: #cc79a7;
+  --m-hard: #d55e00;
+  --m-ssi: #0072b2;
+  --m-lit: #000000;
+  --m-neutral: #999999;
+
+  /* --- Broderick pieces: blue, orange, green, purple, red, yellow --- */
+  --b-1: #2e64ce;
+  --b-2: #f28c21;
+  --b-3: #3e9d57;
+  --b-4: #8b60bc;
+  --b-5: #d72438;
+  --b-6: #e6c229;
+  --b-unused: #c3cbd0;
+  --b-rest: #ffffff;
+  --b-marker: #b00020;
+  --b-stroke: #132026;
+
+  --label-light: #ffffff; /* number labels on Broderick fills: the better of */
+
+  --label-dark: #132026;  /* these two by WCAG contrast (chart.labelOn) */
+
+  /* --- surface and text --- */
+  --bg: #ffffff;
+  --bg-raised: #f7f9fa;
+  --bg-sunken: #edf1f3;
+  --fg: #132026;
+  --fg-muted: #40515c;
+  --fg-faint: #5c6b74;
+  --border: #dce4e8;
+  --border-strong: #7a8a93;
+  --accent: #1b9aaa;
+  --accent-ink: #11707c;
+  --focus: #11707c;
+  --warn-bg: #fff4e5;
+  --warn-fg: #7a4100;
+  --shade: #d9d9d9;
+
+  /* --- type --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --lh-tight: 1.2;
+  --lh-body: 1.55;
+
+  /* --- space (4px scale) --- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.04);
+  --widget-max: 960px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --dp-teal: #3cb8c7;
+    --dp-blue: #5b9bd0;
+    --dp-green: #4fae84;
+    --dp-gold: #e0a93a;
+    --dp-red: #e1705d;
+    --dp-slate: #9fb1bc;
+    --m-vague: #e69f00;
+    --m-doro: #3bbff9;
+    --m-tsmm: #4fb284;
+    --m-da: #cc8db7;
+    --m-hard: #ec7a3a;
+    --m-ssi: #4b9de0;
+    --m-lit: #e6ecef;
+    --m-neutral: #8d979d;
+    --b-1: #4790ec;
+    --b-2: #f5a04f;
+    --b-3: #4db979;
+    --b-4: #a57cc3;
+    --b-5: #f04f57;
+    --b-6: #f2d34d;
+    --b-unused: #4c585f;
+    --b-rest: #1a2228;
+    --b-marker: #ff5a6e;
+    --b-stroke: #e6ecef;
+
+    --label-light: #ffffff; /* number labels on Broderick fills: the better of */
+
+    --label-dark: #132026;  /* these two by WCAG contrast (chart.labelOn) */
+    --bg: #10161a;
+    --bg-raised: #1a2228;
+    --bg-sunken: #0a0e11;
+    --fg: #e6ecef;
+    --fg-muted: #b3c1c9;
+    --fg-faint: #93a3ad;
+    --border: #2b363d;
+    --border-strong: #7d8f99;
+    --accent: #3cb8c7;
+    --accent-ink: #6fd2de;
+    --focus: #6fd2de;
+    --warn-bg: #3a2a12;
+    --warn-fg: #f5c98a;
+    --shade: #3a454c;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 12px rgb(0 0 0 / 0.3);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --dp-teal: #3cb8c7;
+  --dp-blue: #5b9bd0;
+  --dp-green: #4fae84;
+  --dp-gold: #e0a93a;
+  --dp-red: #e1705d;
+  --dp-slate: #9fb1bc;
+  --m-vague: #e69f00;
+  --m-doro: #3bbff9;
+  --m-tsmm: #4fb284;
+  --m-da: #cc8db7;
+  --m-hard: #ec7a3a;
+  --m-ssi: #4b9de0;
+  --m-lit: #e6ecef;
+  --m-neutral: #8d979d;
+  --b-1: #4790ec;
+  --b-2: #f5a04f;
+  --b-3: #4db979;
+  --b-4: #a57cc3;
+  --b-5: #f04f57;
+  --b-6: #f2d34d;
+  --b-unused: #4c585f;
+  --b-rest: #1a2228;
+  --b-marker: #ff5a6e;
+  --b-stroke: #e6ecef;
+
+  --label-light: #ffffff; /* number labels on Broderick fills: the better of */
+
+  --label-dark: #132026;  /* these two by WCAG contrast (chart.labelOn) */
+  --bg: #10161a;
+  --bg-raised: #1a2228;
+  --bg-sunken: #0a0e11;
+  --fg: #e6ecef;
+  --fg-muted: #b3c1c9;
+  --fg-faint: #93a3ad;
+  --border: #2b363d;
+  --border-strong: #7d8f99;
+  --accent: #3cb8c7;
+  --accent-ink: #6fd2de;
+  --focus: #6fd2de;
+  --warn-bg: #3a2a12;
+  --warn-fg: #f5c98a;
+  --shade: #3a454c;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+/* Respect a reader who has asked for less motion. Widgets also read
+   matchMedia('(prefers-reduced-motion: reduce)') and jump to the end state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

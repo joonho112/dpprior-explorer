@@ -1,0 +1,75 @@
+---
+title: "The method map"
+subtitle: "Catalog M-15, M-16"
+description: "Every catalog prior on one plane, expected number of clusters against the majority-mass probability: one alpha cannot buy few clusters and little dominance for free."
+toc: true
+---
+
+Each rule on the previous pages answers one question. Put them all on one plane, the
+expected number of clusters E K_J against the chance Pr(W_SB > .5) that a randomly chosen
+unit sits in a cluster holding more than half the units, and a pattern appears: the corner
+of few clusters and little dominance is nearly empty.
+
+## One plane for every prior {#method-map}
+
+```{=html}
+<div id="w-map" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/method-map.js"></script>
+<script>
+  window.__dpxMap = DPX["method-map"].mountWidget(document.getElementById("w-map"), {});
+</script>
+```
+
+- **At J = 100:** Vague Gamma(1, 1) sits at (4.84, .591), Gamma(2, 4) at (3.20, .726),
+  DORO-Unif at (4.99, .547), the tabulated SCAL prior at (4.74, .654), SSI-Weight at
+  (10.05, .250), the count-only TSMM calibration at (5.00, .557) and the Dual-Anchor at
+  (6.65, .399).
+- **The corner.** The shaded box holds what the vocabulary target asks for (E K_J between 2
+  and 10) together with the Dual-Anchor's weight bound (Pr(W_SB > .5) ≤ .40). At J = 100
+  three priors are inside: the Dual-Anchor (6.65, .399), and two that aim at more clusters,
+  the SSI exemplar Gamma(1.81, 1.04) (7.26, .395) and DORO-Unif with mu_K = 10 (9.91, .284).
+  At J = 500 only the Dual-Anchor is left. Priors that target the count alone land above the
+  box; priors that target the weights alone drift out to the right as J grows.
+- **J moves points sideways only.** For fixed (a, b) the weight tail does not depend on J,
+  so changing J slides every point left or right; SSI-Weight moves furthest (8.21 at J = 50,
+  14.47 at J = 500), because its E(alpha) = 2.8 is the largest of the labelled priors.
+- Hover or choose a prior to see its count distribution and W_SB density, and send its
+  (a, b) and J to the [Gamma(1, 1) dashboard](../bridge/gamma11.qmd) (M-07).
+
+## Transported versus recalibrated {#transported-vs-recalibrated}
+
+A count judgment such as "about 5 clusters, between 2 and 10 with 80% probability" can be
+calibrated once and reused, or calibrated again for each design. Calibrated at J = 500 (the
+vocabulary study) it gives Gamma(2.1062, 3.0789); the figure shows what happens either way.
+
+```{=html}
+<div id="w-transport" class="dpx-host column-page"></div>
+<script src="../../js/bundles/transported-vs-recalibrated.js"></script>
+<script>
+  window.__dpxTransport = DPX["transported-vs-recalibrated"].mountWidget(document.getElementById("w-transport"), {});
+</script>
+```
+
+- **Carried unchanged,** Gamma(2.1062, 3.0789) no longer says "about 5" at other sizes: it
+  expects 2.36 clusters at J = 10, 3.43 at 50 and 3.90 at 100, reaching 5.00 only at J = 500.
+- **Recalibrated at each J,** the expected count is 5.00 everywhere the target can be met
+  (J = 15 and up; at J = 10 no Gamma prior has this mean and variance), with the same 90% band
+  [1, 11]. But the weights move: Pr(W_SB > .5) is .495 at J = 50, .555 at 100 and .652 at
+  500, because a larger design needs a smaller alpha for the same count.
+- The same count judgment therefore implies more dominance in larger designs. This is what the
+  Dual-Anchor controls explicitly.
+
+::: {.callout-note appearance="simple"}
+Prior statements only; K_J is the number of fitted components among the J units. Gamma and
+fixed-alpha points are recomputed in the browser; the Jeffreys and Stirling-gamma points come
+from R (`r-export/02_methods_catalog.R`). TSMM and Dual-Anchor are the paper's J = 100
+calibrations (OSM Table F.4), kept fixed when J changes. The recalibrated priors are TSMM fits
+by DPprior 2.0.0 (`r-export/03_recalibrate_by_J.R`); they agree with the paper's Fig. 2 data.
+:::
+
+Standalone versions: [embed/method-map.html](../../embed/method-map.html)
+(for example `?J=500` or `?preset=headline`) and
+[embed/transported-vs-recalibrated.html](../../embed/transported-vs-recalibrated.html)
+(for example `?J=100` for the reference J, `?preset=noband`).

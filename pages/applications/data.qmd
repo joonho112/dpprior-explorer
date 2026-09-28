@@ -1,0 +1,57 @@
+---
+title: "Released data behind the evidence pages"
+subtitle: "Catalog A-13 · data lineage and licence"
+description: "Every summary table the site reads, with its source in the replication package, its level, its size and its fixed caption."
+toc: false
+---
+
+The evidence pages read summary tables that the replication package
+([joonho112/DPprior-paper-replication](https://github.com/joonho112/DPprior-paper-replication))
+releases. They are copied, not recomputed: no MCMC runs in the browser, and no pupil-level,
+response-level or individual posterior-draw data are included. A contract file records each
+table's source, level, rows, columns, sha256 and licence scope, and the site's verification
+gate (`verification/check_data_contract.mjs`) fails if a table changes, loses or gains a
+column, contains an individual-level field, or lacks its rights statement.
+
+**What CC BY 4.0 covers.** The grant covers the author's contribution and nothing more. The simulation and calibration tables are the author's own output and are
+covered whole. The application tables hold the author's posterior summaries of data that
+belong to others, and the per-unit inputs in `star_units.json` and `bd_units.json` (the
+estimate `tau_hat`, its standard error `se` and the size `n_j`) come straight from those data:
+Project STAR through the R package mlmRev, and Bangert-Drowns, Hurley and Wilkinson (2004)
+through the R package metadat. Both packages are distributed under GPL (>= 2), a package
+licence rather than a separate grant for the original study data, so these inputs keep their
+upstream terms and are not relicensed here. The vocabulary tables derive from an Item Response
+Warehouse table whose derived licence is CC BY 4.0, subject to upstream rights (collected by
+the Open-Source Psychometrics Project; scale by Brotherton, French and Pickering, 2013). Each card
+below states its table's scope, upstream source and terms, following the replication
+package's `LICENSE-SCOPE.md` and `provenance/data-rights.csv`.
+
+One table is the declared exception: `rasch_respondents.json` holds anonymous derived values
+for the 500 respondents of the vocabulary application (row number, raw score, WLE, its SE
+and a perfect-score flag), re-derived from the public Item Response Warehouse table with the
+replication package's sampling rule and scoring code. It has no responses and no source IDs,
+it is the only file on the respondent-level allowlist, and the gate checks that it agrees
+with the score-group table (the same count, WLE and SE at every raw score).
+
+```{=html}
+<div id="w-lineage" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/data-lineage-card.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = { dataBase: "../../data/released/" };
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxLineage = DPX["data-lineage-card"].mountWidget(document.getElementById("w-lineage"), spec);
+  })();
+</script>
+```
+
+::: {.callout-note appearance="simple"}
+Simulation summaries keep the paper's retained-fit denominators: 8,607 of 9,000 planned fits
+in the 45 main cells (57,151 of 64,400 across all suites). The replication package's OCRS
+application (descriptive school-level contrasts, not the original blocked intent-to-treat
+analysis) is not used on this site.
+:::
+
+Standalone version: [embed/data-lineage-card.html](../../embed/data-lineage-card.html) (for example `?preset=rasch`).

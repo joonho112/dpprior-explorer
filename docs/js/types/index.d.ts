@@ -1,0 +1,11 @@
+export declare const DP_CORE_VERSION = "0.2.0";
+export { digamma, lgamma, logAddExp, logRising, logSumExp, trigamma, } from "./special.ts";
+export { FINITE_SUM_J_MAX, LIVE_J_MAX, condMean, condMeanDigamma, condMeanSum, condPmf, condPmfConvolution, condVar, condVarDigamma, condVarSum, logStirlingRow, pmfQuantile, pmfSummary, profileBound, supportUpperVariance, type PmfSummary, } from "./count.ts";
+export { dgammaLog, gammp, gammq, pgamma, pgammaUpper, qgamma } from "./gamma.ts";
+export { ALPHA_FLOOR, DEGENERATE_A, MIN_NODES, NODE_SPACING, POINT_MASS_A, alphaGrid, mixExpect, mixMoments, mixPK1, mixPmf, mixSummary, prAlphaBelow, type AlphaGrid, type Moments, } from "./mixing.ts";
+export { MAJORITY_T, W_DENSITY_MAX, meanRho, meanRhoGivenAlpha, varRhoGivenAlpha, wmaxBounds, wmaxTail, wmaxTailGivenAlpha, wsbCdf, wsbDensity, wsbQuantile, wsbTail, wsbTailGivenAlpha, type WmaxBounds, } from "./weights.ts";
+export { VIF_BY_CONFIDENCE, a1Init, checkTarget, confidenceToVariance, cvToVariance, intervalToMoments, qnorm, vifToVariance, type A1Start, type Confidence, type CountMoments, type Feasibility, } from "./elicit.ts";
+export { DEMO_MEANS, DEMO_WEIGHTS, clusterMeans, createGibbs, demoData, setAlpha, stepPoint, sweep, type Cluster, type GibbsInit, type GibbsOptions, type GibbsState, type Point2, type PointUpdate, } from "./gibbs.ts";
+export { DORAZIO_TABLE, SCAL_SHORTCUT_RATE, SCAL_TARGETS, SEARCH_NODE_FACTOR, SSI_TARGETS, doroDivergence, doroKL, scalShortcut, scalSolve, scalTailK, scalTails, ssiSolve, type DoroOptions, type SolverResult, } from "./solvers.ts";
+export { maxCountVariance, tsmmFit, tsmmMoments, type TsmmOptions, type TsmmResult, type TsmmStatus, type TsmmStep, } from "./tsmm.ts";
+export { Crp, GEM_EPS, lrgamma, makeRng, rbeta, rbeta1, rcrpTables, rdirichlet, rgamma, rgem, rnorm, type CrpStep, type GemDraw, type Rng, } from "./sample.ts";

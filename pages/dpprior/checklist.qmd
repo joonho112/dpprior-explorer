@@ -1,0 +1,54 @@
+---
+title: "Reporting the prior"
+subtitle: "Catalog C-14"
+description: "The paper's eight-item reporting checklist as a form: fill it in, see what is missing, and copy a reporting paragraph with the calibrated prior, its weight diagnostics, the Dual-Anchor choice and the hard-bound sensitivity."
+toc: false
+---
+
+A calibrated hyperprior is only as useful as its report. The paper asks for eight items,
+fixed before any posterior simulation. Fill in the form, or press "Fill in the J = 50
+example", and copy the paragraph. The weight diagnostics and the trigger decision are computed
+for you from J and (a, b).
+
+```{=html}
+<div id="w-report" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/report-generator.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxReport = DPX["report-generator"].mountWidget(document.getElementById("w-report"), spec);
+  })();
+</script>
+```
+
+1. **J**, and why it is treated as fixed.
+2. **The elicited statement** about K_J, the route used to convert it, and the resulting
+   (mu_K, sigma^2) with a substantive justification ([the elicitation form](elicitation.qmd)).
+3. **The calibrated (a, b)**, shape and rate, and the software version ([the calibrator](calibrator.qmd)).
+4. **The prior median and central interval** of K_J.
+5. **Pr(W_SB > .5) and Pr(W_SB > .9)**, the result for the largest weight, and E(rho).
+6. **If the .40 trigger fires**, the Dual-Anchor details: soft target, the full lambda grid and
+   the selection rule, the selected lambda, the change in the moments, and the software's
+   status fields ([the frontier](dual-anchor.qmd)).
+7. **The hard-bound result**, reported separately, including whether it is nearly a point mass.
+8. **At least one posterior sensitivity variant.**
+
+The six steps behind these items are on [the workflow page](workflow.qmd).
+
+::: {.callout-note appearance="simple"}
+The generated paragraph is a starting point written by this site, not text from the paper.
+It ends with a one-line summary, such as "J=50, Gamma(2.3158,1.4204), S(.5)=.398,
+lambda=.30", for a table of priors.
+:::
+
+::: {.callout-tip appearance="simple"}
+**In DPprior Studio.** For R code, a table and figures for the chosen prior, use the Report panel of [DPprior Studio](https://joonho.shinyapps.io/dpprior-studio/), the Shiny app that
+accompanies the package (built on DPprior 1.1.0; it may take a moment to wake up). This site does
+not rebuild what Studio already does.
+:::
+
+Standalone version: [embed/report-generator.html](../../embed/report-generator.html)
+(for example `?preset=j50`).

@@ -1,0 +1,63 @@
+---
+title: "Stick-breaking"
+subtitle: "Catalog P-05 · after Broderick (MLSS 2016, part I)"
+description: "How one number, the concentration alpha, splits a unit stick into the weights of infinitely many components."
+toc: false
+---
+
+Take a stick of length one. Break off a random proportion V_1 of it: that piece is the
+first weight, w_1 = V_1. Break off a proportion V_2 of what is left: w_2 = V_2 (1 − V_1).
+Keep going. With every V_k drawn from Beta(1, alpha), the weights (w_1, w_2, …) follow the
+GEM(alpha) distribution, the weights of a Dirichlet process.
+
+```{=html}
+<div id="w-stick" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/stick-breaking.js"></script>
+<script>
+  window.__dpxStick = DPX["stick-breaking"].mountWidget(document.getElementById("w-stick"), { alpha: 2 });
+</script>
+```
+
+## What to try
+
+- **alpha = 0.5.** The first break usually takes most of the stick:
+  E[w_1] = 1/(1 + alpha) = .667 and Pr(w_1 > .5) = 0.5^alpha = .707.
+- **alpha = 2, then 10.** The pieces get smaller and more numerous; at alpha = 10 no
+  single piece dominates (E[w_1] = .091, Pr(w_1 > .5) = .001).
+- **alpha = 100.** Hundreds of slivers; the stick behaves almost like a continuum.
+- **Step** reveals the staircase one break at a time, so you can read each V_k.
+- **Ranked by size** reorders the same pieces from largest to smallest.
+- **x20 rows** draws twenty more sticks with the same alpha: the spread across rows is
+  the uncertainty that a single draw hides.
+
+The first piece matters for everything that follows on this site: it has the same
+distribution as the population share of the cluster that a randomly chosen unit belongs
+to (the size-biased weight W_SB). That is why Pr(W_SB > .5) is the paper's measure of
+majority-mass dominance.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, Cádiz, part I; 2012 tutorial). The widget re-implements the
+mathematics; no code from her R demonstrations is used. Keyboard: Tab to the controls,
+arrow keys move the slider, Enter draws again.
+:::
+
+Standalone version: [embed/stick-breaking.html](../../embed/stick-breaking.html),
+for example `?alpha=0.5`.
+
+## The same idea as a video (P-17)
+
+Fifty independent sticks, pieces ranked by size, as alpha moves from 0.5 to 2 to 10.
+The video needs no JavaScript, so it is the last-resort fallback for slides.
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: fifty stick-breaking draws ranked by size as alpha moves from 0.5 to 2 to 10">
+  <source src="../../media/stick_alpha.mp4" type="video/mp4">
+  <a href="../../media/stick_alpha.mp4">Download the video (mp4, 15 s)</a>
+</video>
+```
+
+Rendered with gganimate from `r-export/04_gganimate.R` (1280 × 720, 15 s). A still of
+the three states: [stick_alpha_key.png](../../media/stick_alpha_key.png).

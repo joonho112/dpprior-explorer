@@ -1,0 +1,45 @@
+---
+title: "Stage 1, then Stage 2: how TSMM finds Gamma(a, b)"
+subtitle: "Catalog C-07"
+description: "The J = 50 example step by step: a closed-form start from a negative-binomial proxy, then Newton steps on the exact moments, over the contours of the moment error, in R and in the browser."
+toc: false
+---
+
+TSMM solves for Gamma(a, b) in two stages. **Stage 1** (A1) pretends that K_J − 1 is
+negative binomial, which gives a closed-form start: for J = 50 and the target (5, 10),
+Gamma(2.667, 2.608). Under the exact Gamma mixture that start gives E K_50 = 4.415 and
+Var K_50 = 5.618, so it misses by (−0.59, −4.38). **Stage 2** runs Newton on (log a, log b)
+with the exact moments and their derivatives, and lands on Gamma(1.4082, 1.0770) in five steps.
+
+```{=html}
+<div id="w-newton" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/newton-path.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    var t = q.get("t"); if (t !== null && t !== "" && isFinite(+t)) spec.t = +t;
+    window.__dpxNewton = DPX["newton-path"].mountWidget(document.getElementById("w-newton"), spec);
+  })();
+</script>
+```
+
+- **The start is close in shape, not in moments.** The gold proxy has mean 5 and variance 10 by
+  construction; the exact pmf at the start is narrower (variance 5.618). The first Newton step
+  overshoots to Gamma(0.841, 0.627), with variance 13.5, and the next three close in.
+- **The residual falls quadratically.** |F| goes 4.42, 3.55, 0.41, 0.009, 5e-6 and then about
+  1e-11, the signature of Newton near a root.
+- **R and the browser take the same steps.** The R path (DPprior 2.0.0) and the dp-core path
+  agree to four decimals at every step; both stop below 1e-8.
+
+The same solver runs live in [the calibrator](calibrator.qmd), and all ten calibration targets
+are checked against R on [the parity page](tsmm-parity.qmd).
+
+::: {.callout-note appearance="simple"}
+R trace: data/released/newton_trace.json (six rows: the start and five Newton steps). The
+contours use a coarse alpha grid and are drawn once when the page loads; the path uses the
+full grid.
+:::
+
+Standalone version: [embed/newton-path.html](../../embed/newton-path.html) (for example `?t=1`).

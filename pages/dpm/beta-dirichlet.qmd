@@ -1,0 +1,48 @@
+---
+title: "Beta and Dirichlet: random probability vectors"
+subtitle: "Catalog P-01, P-02 · rungs 1–2 · after Broderick (MLSS 2016, part I)"
+description: "Draw random weight vectors again and again, and watch the parameter a decide between all-or-nothing and nearly even."
+toc: false
+---
+
+A mixture needs weights: nonnegative numbers that add up to one. The Dirichlet distribution
+is a distribution over such vectors. With K = 2 it is the Beta distribution: rho_1 ~
+Beta(a_1, a_2) and rho_2 = 1 − rho_1. Its parameters work like pseudo-counts: E(rho_k) =
+a_k / (a_1 + … + a_K), and the larger they are, the closer each draw stays to that mean.
+
+```{=html}
+<div id="w-lollipop" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/lollipop.js"></script>
+<script>
+  window.__dpxLollipop = DPX["lollipop"].mountWidget(document.getElementById("w-lollipop"), { K: 2 });
+</script>
+```
+
+## What to try
+
+- **K = 2 (Beta).** Press **Draw again** (or Enter) a few times, or switch on auto-draw.
+  At a = 1 every value of rho_1 is equally likely. At a = 0.01 almost every draw puts
+  nearly all weight on one of the two components. At a = 1000 both stay near one half.
+  The right panel shows the Beta density with the current rho_1 in red.
+- **K = 5 to 12 (Dirichlet).** The same rule with more components: small a concentrates
+  each draw on one or two components, large a flattens it towards 1/K (dashed line).
+- **K = 3 and the ternary view.** Every draw is a point in a triangle whose corners are
+  (1, 0, 0), (0, 1, 0) and (0, 0, 1). The presets show the three shapes: a = 0.5 pushes
+  the points into the corners, a = 5 gathers them in the centre, and a = (40, 10, 10) pulls
+  them towards rho_1 = 40/60 = 2/3.
+- **set each a_k** gives every component its own parameter.
+
+As K grows and a shrinks with K·a held fixed, the Dirichlet draw starts to look like the
+stick-breaking weights of the Dirichlet process ([paintbox](paintbox.qmd),
+[stick-breaking](stick-breaking.qmd)).
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part I, demos 1 and 2); the mathematics is re-implemented and
+no code is copied.
+:::
+
+Standalone versions: [embed/beta-lollipop.html](../../embed/beta-lollipop.html) (for
+example `?a=0.01`) and [embed/dirichlet-lollipop.html](../../embed/dirichlet-lollipop.html)
+(`?preset=corners`, `centre` or `tilted`, or `?K=8&a=0.1`).

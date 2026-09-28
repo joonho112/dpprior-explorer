@@ -1,0 +1,45 @@
+---
+title: "The Dirichlet process mixture, generated"
+subtitle: "Catalog P-09 · rung 7 · after Broderick (MLSS 2016, part II)"
+description: "Points arrive one at a time; stick pieces and their means are created only when needed. Points, components and clusters grow at three different speeds."
+toc: false
+---
+
+The Dirichlet process mixture puts the pieces together. Each new point draws a uniform u.
+If u falls inside a piece of the stick that already exists, the point joins that piece's
+cluster. If it falls in the unbroken rest, the stick is broken further, one Beta(1, alpha)
+proportion at a time, until a piece covers u; every new piece also gets a new mean, drawn
+from the base distribution N(0, sigma0^2). The point then lands near its piece's mean, with
+spread sigma.
+
+```{=html}
+<div id="w-dpmm" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/dpmm-generator.js"></script>
+<script>
+  window.__dpxDpmm = DPX["dpmm-generator"].mountWidget(document.getElementById("w-dpmm"), {});
+</script>
+```
+
+## What to try
+
+- **Add 1** (or Enter) a few times, then **Add 100**. Three counters move at different
+  speeds: N grows by one per point, components by one per new piece of stick, clusters by
+  one per piece that receives its first point. Clusters grow roughly like alpha log N (the
+  dashed curve).
+- **Look for lonely black squares.** A u that lands far to the right forces several breaks
+  at once; the pieces it skipped get means but no points. Those are components without a
+  cluster.
+- **Hover over a piece** of the stick (or use the component picker) to light up its points
+  and its mean.
+- **alpha, sigma0, sigma.** alpha sets how quickly new pieces are needed; sigma0 how far
+  apart the means are; sigma how tight each cluster is.
+
+::: {.callout-note appearance="simple"}
+On this site K_J counts clusters, the fitted components among the J units, not the components
+the process has created. After Broderick (MLSS 2016, part II, demo 6); the mathematics is
+re-implemented and no code is copied.
+:::
+
+Standalone version: [embed/dpmm.html](../../embed/dpmm.html), for example `?alpha=5&n=300`.

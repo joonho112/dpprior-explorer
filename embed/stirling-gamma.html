@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- M-19 (catalog). Written by scripts/make_embed.mjs from embed/_template.html; edit embed/embeds.json. -->
+<title>Stirling-gamma vs Gamma(2, 4): a pinned count, moving weights · DPprior Explorer</title>
+<script>
+  // ?theme=light|dark overrides prefers-color-scheme (CONTRACT.md section 4)
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<link rel="stylesheet" href="../styles/tokens.css">
+<link rel="stylesheet" href="../styles/widgets.css">
+</head>
+<body class="dpx-embed">
+<main>
+  <h1 class="dpx-embed-title">Stirling-gamma vs Gamma(2, 4): a pinned count, moving weights</h1>
+  <div id="w" class="dpx-host"></div>
+  <p class="dpx-caption">Sg(4, 1, n) and Sg(1, 0.25, n) keep E K_n = 4 at every n, where Gamma(2, 4) drifts like log n (3.20 at 100, 4.35 at 1,000, 5.51 at 10,000). The weights, not examined by the Sg papers, move instead: Pr(W_SB &gt; .5) rises from about .3 to .77 by n = 2000. Use ?n=.</p>
+  <p class="dpx-attrib">DPprior Explorer · <a href="https://arxiv.org/abs/2602.06301">Lee (2026)</a> · after Zito, Rigon and Dunson (2024)</p>
+</main>
+<!-- classic scripts only: this page must work from file:// (CONTRACT.md section 1) -->
+<script src="../js/vendor/d3.min.js"></script>
+<script src="../js/vendor/plot.min.js"></script>
+<script src="../js/bundles/stirling-gamma.js"></script>
+<script>
+  (function () {
+    // numeric query parameters become the initial spec; unparseable values are ignored
+    var q = new URLSearchParams(location.search), spec = {};
+    ["a", "b", "J", "K", "I", "r", "alpha", "t", "n", "seed", "mu", "var"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v;
+    });
+    // short word parameters (an application, a prior, a view) pass through when they are plain words;
+    // each widget checks them against its own list
+    ["app", "prior", "sort", "view", "branch"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && /^[A-Za-z0-9_ ()-]{1,40}$/.test(v)) spec[k] = v;
+    });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxWidget = DPX["stirling-gamma"].mountWidget(document.getElementById("w"), spec);
+  })();
+</script>
+</body>
+</html>

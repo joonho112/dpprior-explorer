@@ -1,0 +1,58 @@
+---
+title: "Videos for talks"
+subtitle: "Catalog P-17 and A-16"
+description: "Three short videos rendered in R with gganimate: stick-breaking by alpha, the Chinese restaurant at alpha = 1 and 5, and the default Gamma(1, 1) prior on K_J as J grows. They need no JavaScript, so they also play in a slide or offline."
+toc: false
+---
+
+Three short videos rendered in R with gganimate. They need no JavaScript, so they also play
+inside a slide deck, in QuickTime, or offline; each is 1280 × 720 and under 1 MB.
+
+## Stick-breaking by alpha (P-17)
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: fifty stick-breaking draws ranked by size as alpha moves from 0.5 to 2 to 10">
+  <source src="../media/stick_alpha.mp4" type="video/mp4">
+  <a href="../media/stick_alpha.mp4">Download the video (mp4, 15 s)</a>
+</video>
+```
+
+Fifty independent sticks, pieces ranked by size, as alpha moves from 0.5 to 2 to 10. Still:
+[stick_alpha_key.png](../media/stick_alpha_key.png).
+
+## The Chinese restaurant, 79 arrivals: alpha = 1 against alpha = 5 (A-16)
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: 79 customers seated by the Chinese restaurant process with alpha = 1 (5 tables at the end, one with 51 customers) and alpha = 5 (15 tables)">
+  <source src="../media/crp_growth.mp4" type="video/mp4">
+  <a href="../media/crp_growth.mp4">Download the video (mp4, 13 s)</a>
+</video>
+```
+
+With alpha = 1, the mean of the default Gamma(1, 1), the 79 customers end at 5 tables and one
+table holds 51 of them; with alpha = 5 they open 15 tables. Each panel is the first simulated
+seating whose final count equals its expected value rounded (E[K_79 | alpha] = 4.95 and
+14.59, from DPprior 2.0.0), so the two runs are typical rather than lucky. Still:
+[crp_growth_key.png](../media/crp_growth_key.png).
+
+## The default Gamma(1, 1) prior on K_J as J grows (A-16)
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: the prior pmf of K_J under Gamma(1, 1) for J from 10 to 500; the mean moves from 2.65 to 6.44 while Pr(W_SB > .5) stays at .591">
+  <source src="../media/k_prior_by_J.mp4" type="video/mp4">
+  <a href="../media/k_prior_by_J.mp4">Download the video (mp4, 14 s)</a>
+</video>
+```
+
+The prior mean of K_J moves from 2.65 at J = 10 to 4.61 at J = 79 and 6.44 at J = 500, and
+Pr(K_J = 1) falls from .287 to .132, while the stick-breaking tail Pr(W_SB > .5) stays at .591:
+the count view of the same prior depends on J, the weight view does not. The pmf is mixed over
+alpha with `integrate()` over the exact conditional pmf. Still:
+[k_prior_by_J_key.png](../media/k_prior_by_J_key.png). The interactive versions are
+[the CRP page](dpm/crp.qmd) and [Same default, different J](problems/defaults-drift.qmd).
+
+Rendered from `r-export/04_gganimate.R` (gganimate 1.0.11, ffmpeg 8.1.2, H.264; `theme_DPprior`
+and the moments from DPprior 2.0.0).

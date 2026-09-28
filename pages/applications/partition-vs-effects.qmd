@@ -1,0 +1,53 @@
+---
+title: "The partition moves, the effects do not"
+subtitle: "Catalog A-11 and A-12"
+description: "Vague, TSMM and Dual-Anchor fitted to the same data: the posterior partition changes with the prior while the unit effects stay put; the model specification can move both."
+toc: false
+---
+
+The same data, three priors on alpha. The top row is what the prior is about (the partition: how
+many clusters, how large the largest one is); the bottom row is what most analyses report (the
+unit effects).
+
+```{=html}
+<div id="w-pve" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/partition-vs-effects.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    if (q.get("app")) spec.app = q.get("app");
+    window.__dpxPve = DPX["partition-vs-effects"].mountWidget(document.getElementById("w-pve"), spec);
+  })();
+</script>
+```
+
+- **Project STAR.** From Vague to Dual-Anchor the posterior mean of K_J goes from 1.96 to 4.47
+  and the chance of a single cluster from .560 to .064, while the school posterior means move by
+  RMS .0088 (largest .049) and three intervals exclude zero under each.
+- **Bangert-Drowns.** The same pattern with 48 studies: 1.89 to 3.31 clusters, collapse .548 to
+  .190, study means moving by RMS .0071.
+
+## The specification matters too
+
+```{=html}
+<div id="w-spec" class="dpx-host column-page"></div>
+<script src="../../js/bundles/spec-sensitivity.js"></script>
+<script>
+  window.__dpxSpec = DPX["spec-sensitivity"].mountWidget(document.getElementById("w-spec"), {});
+</script>
+```
+
+- **Wide scale.** With the grand-mean prior N(0, 100) and the matching scale, the Dual-Anchor fit
+  to STAR drops from 4.47 to 2.85 clusters and its collapse probability rises from .064 to .318.
+- **The HC3 input.** Replacing the multilevel school estimates by schoolwise OLS/HC3 ones moves the
+  school posterior means by RMS .169 to .174, about 20 times the difference between priors, and
+  22 of 79 intervals then exclude zero. This is a specification sensitivity, not a robustness
+  check: the structural summaries move with the model and its uncertainty input, not only with the
+  concentration prior.
+
+Standalone versions: [embed/partition-vs-effects.html](../../embed/partition-vs-effects.html)
+(for example `?app=bd` or `?preset=weight`) and
+[embed/spec-sensitivity.html](../../embed/spec-sensitivity.html) (for example `?preset=hc3` or
+`?preset=wide_scale`).

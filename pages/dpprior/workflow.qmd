@@ -1,0 +1,39 @@
+---
+title: "The workflow, step by step"
+subtitle: "Catalog C-13"
+description: "The DPprior workflow in six steps, with the J = 50 example filled in: state a target, calibrate with TSMM, diagnose the weights, check the .40 trigger, refine with the Dual-Anchor rule, and report the hard bound separately."
+toc: false
+---
+
+The paper's workflow turns a statement about the number of clusters into a checked prior in
+six steps. Each step links to the page where you can do it yourself. Press "Fill in the J = 50
+example" to see the paper's numbers travel through the steps.
+
+```{=html}
+<div id="w-wf" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/workflow-stepper.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = { base: "" };
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxWf = DPX["workflow-stepper"].mountWidget(document.getElementById("w-wf"), spec);
+  })();
+</script>
+```
+
+- **Inputs and policy are fixed first.** J, the target mean and variance for K_J, the .40
+  trigger, the .25 soft target, the lambda grid and the separate .25 hard bound are all set
+  before any model is fitted.
+- **With the J = 50 example the trigger fires.** TSMM matches (5, 10) exactly with
+  Gamma(1.4082, 1.0770), but its Pr(W_SB > .5) is .497, above .40. The Dual-Anchor rule then
+  picks lambda = .30: Gamma(2.3158, 1.4204), .398, with E K_50 = 5.88.
+- **The hard bound is reported, not substituted.** Gamma(5.2745, 2.3059) reaches .250 at
+  E K_50 = 7.49; it belongs next to the primary prior as a sensitivity analysis.
+
+To write the prior up, use [the reporting checklist](checklist.qmd). Every tool behind the steps
+is listed on the [Part 4 overview](index.qmd).
+
+Standalone version: [embed/workflow-stepper.html](../../embed/workflow-stepper.html)
+(for example `?preset=j50`).

@@ -1,0 +1,42 @@
+---
+title: "TSMM in the browser, checked against R"
+subtitle: "Catalog C-01"
+description: "The same ten calibration targets solved by the DPprior R package and by the page's own engine, side by side."
+toc: false
+---
+
+Every calibration on these pages is solved in your browser by the site's engine (dp-core).
+The table checks it against the DPprior R package (version 2.0.0): ten targets, from the
+paper's J = 50 worked example to the three applications, plus one target that has no Gamma
+solution at all.
+
+```{=html}
+<div id="w-parity" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/tsmm-parity-table.js"></script>
+<script>
+  window.__dpxParity = DPX["tsmm-parity-table"].mountWidget(document.getElementById("w-parity"), {});
+</script>
+```
+
+- **Two-stage moment matching (TSMM).** Stage 1 starts from a closed form (A1): for
+  J = 50 and the target E K = 5, Var K = 10 it gives Gamma(2.667, 2.608). Stage 2 runs Newton on
+  (log a, log b) until the prior's exact count mean and variance hit the target: Gamma(1.4082,
+  1.0770) after five steps, the same path the R package takes.
+- **Agreement.** All nine feasible targets agree to about 3e-8 on a and b (the tolerance is
+  5e-3), including STAR (5.134, 4.939), Bangert-Drowns (1.145, 1.221) and the vocabulary study
+  (2.1062, 3.0789).
+- **An impossible target.** "Between 3 and 10 with 95% probability" at J = 100 asks for a count
+  variance of 3.19, but every prior with E K = 6.5 has a variance above 4.52 (the point mass at
+  alpha = 1.386). Both engines report that no solution exists, and the browser does so before
+  any Newton step.
+
+::: {.callout-note appearance="simple"}
+Golden values: `verification/golden/tsmm_fits.csv`, written by `r-export/05_golden_v2_solvers.R`
+with `DPprior_fit(method = "A2-MN")` (DPprior 2.0.0, loaded with `pkgload::load_all`); the
+parity run (`verification/run_parity.mjs`) checks the same rows on every build.
+:::
+
+Standalone version: [embed/tsmm-parity-table.html](../../embed/tsmm-parity-table.html)
+(for example `?preset=STAR`).

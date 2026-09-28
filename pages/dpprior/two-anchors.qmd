@@ -1,0 +1,45 @@
+---
+title: "Two anchors, one prior"
+subtitle: "Catalog C-09"
+description: "From TSMM to the Dual-Anchor prior at J = 50 in four linked views: the prior on alpha, the count K_50, the weights with the .40 trigger, and the chance two units share a cluster."
+toc: false
+---
+
+The Dual-Anchor refinement changes one Gamma prior, and every view of the model moves with
+it. Press the button to go from TSMM, which anchors the count only, to the paper's
+Dual-Anchor choice at lambda = .30, which also anchors the weights.
+
+```{=html}
+<div id="w-rec" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/reconcile-dashboard.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    ["a", "b"].forEach(function (k) { var v = q.get(k); if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v; });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxRec = DPX["reconcile-dashboard"].mountWidget(document.getElementById("w-rec"), spec);
+  })();
+</script>
+```
+
+- **The count gives a little.** E K_50 moves from the target 5.00 to 5.88: about one more
+  expected cluster.
+- **The weights give a lot.** Pr(W_SB > .5) falls from .497 to .398, just under the .40
+  trigger; the chance that two random units share a cluster falls from .518 to .439.
+- **What changed in alpha.** Its mean rises from 1.31 to 1.63 and its spread shrinks (CV .84
+  to .66). In restaurant terms, a newcomer is a little more willing to open a new table, so
+  the first table dominates less often.
+
+Use the a and b sliders to see how sensitive each view is near the Dual-Anchor choice. The
+full lambda frontier is on [the Dual-Anchor page](dual-anchor.qmd), and the whole workflow is
+on [the J = 50 worked example](worked-example-j50.qmd).
+
+::: {.callout-note appearance="simple"}
+Endpoints: data/precomputed/worked_example_j50.json (replication package, CC BY 4.0). Every
+value is recomputed with dp-core at each frame. With reduced motion the change is immediate.
+:::
+
+Standalone version: [embed/reconcile-dashboard.html](../../embed/reconcile-dashboard.html)
+(for example `?preset=da`).

@@ -1,0 +1,65 @@
+---
+title: "Part 2 · The CRP bridge"
+description: "One concentration parameter, read in the language of the Chinese restaurant process and stick-breaking: two lenses, the unintended prior, dominance, collapse, and what the vague default says."
+---
+
+Part 1 built the Dirichlet process mixture from stick-breaking and the Chinese restaurant
+process. This part keeps that language and asks what a Gamma(a, b) hyperprior on the
+concentration parameter alpha says about clusters. Eight widgets, in the order of the
+argument:
+
+**1. alpha is a pseudo-count for new tables.** In the
+[Chinese restaurant process](../dpm/crp.qmd) customer n + 1 opens a new table with
+probability alpha / (alpha + n). Everything below follows from that one rule.
+
+**2. One alpha, two lenses.** The same alpha fixes how many clusters the J units occupy
+(the count view, K_J) and how large a random unit's cluster is (the weight view, W_SB).
+Only the first depends on J. A Gamma prior on alpha mixes many conditional pmfs into one.
+
+| Page | Catalog | What it shows | Standalone |
+|---|---|---|---|
+| [One alpha, two lenses](two-lenses.qmd) | C-04 | K_J pmf, alpha density and W_SB density side by side; move J and only the count view moves | [embed](../../embed/two-lenses.html) |
+| [Gamma mixing](gamma-mixing.qmd) | C-12 | Conditional pmfs at alpha nodes add up to the marginal pmf of K_J; 20 nodes versus 400 | [embed](../../embed/gamma-mixing.html) |
+
+**3. The unintended prior, restaurant by restaurant.** Gamma(1.60, 1.22) at J = 50 gives
+"about five clusters" and, in most restaurants, one table with more than half of the
+customers.
+
+| Page | Catalog | What it shows | Standalone |
+|---|---|---|---|
+| [The unintended prior in 1000 restaurants](crp-unintended.qmd) | M-05 | Table counts against the exact pmf, the largest table's share, and W_SB versus W_max | [embed](../../embed/crp-unintended.html) |
+
+**4. Dominance and collapse.** The first stick-breaking piece is the size-biased weight
+W_SB. How often it passes one half is majority-mass dominance; the largest piece W_max can
+only be larger. Prior mass near alpha = 0 seats everyone at one table: collapse.
+
+| Page | Catalog | What it shows | Standalone |
+|---|---|---|---|
+| [Dominance in stick-breaking rows](dominance.qmd) | M-17 | Fifty sticks under a hyperprior; the share with a first piece above one half estimates S(.5) | [embed](../../embed/dominance-ribbon.html) |
+| [Dominance in stick-breaking rows](dominance.qmd#m-18-the-first-piece-is-not-always-the-largest) | M-18 | The same sticks in breaking order and by size: the first piece is not always the largest | [embed](../../embed/sb-vs-ranked.html) |
+| [Dominance in stick-breaking rows](dominance.qmd#c-16-how-far-apart-can-w_sb-and-w_max-be) | C-16 | S(t) ≤ Pr(W_max > t) ≤ S(t)/t with the exact value, and STAR posterior summaries | [embed](../../embed/wmax-bounds.html) |
+| [Collapse](collapse.qmd) | M-06 | Pr(alpha < .1), prior P(K_J = 1) at four J, and 79 customers at alpha = 0.02 | [embed](../../embed/collapse.html) |
+
+**5. What the default says.** Gamma(1, 1) is vague about alpha and definite about clusters.
+
+| Page | Catalog | What it shows | Standalone |
+|---|---|---|---|
+| [What Gamma(1, 1) actually says](gamma11.qmd) | M-07 | Five tiles: .393, 4.84, .591, twenty sets of 79 sites, and .168 at J = 100 | [embed](../../embed/prior-implications.html) |
+
+::: {.callout-tip}
+## In 60 seconds
+
+Open [One alpha, two lenses](two-lenses.qmd), keep Gamma(1, 1), and drag J from 10 to 500:
+the count view moves, the weight view does not. Then open
+[Dominance](dominance.qmd), choose Gamma(1, 3) and press Redraw a few times: about four
+rows in five have a first piece above one half (S(.5) = .812).
+:::
+
+::: {.callout-note appearance="simple"}
+**Terms.** *Size-biased weight*, *dominance* (majority-mass: Pr(W_SB > .5); extreme:
+Pr(W_SB > .9)) and *collapse* (prior P(K_J = 1) versus posterior Pr(K_J = 1 | data)) are
+terms of the DPprior paper, not of Broderick's tutorials. K_J is the number of fitted
+components (occupied clusters) among the J units. See the [vocabulary](../vocabulary.qmd).
+The restaurant and stick-breaking pictures follow Broderick (MLSS 2016; 2012 tutorial);
+the mathematics is re-implemented and no code is copied.
+:::

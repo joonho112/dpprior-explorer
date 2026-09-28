@@ -1,0 +1,51 @@
+---
+title: "Calibrate a count target"
+subtitle: "Catalog C-02"
+description: "A live TSMM calibrator: choose J and a target for the number of clusters, and the page solves Gamma(a, b) at once, or says why it cannot."
+toc: false
+---
+
+State what you expect about the number of clusters K_J among your J units, as a mean and a
+variance (or a variance inflation factor, VIF: sigma^2 = VIF (mu_K − 1)). The calibrator
+finds the Gamma(a, b) hyperprior on alpha whose implied K_J has exactly that mean and
+variance.
+
+```{=html}
+<div id="w-cal" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/tsmm-calibrator.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    ["J", "mu", "var"].forEach(function (k) { var v = q.get(k); if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v; });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxCal = DPX["tsmm-calibrator"].mountWidget(document.getElementById("w-cal"), spec);
+  })();
+</script>
+```
+
+- **The J = 50 example.** "About 5 clusters", with VIF 2.5 (sigma^2 = 10), gives
+  Gamma(1.4082, 1.0770) after five Newton steps from the closed-form start (2.667, 2.608).
+- **The applications.** STAR (J = 79, "between 2 and 8 with 80% probability", sigma^2 = 5.48)
+  gives Gamma(5.134, 4.939); Table 2 of the paper (J = 100, VIF 2.5) gives Gamma(1.666,
+  1.646).
+- **When there is no answer.** "Between 3 and 10 with 95% probability" at J = 100 asks for
+  a variance of 3.19 around a mean of 6.5, but no Gamma prior with that mean has a variance
+  below 4.52. The calibrator says so instead of returning a poor fit. A variance at or above
+  (mu_K − 1)(J − mu_K) is refused too: no count on 1..J with that mean can reach it.
+- **Just above the bound.** A target a little above the smallest variance still has an exact
+  answer, with a very large shape a: the prior is nearly a point mass (CV(alpha) below .01).
+  The calibrator shows the mean and variance it achieves beside the target; a result that
+  misses the target by more than 10^-6 is labelled approximate, never calibrated.
+  Try `?J=50&mu=5&var=3.2219`.
+- The weights come along unasked: check Pr(W_SB > .5) in the read-out, and see
+  [the J = 50 worked example](worked-example-j50.qmd) for what to do when it is too high.
+
+::: {.callout-note appearance="simple"}
+Solved by dp-core `tsmmFit` in the browser; checked against DPprior 2.0.0 on
+[the parity page](tsmm-parity.qmd). K_J is the number of fitted components among the J units.
+:::
+
+Standalone version: [embed/tsmm-calibrator.html](../../embed/tsmm-calibrator.html)
+(for example `?J=79&mu=5&var=5.48`).

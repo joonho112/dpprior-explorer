@@ -1,0 +1,53 @@
+---
+title: "Where a Gamma prior exists"
+subtitle: "Catalog C-06"
+description: "The (mu_K, sigma^2) plane at J units: below the profile bound no Gamma prior can meet a count target, above the support ceiling no count can; drag a target and TSMM re-solves at once."
+toc: false
+---
+
+Not every count target has a Gamma hyperprior. At J units, a target mean mu_K for K_J (the
+number of clusters) allows only a band of variances. Mixing over alpha always adds variance,
+so no Gamma prior can be tighter than the point mass alpha* whose mean count is mu_K. That is
+the profile bound v_J(alpha*), the red curve. Above the grey curve no count on 1..J has the
+variance at all: the curve is the count that puts all its mass on 1 and J.
+
+```{=html}
+<div id="w-feas" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/feasibility-map.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    ["J", "mu", "var"].forEach(function (k) { var v = q.get(k); if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v; });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxFeas = DPX["feasibility-map"].mountWidget(document.getElementById("w-feas"), spec);
+  })();
+</script>
+```
+
+- **The [3, 10] example at J = 100.** "Between 3 and 10 clusters with 80% probability" is the
+  target (6.5, 7.46), inside the band: Gamma(6.82, 4.82). The same interval at 95% is
+  (6.5, 3.19), below the red curve, which passes 4.52 at mu_K = 6.5 (alpha* = 1.386). No
+  Gamma prior has that little variance, so TSMM reports "no solution" rather than a poor fit.
+- **The bound moves little with J.** At mu_K = 6.5 the smallest variance is 4.20 at J = 50,
+  4.52 at J = 100 and 4.91 at J = 500; the ceiling grows with J.
+- **Near the red curve the prior is almost a point mass.** Within about .002 of the curve
+  the solution has CV(alpha) < .01 (the gold edge). TSMM still finds that exact solution, with
+  a large shape a, and labels it nearly a point mass.
+- **Near the grey curve** the solution runs to a and b near zero. TSMM converges up to about
+  95% of the ceiling; closer than that, b falls below 10^-17 and Newton stops without
+  converging. Such targets say "anything from one cluster to J clusters", which is rarely meant.
+  The ceiling itself is reached only by a count split between 1 and J, never by a Gamma prior.
+
+The same check runs inside [the calibrator](calibrator.qmd) and [the elicitation form](elicitation.qmd),
+which also name the widest probability or smallest VIF that would work.
+
+::: {.callout-note appearance="simple"}
+Curves from dp-core `profileBound` (bisection for alpha*, then v_J(alpha*)); fits from
+`tsmmFit`. The bound for [3, 10] at 95% matches an independent R computation (uniroot on the
+conditional mean, verification/golden/tsmm_fits.csv) to 1e-9; see [the parity page](tsmm-parity.qmd).
+:::
+
+Standalone version: [embed/feasibility-map.html](../../embed/feasibility-map.html)
+(for example `?preset=i95` or `?J=500&mu=5&var=10`).

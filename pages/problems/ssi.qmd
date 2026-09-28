@@ -1,0 +1,49 @@
+---
+title: "SSI: fixed weights, a count that never stops growing"
+subtitle: "Catalog M-11 and A-10"
+description: "Fixing only the weight tails makes the prior the same at every J and lets the expected number of clusters grow without bound; in the paper's simulation the posterior never reaches a true K* = 30."
+toc: false
+---
+
+Vicentini and Jermyn (2025) choose the Gamma hyperprior from statements about the weights,
+never about the number of units. The paper's SSI-Weight comparator does the same with two
+tail probabilities: Pr(W_SB > .5) = .25 and Pr(W_SB > .9) = .05, which give
+Gamma(2.179, 0.780). A plausible weight judgment then implies a count that depends on J
+alone.
+
+```{=html}
+<div id="w-ssi" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/ssi-explorer.js"></script>
+<script>
+  window.__dpxSsi = DPX["ssi-explorer"].mountWidget(document.getElementById("w-ssi"), {});
+</script>
+```
+
+What to look for:
+
+- **The weights do not move with J.** The density on the left is the same for 25 units and
+  for 5000; so are its two shaded tails, .250 and .050.
+- **The count does.** E K_J = 6.44 at J = 25, 10.05 at J = 100, 14.47 at J = 500 and 20.9 at
+  J = 5000: "six groups among 25 sites, twenty-one among 5000". Above J = 500 the widget
+  shows E K_J only (digamma path); the 90% band needs the full pmf.
+- **Other weight-only rules behave the same way.** Vicentini and Jermyn's exemplars
+  Gamma(1.814, 1.036) (equal thirds on alpha ≤ 1, 1 < alpha ≤ 2, alpha > 2) and
+  Gamma(1, 0.693) (half the mass on alpha ≤ 1) give E K_100 = 7.26 and 6.15, and both grow
+  with J. Set your own two tails to see which pairs a Gamma can meet at all.
+- **A-10: the truth outside the interval.** In the paper's simulation (J = 100, weak
+  information I = 0.2, 200 replications per cell) SSI-Weight gives posterior means of 3.41,
+  3.42 and 3.39 clusters when the truth is K* = 5, 10 and 30. The average 95% interval runs
+  from 1 to about 13.8, so it covers 5 and 10 every time and 30 never (coverage 0).
+
+::: {.callout-note appearance="simple"}
+Prior statements, except the A-10 overlay, which shows posterior summaries from the paper's
+simulation (`data/released/headline_primary.json`, grand-mean prior N(0, 1), CC BY 4.0).
+K_J is the number of fitted components among the J units. SSI-Weight is solved in the
+browser by `ssiSolve` (bisection on log b); the R solution (`pcv_solve_ssi`) agrees to 1e-12.
+:::
+
+Standalone versions: [embed/ssi-explorer.html](../../embed/ssi-explorer.html)
+(for example `?J=5000` or `?preset=half`) and
+[embed/ssi-truth.html](../../embed/ssi-truth.html) (the A-10 overlay, `?K=5|10|30`).

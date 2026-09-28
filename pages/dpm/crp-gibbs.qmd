@@ -1,0 +1,50 @@
+---
+title: "A collapsed Gibbs sampler for the CRP mixture"
+subtitle: "Catalog P-13 · rung 8 · after Broderick (MLSS 2016, part III)"
+description: "Posterior inference one point at a time: each point's new cluster is chosen with probability proportional to the CRP prior weight times the fit."
+toc: false
+---
+
+The last rung runs the model backwards: given the data, which clusters? The collapsed Gibbs
+sampler (Neal's Algorithm 3) visits one point at a time. It takes the point out of its
+cluster and puts it back with probability proportional to
+
+- n_c × (fit of the point to cluster c), for each existing cluster c, or
+- alpha × (fit of the point to a brand-new cluster),
+
+where n_c is the number of other points in cluster c. The first factor is the Chinese
+restaurant prior; the second is the likelihood with the cluster centre integrated out.
+
+```{=html}
+<div id="w-gibbs" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/crp-gibbs.js"></script>
+<script>
+  window.__dpxGibbs = DPX["crp-gibbs"].mountWidget(document.getElementById("w-gibbs"), {});
+</script>
+```
+
+## What to try
+
+- **Step point** (or Enter) a few times and compare the two bars: the CRP prior weight
+  says "join a big cluster"; the posterior multiplies in how well the point fits each
+  cluster. The dashed piece is a new cluster.
+- **Start from one cluster, singletons or a random split.** From one cluster the sampler
+  splits off the four true clusters within a sweep or two; from 100 singletons or a random
+  split it merges them over ten to twenty sweeps, because single points move one at a time.
+- **alpha.** The demo in Broderick's tutorial fixes alpha = 0.01, so a new cluster starts
+  with one hundredth of the weight of a one-point cluster. That is a strong prior. Move
+  alpha to 1 or 10 while playing: the sampler keeps more small clusters, and the level
+  of K in the trace moves up.
+- **true means** overlays the four centres the data came from.
+
+::: {.callout-note appearance="simple"}
+The number of clusters here, K after a sweep, is a draw from the posterior of K_J for
+J = 100 units, not a prior statement. The sampler holds sigma = 1 and a N(0, 3²) prior on
+cluster centres fixed. After Broderick (MLSS 2016, part III, demo 7); the sampler is
+re-implemented in the site's engine (`gibbs.ts`) and no code is copied.
+:::
+
+Standalone version: [embed/crp-gibbs.html](../../embed/crp-gibbs.html), for example
+`?preset=singletons`, `?alpha=1&n=20`.

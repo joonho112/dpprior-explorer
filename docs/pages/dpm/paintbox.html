@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A Dirichlet draw with a thousand tiny weights, hit by uniform drops: many components, few clusters, and new clusters ever more rarely.">
+
+<title>Paintbox: components versus clusters – DPprior Explorer</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>document.documentElement.setAttribute("data-theme", "light");</script>
+
+
+<link rel="stylesheet" href="../../styles/tokens.css">
+<link rel="stylesheet" href="../../styles/widgets.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DPprior Explorer</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learn-the-dpm" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">1 · Learn the DPM</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn-the-dpm">    
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/why-nonparametric.html">
+ <span class="dropdown-text">Why nonparametric Bayes? (P-00)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/beta-dirichlet.html">
+ <span class="dropdown-text">Beta and Dirichlet (P-01, P-02)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/paintbox.html">
+ <span class="dropdown-text">Paintbox (P-03, P-04)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/stick-breaking.html">
+ <span class="dropdown-text">Stick-breaking (P-05)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/urn-to-sticks.html">
+ <span class="dropdown-text">Hoppe urn to stick-breaking (P-06)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/crp.html">
+ <span class="dropdown-text">Chinese restaurant process (P-07)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/eppf.html">
+ <span class="dropdown-text">EPPF and exchangeability (P-14)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/exercises.html">
+ <span class="dropdown-text">K_J as a random variable + exercises (P-15)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/dpmm.html">
+ <span class="dropdown-text">DP mixture, generated (P-09)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/dp-and-atoms.html">
+ <span class="dropdown-text">Distributions and DP atoms (P-10, P-11, P-12)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpm/crp-gibbs.html">
+ <span class="dropdown-text">Collapsed Gibbs sampler (P-13)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-crp-bridge" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">2 · CRP bridge</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-crp-bridge">    
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/two-lenses.html">
+ <span class="dropdown-text">One alpha, two lenses (C-04)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/gamma-mixing.html">
+ <span class="dropdown-text">Gamma mixing (C-12)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/crp-unintended.html">
+ <span class="dropdown-text">The unintended prior in 1000 restaurants (M-05)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/dominance.html">
+ <span class="dropdown-text">Dominance: ribbon, order, W_max band (M-17, M-18, C-16)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/collapse.html">
+ <span class="dropdown-text">Collapse (M-06)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/bridge/gamma11.html">
+ <span class="dropdown-text">What Gamma(1, 1) actually says (M-07)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-default-problems" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">3 · Default problems</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-default-problems">    
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/index.html">
+ <span class="dropdown-text">Overview and method timeline (M-08)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/defaults-drift.html">
+ <span class="dropdown-text">Same default, different J (M-01, M-02)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/unintended-prior.html">
+ <span class="dropdown-text">The unintended prior (M-03)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/method-problems-strip.html">
+ <span class="dropdown-text">DORO, SCAL and SSI side by side (M-04)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/doro.html">
+ <span class="dropdown-text">DORO explorer (M-09)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/scal.html">
+ <span class="dropdown-text">SCAL explorer (M-10)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/ssi.html">
+ <span class="dropdown-text">SSI explorer and the K* = 30 overlay (M-11, A-10)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/other-defaults.html">
+ <span class="dropdown-text">Other defaults: Gamma(eps, eps), K_n-diffuse, Jeffreys, Stirling-gamma (M-12 to M-14, M-19)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/problems/method-map.html">
+ <span class="dropdown-text">The method map; transported vs recalibrated (M-15, M-16)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-dpprior" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">4 · DPprior</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-dpprior">    
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/workflow.html">
+ <span class="dropdown-text">The workflow, step by step (C-13)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/checklist.html">
+ <span class="dropdown-text">Reporting the prior (C-14)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/worked-example-j50.html">
+ <span class="dropdown-text">Worked example, J = 50 (C-15)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/elicitation.html">
+ <span class="dropdown-text">Elicit: from what you expect to a prior (C-05)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/calibrator.html">
+ <span class="dropdown-text">Calibrate a count target (C-02)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/feasibility.html">
+ <span class="dropdown-text">Where a Gamma prior exists (C-06)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/stage1-stage2.html">
+ <span class="dropdown-text">Stage 1, then Stage 2: the Newton path (C-07)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/dual-anchor.html">
+ <span class="dropdown-text">The Dual-Anchor frontier (C-08)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/two-anchors.html">
+ <span class="dropdown-text">Two anchors, one prior (C-09)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/why-fast.html">
+ <span class="dropdown-text">Why it is fast (C-10, C-11)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/vif-sensitivity.html">
+ <span class="dropdown-text">Confidence and the tails: Table 2 (C-03)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/tsmm-parity.html">
+ <span class="dropdown-text">TSMM checked against R (C-01)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/dpprior/plotly-alpha-sweep.html">
+ <span class="dropdown-text">The alpha sweep in plotly and ggiraph (X-02)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-evidence" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">5 · Evidence</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-evidence">    
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/star.html">
+ <span class="dropdown-text">Project STAR: 79 schools (A-01, A-02)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/bangert-drowns.html">
+ <span class="dropdown-text">Bangert-Drowns: 48 studies (A-03)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/vocabulary-rasch.html">
+ <span class="dropdown-text">A vocabulary test: 500 respondents (A-04, A-05)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/partition-vs-effects.html">
+ <span class="dropdown-text">The partition moves, the effects do not (A-11, A-12)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/simulation.html">
+ <span class="dropdown-text">The simulation (A-06 to A-09)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/data.html">
+ <span class="dropdown-text">Released data (A-13)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/applications/talk-fallbacks.html">
+ <span class="dropdown-text">Static fallbacks for talks (A-14, A-15)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/media.html">
+ <span class="dropdown-text">Videos for talks (P-17, A-16)</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../learning-paths.html"> 
+<span class="menu-text">Learning paths</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/vocabulary.html"> 
+<span class="menu-text">Vocabulary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/tools.html"> 
+<span class="menu-text">Tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../catalog.html"> 
+<span class="menu-text">Catalog</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Paintbox: components versus clusters</h1>
+<p class="subtitle lead">Catalog P-03, P-04 · rung 3 · after Broderick (MLSS 2016, part I)</p>
+</div>
+
+<div>
+  <div class="description">
+    A Dirichlet draw with a thousand tiny weights, hit by uniform drops: many components, few clusters, and new clusters ever more rarely.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Take a Dirichlet draw with many components and a small parameter: K = 1000 and a = 0.01. Lay its weights side by side on the unit interval. A handful of pieces are wide and the rest are slivers too thin to see. Now drop points uniformly on the interval, one unit at a time. Each drop lands in some piece; the pieces that have been hit are the <em>clusters</em>, and there are far fewer of them than <em>components</em>.</p>
+<div id="w-paintbox" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/paintbox.js"></script>
+<script>
+  window.__dpxPaintbox = DPX["paintbox"].mountWidget(document.getElementById("w-paintbox"), {});
+</script>
+<section id="what-to-try" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-try">What to try</h2>
+<ul>
+<li><strong>Drop 1, Drop 10, Drop 100.</strong> After 100 drops only a couple of dozen of the 1000 pieces are blue (the exact expectation for K = 1000 and a = 0.01 is 24.2). The staircase below records, for every drop, whether it hit a piece seen before or a new one; the steps get further and further apart.</li>
+<li><strong>log x.</strong> On a log scale of the drop number the staircase is close to a straight line: clusters grow like alpha log N, with alpha = K·a.</li>
+<li><strong>K and a.</strong> Keep K·a fixed (say K = 5000 and a = 0.002, K·a = 10) and the picture barely changes: that limit is the Dirichlet process with concentration alpha = K·a. Lower a to 0.001 (K·a = 1) and a few pieces take almost everything.</li>
+<li><strong>Hover</strong> over the bar (or use the piece picker) to read a piece’s weight rho_k.</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Components are the infinitely many atoms of the model; clusters are the ones the J units actually occupy. On this site K_J always counts clusters: the number of fitted components among the J units. After Broderick (MLSS 2016, part I, demos 3 and 4); the mathematics is re-implemented and no code is copied.</p>
+</div>
+</div>
+</div>
+<p>Standalone version: <a href="../../embed/paintbox.html">embed/paintbox.html</a>, for example <code>?n=100</code> or <code>?K=5000&amp;a=0.002&amp;n=200</code>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/joonho112\.github\.io\/dpprior-explorer\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DPprior Explorer · code MIT · released summaries CC BY 4.0</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Lee (2026), arXiv:2602.06301</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

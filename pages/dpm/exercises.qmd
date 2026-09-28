@@ -1,0 +1,85 @@
+---
+title: "K_J is a random variable, and five exercises"
+subtitle: "Catalog P-15 · rung 6 · after Broderick (MLSS 2016, part II)"
+description: "Replicate the Chinese restaurant a hundred times and watch K_J scatter over the Antoniak pmf; then five exercises whose answers the site's engine computes."
+toc: true
+---
+
+The number of occupied tables K_J is not a fixed consequence of alpha: seat J customers with
+the same alpha in a hundred restaurants and you get a hundred different values. Their
+distribution is the Antoniak pmf, P(K_J = k | alpha) = |s(J, k)| alpha^k Γ(alpha) / Γ(alpha + J),
+which every prior statement about K_J on this site builds on.
+
+```{=html}
+<div id="w-kj-reps" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/kj-replicates.js"></script>
+<script>
+  window.__dpxKjReps = DPX["kj-replicates"].mountWidget(document.getElementById("w-kj-reps"), {});
+</script>
+```
+
+Press **100 replicates** (or Enter) a few times. The dots pile up where the bars predict,
+and their mean approaches E(K_J | alpha): 5.19 for J = 100 and alpha = 1. K_J is the number
+of fitted components (occupied clusters) among the J units.
+
+## Exercises
+
+The answers are computed in your browser by the site's engine (`js/dp-core.umd.js`), the same
+code the widgets use.
+
+**1. Conjugacy.** A proportion has a Beta(1, 1) prior and 7 of 10 trials succeed. What is
+the posterior, and its mean? Now a three-component weight vector has a Dirichlet(1, 1, 1)
+prior and the counts are (5, 3, 2): what is the posterior mean of each weight?
+
+<details><summary>Answer</summary><p id="dpx-ex1">(computing…)</p></details>
+
+**2. A GEM simulator.** Break a stick with V_k ~ Beta(1, alpha) and w_k = V_k ∏_{j<k}(1 − V_j).
+For alpha = 2, what are E[w_1] and E[w_2]? Check them by simulation.
+
+<details><summary>Answer</summary><p id="dpx-ex2">(computing…)</p></details>
+
+**3. How K_N grows.** Compare E[K_N] for alpha = 1 and alpha = 5 at N = 10, 100 and 1000.
+How does each grow when N is multiplied by ten?
+
+<details><summary>Answer</summary><p id="dpx-ex3">(computing…)</p></details>
+
+**4. E[K_N] by hand.** Customer n opens a new table with probability alpha / (alpha + n − 1).
+Write E[K_N] as a sum and evaluate it for alpha = 1 and N = 100.
+
+<details><summary>Answer</summary><p id="dpx-ex4">(computing…)</p></details>
+
+**5. Two lenses.** Under a Gamma(1, 1) hyperprior on alpha, compute E[K_J] and
+Pr(W_SB > .5) for J = 100 and for J = 500. Which of the two depends on J, and why?
+
+<details><summary>Answer</summary><p id="dpx-ex5">(computing…)</p></details>
+
+```{=html}
+<script src="../../js/dp-core.umd.js"></script>
+<script>
+  (function () {
+    var dp = window.dpCore;
+    var f = function (x, d) { return x.toFixed(d).replace(/^0\./, "."); };
+    var set = function (id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; };
+    if (!dp) { ["dpx-ex1", "dpx-ex2", "dpx-ex3", "dpx-ex4", "dpx-ex5"].forEach(function (id) { set(id, "The engine did not load."); }); return; }
+    set("dpx-ex1", "Beta(1 + 7, 1 + 3) = Beta(8, 4), with mean 8/12 = " + f(8 / 12, 3) + ". Dirichlet(1 + 5, 1 + 3, 1 + 2) = Dirichlet(6, 4, 3), with means " +
+      [6, 4, 3].map(function (a) { return f(a / 13, 3); }).join(", ") + ". The prior parameters act as pseudo-counts added to the data counts.");
+    var rng = dp.makeRng(1), R = 20000, s1 = 0, s2 = 0;
+    for (var i = 0; i < R; i++) { var g = dp.rgem(rng, 2); s1 += g.w[0]; s2 += g.w.length > 1 ? g.w[1] : 0; }
+    set("dpx-ex2", "E[w_1] = 1/(1 + alpha) = " + f(1 / 3, 3) + " and E[w_2] = alpha/(1 + alpha)^2 = " + f(2 / 9, 3) + ". In " + R + " simulated sticks (dpCore.rgem, seed 1) the averages are " + f(s1 / R, 3) + " and " + f(s2 / R, 3) + ".");
+    var rows = [10, 100, 1000].map(function (N) { return "N = " + N + ": " + dp.condMean(N, 1).toFixed(2) + " and " + dp.condMean(N, 5).toFixed(2); });
+    set("dpx-ex3", "E[K_N] for alpha = 1 and alpha = 5: " + rows.join("; ") + ". Each tenfold increase in N adds about alpha log(10): " + (Math.log(10)).toFixed(2) + " tables for alpha = 1 and " + (5 * Math.log(10)).toFixed(2) + " for alpha = 5, once N is well above alpha.");
+    set("dpx-ex4", "E[K_N] = sum over n = 1..N of alpha/(alpha + n - 1). For alpha = 1 this is the harmonic number H_100 = 1 + 1/2 + ... + 1/100 = " + dp.condMean(100, 1).toFixed(3) + ".");
+    var m100 = dp.mixMoments(100, 1, 1).mean, m500 = dp.mixMoments(500, 1, 1).mean, s5 = dp.wsbTail(0.5, 1, 1);
+    set("dpx-ex5", "E[K_100] = " + m100.toFixed(2) + " and E[K_500] = " + m500.toFixed(2) + ", while Pr(W_SB > .5) = " + f(s5, 3) + " for both. The count of clusters depends on how many units there are; the share of a random unit's cluster is a property of the weights alone: Pr(W_SB > t) = (b / (b - log(1 - t)))^a has no J in it.");
+  })();
+</script>
+```
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part II); the mathematics is re-implemented and no code is copied.
+:::
+
+Standalone version of the replicates widget: [embed/kj-replicates.html](../../embed/kj-replicates.html),
+for example `?J=50&alpha=2&n=200`.

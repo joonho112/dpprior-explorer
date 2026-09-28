@@ -1,0 +1,45 @@
+---
+title: "Paintbox: components versus clusters"
+subtitle: "Catalog P-03, P-04 · rung 3 · after Broderick (MLSS 2016, part I)"
+description: "A Dirichlet draw with a thousand tiny weights, hit by uniform drops: many components, few clusters, and new clusters ever more rarely."
+toc: false
+---
+
+Take a Dirichlet draw with many components and a small parameter: K = 1000 and a = 0.01.
+Lay its weights side by side on the unit interval. A handful of pieces are wide and the
+rest are slivers too thin to see. Now drop points uniformly on the interval, one unit at a
+time. Each drop lands in some piece; the pieces that have been hit are the *clusters*, and
+there are far fewer of them than *components*.
+
+```{=html}
+<div id="w-paintbox" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/paintbox.js"></script>
+<script>
+  window.__dpxPaintbox = DPX["paintbox"].mountWidget(document.getElementById("w-paintbox"), {});
+</script>
+```
+
+## What to try
+
+- **Drop 1, Drop 10, Drop 100.** After 100 drops only a couple of dozen of the 1000 pieces
+  are blue (the exact expectation for K = 1000 and a = 0.01 is 24.2). The staircase below
+  records, for every drop, whether it hit a piece seen before or a new one; the steps get
+  further and further apart.
+- **log x.** On a log scale of the drop number the staircase is close to a straight line:
+  clusters grow like alpha log N, with alpha = K·a.
+- **K and a.** Keep K·a fixed (say K = 5000 and a = 0.002, K·a = 10) and the picture barely
+  changes: that limit is the Dirichlet process with concentration alpha = K·a. Lower a to
+  0.001 (K·a = 1) and a few pieces take almost everything.
+- **Hover** over the bar (or use the piece picker) to read a piece's weight rho_k.
+
+::: {.callout-note appearance="simple"}
+Components are the infinitely many atoms of the model; clusters are the ones the J units
+actually occupy. On this site K_J always counts clusters: the number of fitted components
+among the J units. After Broderick (MLSS 2016, part I, demos 3 and 4); the mathematics is
+re-implemented and no code is copied.
+:::
+
+Standalone version: [embed/paintbox.html](../../embed/paintbox.html), for example
+`?n=100` or `?K=5000&a=0.002&n=200`.

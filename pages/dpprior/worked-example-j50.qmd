@@ -1,0 +1,43 @@
+---
+title: "Worked example: J = 50"
+subtitle: "Catalog C-15 · paper Section 3.5"
+description: "State a count judgment, calibrate a Gamma hyperprior to it, diagnose the implied cluster sizes, and decide whether to refine."
+toc: false
+---
+
+An analyst expects **about five clusters** among J = 50 sites, with medium confidence
+(VIF 2.5, so sigma_K^2 = 2.5 × (5 − 1) = 10). The DPprior workflow runs four steps.
+
+```{=html}
+<div id="w-worked" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/worked-example.js"></script>
+<script>
+  window.__dpxWorked = DPX["worked-example"].mountWidget(document.getElementById("w-worked"), {});
+</script>
+```
+
+1. **State.** mu_K = 5, sigma_K^2 = 10 for K_50.
+2. **Calibrate (TSMM).** Stage 1 uses a shifted negative-binomial proxy and starts at
+   Gamma(2.667, 2.608), whose implied moments (4.415, 5.618) miss the target. Stage 2
+   solves the exact moment equations by Newton steps and returns Gamma(1.4082, 1.0770):
+   E K_50 = 5.00, Var 10.00, median 4, 90% interval [1, 11].
+3. **Diagnose.** The same prior gives Pr(W_SB > .5) = .497: a randomly chosen site has
+   nearly even odds of sitting in a majority cluster. That is above the .40 trigger.
+4. **Decide.** Dual-Anchor picks the largest weight on the count target (lambda = .30 on
+   a 29-point grid) whose tail is at most .40: Gamma(2.3158, 1.4204), with E K_50 = 5.88,
+   90% [2, 12] and Pr(W_SB > .5) = .398. A hard bound of .25 is reported separately as a
+   sensitivity analysis: Gamma(5.2745, 2.3059), E K_50 = 7.49, 90% [3, 13].
+
+Turn on **Show the Stage 1 initializer** to see why Stage 2 is needed.
+
+::: {.callout-note appearance="simple"}
+K_J is the number of fitted components (occupied clusters) among the J units.
+Pr(W_SB > .5) is a prior probability about the size-biased weight, not about the largest
+cluster. Exact Gamma parameters come from the replication package; the widget recomputes
+every number with the site's engine.
+:::
+
+Standalone version: [embed/worked-example.html](../../embed/worked-example.html)
+(`?preset=da`, `?preset=hard`, `?preset=init`).

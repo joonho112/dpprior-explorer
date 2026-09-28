@@ -1,0 +1,48 @@
+---
+title: "SCAL: clamped count tails, free weights"
+subtitle: "Catalog M-10"
+description: "Murugiah and Sweeting's rule fixes P(K = 1) = .34 and an upper count tail at every sample size; the weights drift, and the published shortcut collapses to one cluster."
+toc: false
+---
+
+Murugiah and Sweeting (2012) calibrate the Gamma hyperprior by two count probabilities that
+they carry to every sample size m: P(K_m = 1) = .34 and P(K_m ≥ ⌈2 ln m⌉) = .15, the values a
+Gamma(1, 1) gives at m = 6. For each m the two equations are solved for (a, b). The explorer
+solves them live and shows what the rule does not fix.
+
+```{=html}
+<div id="w-scal" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/scal-explorer.js"></script>
+<script>
+  window.__dpxScal = DPX["scal-explorer"].mountWidget(document.getElementById("w-scal"), {});
+</script>
+```
+
+What to look for:
+
+- **The two tails never move.** Whatever m you choose, the red bar stays at .34 and the gold
+  tail at .15: the prior probability of complete homogeneity is .34 for 6 units and for
+  100. At m = 100 the exact solution is Gamma(0.401, 0.364), with E K_100 = 4.77. Because the
+  upper threshold ⌈2 ln m⌉ is an integer, the solved (a, b) jump each time it steps up
+  (m = 8, 13, 21, 34, 55 and 91).
+- **The weights are not part of the rule.** Pr(W_SB > .5) is .590 at m = 6 and .652 at
+  m = 100, above the vague Gamma(1, 1)'s .591. The tabulated m = 100 values,
+  Gamma(0.403, 0.370), give E K = 4.74, Pr(W_SB > .5) = .654 and tails .340 and .148 (they
+  are the exact solution rounded to three decimals).
+- **The shortcut collapses.** The published approximation a = b = exp(−0.033 m) tracks the
+  solution up to about m = 25 and then falls toward zero: at m = 100 it is
+  Gamma(0.0369, 0.0369), with P(K = 1) = .834 and E K = 2.97. That is the quasi-degenerate
+  prior of [other defaults](other-defaults.qmd#quasi-degenerate).
+
+::: {.callout-note appearance="simple"}
+Prior statements only; K_m is the number of fitted components among the m units. The (a, b)
+are solved in the browser by `scalSolve` (Newton on log a and log b); the R solution in
+`verification/golden/solvers.csv` agrees to 1e-9. Tabulated values: Vicentini and Jermyn
+(2025), Table 2. The curves under the chart are solved at m = 6, 8, …, 100 after the page
+loads; open circles mark the tabulated (a, b).
+:::
+
+Standalone version: [embed/scal-explorer.html](../../embed/scal-explorer.html)
+(for example `?n=25`, or `?preset=shortcut` to overlay the shortcut).

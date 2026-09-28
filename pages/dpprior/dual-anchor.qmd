@@ -1,0 +1,53 @@
+---
+title: "The Dual-Anchor frontier"
+subtitle: "Catalog C-08 (OSM Figure G.4)"
+description: "How much of the count target to give up for less dominance: the Dual-Anchor solutions along lambda at J = 50, the .40 trigger, the paper's choice lambda = .30, and the hard bound .25 as a sensitivity analysis."
+toc: false
+---
+
+TSMM matches the count target exactly, but at J = 50 its prior still gives
+Pr(W_SB > .5) = .497: about half the time, the cluster of a randomly chosen unit holds most of
+the population. The Dual-Anchor refinement adds a second anchor on the weights and weighs the
+two with lambda (lambda = 1 is TSMM). Lowering lambda buys less dominance with more clusters.
+
+```{=html}
+<div id="w-da" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/dual-anchor-frontier.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxDA = DPX["dual-anchor-frontier"].mountWidget(document.getElementById("w-da"), spec);
+  })();
+</script>
+```
+
+- **The rule.** Take the largest lambda whose prior is at or below the .40 trigger. At J = 50
+  that is lambda = .30: Gamma(2.3158, 1.4204), with Pr(W_SB > .5) = .398 and E K_50 = 5.88.
+  Every larger lambda (grey) leaves the trigger on.
+- **The price.** Moving from TSMM (.497, E K 5.00) to lambda = .30 costs about 0.9 expected
+  clusters. The hard bound .25, Gamma(5.2745, 2.3059), costs 2.5 (E K 7.49). It is reported as a
+  sensitivity analysis, not as the recommended prior.
+- **In the applications** the hard bound can collapse to nearly a point mass: for STAR and
+  Vocabulary it puts almost all prior mass at alpha = 2 (a above 3 million), where
+  Pr(W_SB > .5) is (1/2)^2 = .25 to three decimals.
+
+For the whole J = 50 workflow on one page, see [the worked example](worked-example-j50.qmd);
+to see where the trigger comes from, see [the elicitation form](elicitation.qmd).
+
+::: {.callout-note appearance="simple"}
+Grid: data/released/dual_anchor_grid.json (29 values of lambda; CC BY 4.0). Hard bound:
+data/precomputed/worked_example_j50.json. Applications: data/released/app_priors.json. Every
+probability and expected count on this page is recomputed with dp-core.
+:::
+
+::: {.callout-tip appearance="simple"}
+**In DPprior Studio.** To set the weight anchor as a quantile or a mean of W_SB rather than a probability, use the Dual Anchor panel of [DPprior Studio](https://joonho.shinyapps.io/dpprior-studio/), the Shiny app that
+accompanies the package (built on DPprior 1.1.0; it may take a moment to wake up). This site does
+not rebuild what Studio already does.
+:::
+
+Standalone version: [embed/dual-anchor-frontier.html](../../embed/dual-anchor-frontier.html)
+(for example `?preset=hard` or `?preset=0.5`).

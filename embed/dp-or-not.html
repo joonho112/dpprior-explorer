@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- P-12 (catalog). Written by scripts/make_embed.mjs from embed/_template.html; edit embed/embeds.json. -->
+<title>DP or not: finite Dirichlet weights against stick-breaking · DPprior Explorer</title>
+<script>
+  // ?theme=light|dark overrides prefers-color-scheme (CONTRACT.md section 4)
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<link rel="stylesheet" href="../styles/tokens.css">
+<link rel="stylesheet" href="../styles/widgets.css">
+</head>
+<body class="dpx-embed">
+<main>
+  <h1 class="dpx-embed-title">DP or not: finite Dirichlet weights against stick-breaking</h1>
+  <div id="w" class="dpx-host"></div>
+  <p class="dpx-caption">A finite Dirichlet mixture never uses more than its K components, while stick-breaking keeps supplying new ones: K_N stops at 5 or 50 but keeps growing like alpha log N for the Dirichlet process. ?preset=scaled gives the finite models the same total mass alpha. Enter redraws.</p>
+  <p class="dpx-attrib">DPprior Explorer · <a href="https://arxiv.org/abs/2602.06301">Lee (2026)</a> · after Broderick (MLSS 2016; 2012 tutorial)</p>
+</main>
+<!-- classic scripts only: this page must work from file:// (CONTRACT.md section 1) -->
+<script src="../js/vendor/d3.min.js"></script>
+<script src="../js/vendor/plot.min.js"></script>
+<script src="../js/bundles/dp-atoms.js"></script>
+<script>
+  (function () {
+    // numeric query parameters become the initial spec; unparseable values are ignored
+    var q = new URLSearchParams(location.search), spec = {"mode":"compare"};
+    ["a", "b", "J", "K", "I", "r", "alpha", "t", "n", "seed", "mu", "var"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v;
+    });
+    // short word parameters (an application, a prior, a view) pass through when they are plain words;
+    // each widget checks them against its own list
+    ["app", "prior", "sort", "view", "branch"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && /^[A-Za-z0-9_ ()-]{1,40}$/.test(v)) spec[k] = v;
+    });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxWidget = DPX["dp-atoms"].mountWidget(document.getElementById("w"), spec);
+  })();
+</script>
+</body>
+</html>

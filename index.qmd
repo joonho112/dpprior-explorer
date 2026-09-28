@@ -1,0 +1,74 @@
+---
+title: "DPprior Explorer"
+subtitle: "Interactive visualizations for design-conditional prior elicitation in Dirichlet process mixtures"
+toc: false
+---
+
+This site is a pool of interactive visualizations built around
+*Design-Conditional Prior Elicitation for Dirichlet Process Mixtures*
+(Lee, 2026, [arXiv:2602.06301](https://arxiv.org/abs/2602.06301)).
+It assumes no prior knowledge of Dirichlet process mixtures (DPMs). Its numbers come by two
+routes. Prior quantities for any Gamma(a, b) or fixed alpha (cluster counts, weight tails,
+calibrations, the default-method solvers) are computed in your browser by one JavaScript
+engine, which is compared with the DPprior R package (version 2.0.0) and with independent R
+integrals. Posterior, simulation and application results are read from released summary
+tables of the replication package and never recomputed. [How the numbers are
+checked](#how-the-numbers-are-checked) says what each check covers.
+
+::: {.callout-note appearance="simple"}
+**Where to start.** Three [learning paths](learning-paths.qmd): 25 minutes for beginners,
+45 for researchers, 90 for a course, each step with its setting and what to notice. The
+[catalog](catalog.qmd) lists all 72 visualizations and filters them by section, ladder rung and
+audience.
+:::
+
+## The storyline
+
+1. **[Learn the DPM](pages/dpm/index.qmd).** Following Broderick's MLSS 2016 ladder:
+   why a nonparametric prior, Beta and Dirichlet weights, many components and few
+   clusters, stick-breaking (GEM), the Chinese restaurant process, and the DP mixture.
+2. **[The CRP bridge](pages/bridge/index.qmd).** One concentration parameter alpha sets
+   both how many tables open among J units (the *count view*, K_J) and how large the
+   tables are (the *weight view*, W_SB). A Gamma(a, b) hyperprior on alpha is read in the
+   same table-and-stick language.
+3. **[What default hyperpriors imply](pages/problems/index.qmd).** A "vague" default
+   says different things at different J ([same default, different J](pages/problems/defaults-drift.qmd));
+   a prior calibrated to "about five clusters" can still put a random unit in a majority
+   cluster with probability .49 ([the unintended prior](pages/problems/unintended-prior.qmd)).
+4. **[The DPprior principle](pages/dpprior/index.qmd).** State a design-conditional
+   target, calibrate Gamma(a, b) to it (TSMM), diagnose the implied weights, and decide
+   whether a Dual-Anchor adjustment is needed.
+5. **[Evidence](pages/applications/index.qmd).** Simulation and three applications:
+   STAR (J = 79 schools), Bangert-Drowns (J = 48 studies) and a vocabulary checklist
+   (N = 500 respondents), drawn only from released summaries.
+
+Terms are defined on the [vocabulary](pages/vocabulary.qmd) page.
+
+## Start here
+
+- [**Same default, different J**](pages/problems/defaults-drift.qmd) (M-01, M-02):
+  Gamma(1, 1) implies 4.16 clusters at J = 50 and 7.82 at J = 2000, with the same .591
+  majority-mass tail at every J.
+- [**The unintended prior**](pages/problems/unintended-prior.qmd) (M-03): "about five
+  clusters" and a .49 chance of majority dominance, from one hyperprior.
+
+## How the numbers are checked
+
+| Route | What | Check |
+|---|---|---|
+| Computed in your browser | prior quantities for any Gamma(a, b) or fixed alpha | compared with golden values from the DPprior R package (version 2.0.0) and with R integrals that share no code with the engine: 17,351 comparisons in 147 groups, 0 failures |
+| Read from released tables | posterior, simulation and application results in 20 released tables (1.30 MB) | source, rows, columns and checksum of every table; no individual-level fields |
+| Shown on the pages | the numbers the widgets and pages display | 117 displayed numbers in 28 cases on 20 widgets and 2 site pages against the R values and the released tables; six paper cross-checks of the released tables |
+
+These checks cover the listed rows and values, not every number on every page. The released
+tables are copied from the replication package, not re-derived here, and posterior fits are
+never rerun. The golden values, the checks and their tolerances are in the source repository
+(`verification/`, `r-export/` and `CONTRACT.md`).
+
+## About
+
+Built by JoonHo Lee (jlee296@ua.edu), The University of Alabama, with support from the Institute of
+Education Sciences (R305D240078). Teaching material after Broderick is re-drawn from the
+mathematics and attributed on each page. The DPprior R package, the replication package
+and the DPprior Studio app are linked from the paper. This is release 1.1.0 (28 September 2026); the changelog in the
+[source repository](https://github.com/joonho112/dpprior-explorer) lists what changed.

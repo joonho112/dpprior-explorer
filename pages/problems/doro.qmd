@@ -1,0 +1,49 @@
+---
+title: "DORO: a flat count target the Gamma cannot reach"
+subtitle: "Catalog M-09"
+description: "Dorazio's KL projection onto a uniform number of clusters: the closest Gamma is a spike plus a hump, the gap grows with n, and the prior ends up expecting about n / 2 clusters."
+toc: false
+---
+
+Dorazio (2009) asked for the least informative prior on the number of clusters and answered
+with a flat one: every K_n from 1 to n equally likely. No Gamma(a, b) hyperprior on alpha can
+deliver that, so DORO takes the Gamma whose implied count distribution is closest to flat in
+Kullback–Leibler divergence. The explorer solves that problem live for each n.
+
+```{=html}
+<div id="w-doro" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/doro-explorer.js"></script>
+<script>
+  window.__dpxDoro = DPX["doro-explorer"].mountWidget(document.getElementById("w-doro"), {});
+</script>
+```
+
+What to look for:
+
+- **The target is out of reach.** With two parameters the closest a Gamma hyperprior gets to
+  a flat line is a spike at a single cluster (its shape a < 1 puts mass near alpha = 0) plus a
+  hump near 0.9 n (the mass at large alpha), sagging below the target in between. At n = 10
+  the solution is Gamma(0.525, 0.046) with KL = .019, Dorazio's own table entry; at n = 50 it
+  is Gamma(0.467, 0.0068) with KL = .0705.
+- **The gap grows with n and b goes to 0.** The KL divergence rises from .005 at n = 5 to
+  .095 at n = 100 while the rate b falls toward 0, so E(alpha) = a / b grows. For Dorazio's
+  fish data (n = 53) the solution is Gamma(0.465, 0.0063): E(alpha) = 73 and E K_53 = 28.4.
+- **"Noninformative" is a strong statement.** The prior now expects about n / 2 clusters
+  among n units (E K_n near n / 2) and no dominant cluster (Pr(W_SB > .5) = .11 at n = 53),
+  while every fixed Gamma prior grows like log n.
+- **DORO-Unif** (the paper's variant) aims at a flat target on 1 to 2 mu_K − 1 instead. At
+  J = 100 and mu_K = 5 the best Gamma is Gamma(2.43, 2.46), a single right-skewed hump: it
+  still puts .070 on a single cluster, leaks .073 beyond 9, and gives Pr(W_SB > .5) = .547.
+
+::: {.callout-note appearance="simple"}
+Prior statements only; K_n is the number of fitted components among the n units. Every
+(a, b) is solved in the browser by `doroKL` (Nelder–Mead on log a and log b, the same
+problem `r-export/05_golden_v2_solvers.R` solves in R; parity against
+`verification/golden/solvers.csv`). The two curves under the chart are solved at
+n = 5, 10, …, 100 after the page loads.
+:::
+
+Standalone version: [embed/doro-explorer.html](../../embed/doro-explorer.html)
+(for example `?n=53`, or `?preset=unif10` for DORO-Unif with mu_K = 10).

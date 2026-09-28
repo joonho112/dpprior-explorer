@@ -1,0 +1,27 @@
+# Licence for text, figures and data files
+
+Author: JoonHo Lee (jlee296@ua.edu)
+
+The site text, the figures the widgets draw, and the data files in `data/` and
+`verification/golden/` that the author produced are licensed under Creative Commons
+Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/.
+
+Values reused from the replication package (joonho112/DPprior-paper-replication) keep its
+terms and attribution. This grant covers only rights the author holds; it does not relicense
+third-party study data:
+
+- the simulation and calibration tables are the author's own output (covered whole);
+- the application tables hold the author's posterior summaries; the per-unit inputs they
+  carry (`tau_hat`, `se`, `n_j` in `data/released/star_units.json` and `bd_units.json`) come
+  from Project STAR (through the R package mlmRev) and from Bangert-Drowns, Hurley and
+  Wilkinson (2004) (through the R package metadat) and keep their upstream terms; the
+  packages' GPL (>= 2) licence is not a separate grant for the original study data;
+- the vocabulary tables derive from the Item Response Warehouse table
+  `gcbs_brotherton_2013_vcl`, whose derived licence is CC BY 4.0, subject to upstream rights.
+
+Each released file's `license_scope`, `upstream` and `rights_record` in
+`data/released/data_contract.json` state this per file. No pupil-level STAR data,
+response-level IRW data, individual posterior draws or OCRS records are included.
+
+Code is licensed separately under the MIT licence (`LICENSE`). Vendored libraries keep
+their own ISC licences (`js/vendor/`). See `ATTRIBUTION.md` for sources.

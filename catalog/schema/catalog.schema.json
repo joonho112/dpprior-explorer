@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://joonho112.github.io/dpprior-explorer/catalog/schema/catalog.schema.json",
+  "title": "DPprior Explorer visualization catalog",
+  "description": "One entry per visualization. See CONTRACT.md section 3. does and sees are required one-sentence descriptions. Step 11.5 added section, rung and audience.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "name",
+      "axis",
+      "section",
+      "rung",
+      "audience",
+      "concept",
+      "does",
+      "sees",
+      "engine",
+      "page",
+      "embed",
+      "step",
+      "thumb",
+      "status"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[PMCAX]-[0-9]{2}$"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 3
+      },
+      "axis": {
+        "enum": [
+          "dpm",
+          "problems",
+          "dpprior",
+          "evidence",
+          "complementary"
+        ]
+      },
+      "section": {
+        "enum": [
+          "dpm",
+          "bridge",
+          "problems",
+          "dpprior",
+          "applications",
+          "tools"
+        ],
+        "description": "site section the entry lives in (Step 11.5)"
+      },
+      "rung": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minimum": 0,
+        "maximum": 8,
+        "description": "rung of the DPM ladder (P ids; null for the hub and for other sections)"
+      },
+      "audience": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "enum": [
+            "beginner",
+            "researcher",
+            "course"
+          ]
+        },
+        "description": "who the entry is for; drives the catalog filter and the learning paths"
+      },
+      "concept": {
+        "type": "string",
+        "minLength": 10
+      },
+      "does": {
+        "type": "string",
+        "minLength": 10
+      },
+      "sees": {
+        "type": "string",
+        "minLength": 10
+      },
+      "engine": {
+        "type": "string",
+        "minLength": 3
+      },
+      "page": {
+        "type": "string",
+        "pattern": "^pages/.+\\.html$|^[a-z-]+\\.html$"
+      },
+      "embed": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "pattern": "^embed/[a-z0-9-]+\\.html$"
+      },
+      "media": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "step": {
+        "type": "string",
+        "pattern": "^Step [0-9]+\\.[0-9]+$"
+      },
+      "thumb": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "pattern": "^catalog/thumbs/[PMCAX]-[0-9]{2}\\.png$"
+      },
+      "status": {
+        "enum": [
+          "planned",
+          "in-progress",
+          "done"
+        ]
+      },
+      "presets": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "attribution": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  }
+}

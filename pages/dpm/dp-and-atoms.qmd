@@ -1,0 +1,78 @@
+---
+title: "Distributions and Dirichlet process atoms"
+subtitle: "Catalog P-10, P-11, P-12 · rung 6 · after Broderick (MLSS 2016, part I)"
+description: "One concentration alpha, four random distributions with a growing support: Beta, Dirichlet, GEM and the Dirichlet process."
+toc: false
+---
+
+Every rung so far has drawn a *random distribution*: a set of weights on some set of
+points. The four rows below use one concentration alpha and differ only in what the
+weights sit on.
+
+```{=html}
+<div id="w-ladder-rows" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/distributions-ladder.js"></script>
+<script>
+  window.__dpxLadderRows = DPX["distributions-ladder"].mountWidget(document.getElementById("w-ladder-rows"), {});
+</script>
+```
+
+## Reading the rows
+
+1. **Beta(alpha/2, alpha/2)** puts weight on two points.
+2. **Dirichlet(alpha/10, …, alpha/10)** puts weight on ten points. With the total alpha
+   fixed, spreading it over more components makes each draw more uneven.
+3. **GEM(alpha)**, the stick-breaking weights, puts weight on 1, 2, 3, … without end; the
+   "…" is the mass left after thirty pieces.
+4. **The Dirichlet process DP(alpha, N(0, 1))** takes the same weights and gives each one
+   a random location phi_k drawn from the base distribution N(0, 1) (shaded). Press
+   **Redraw all** (or Enter) and watch the bars of row 3 move to their locations.
+
+Row 4 is a draw G = Σ w_k δ_{phi_k} from the Dirichlet process: a discrete distribution on
+the real line, with infinitely many atoms and most of its mass on a few of them.
+
+## P-11 · One draw G, three views
+
+```{=html}
+<div id="w-dp-atoms" class="dpx-host column-page"></div>
+<script src="../../js/bundles/dp-atoms.js"></script>
+<script>
+  window.__dpxDpAtoms = DPX["dp-atoms"].mountWidget(document.getElementById("w-dp-atoms"), {});
+</script>
+```
+
+Panel (a) is the weights, (b) puts each weight at its location, and (c) samples from G.
+Because G is discrete, the samples land exactly on atoms and repeat: N = 100 draws with
+alpha = 2 take only a handful of distinct values (E(K_N | alpha) = 8.40). Those repeats are
+the clusters of a Dirichlet process mixture. **New G** (or Enter) draws new weights and
+locations; **Sample N points** keeps G and draws new samples.
+
+## P-12 · Why choose the Dirichlet process?
+
+The same widget, switched to its comparison view, sets one stick-breaking draw against two
+finite mixtures, with K = 5 and K = 50 components and flat Dirichlet(1, …, 1) weights. Watch
+K_N, the number of components that N draws actually use:
+
+```{=html}
+<div id="w-dp-or-not" class="dpx-host column-page"></div>
+<script>
+  window.__dpxDpOrNot = DPX["dp-atoms"].mountWidget(document.getElementById("w-dp-or-not"), { mode: "compare" });
+</script>
+```
+
+A finite mixture can never use more than its K components, so its K_N flattens at 5 or 50.
+The Dirichlet process keeps supplying new components, and K_N keeps growing like
+alpha log N. Broderick's advice is to choose the Dirichlet process for this growth behaviour:
+new data may reveal new clusters. Switch the finite weights to **alpha/K (same total mass)** and the K = 50
+mixture imitates the Dirichlet process for a very long time (this is the usual finite
+approximation of the DP), yet it too can never pass 50.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part I); the mathematics is re-implemented and no code is copied.
+:::
+
+Standalone versions: [embed/distributions-ladder.html](../../embed/distributions-ladder.html)
+(`?alpha=5`), [embed/dp-atoms.html](../../embed/dp-atoms.html) (`?alpha=2&n=100`) and
+[embed/dp-or-not.html](../../embed/dp-or-not.html).

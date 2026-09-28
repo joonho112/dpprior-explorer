@@ -1,0 +1,62 @@
+---
+title: "Same default, different J"
+subtitle: "Catalog M-01 and M-02 · paper Figure 2"
+description: "A fixed Gamma default on alpha implies an expected number of clusters that grows with J, and a majority-mass tail that does not."
+toc: false
+---
+
+A default hyperprior on the concentration parameter, such as the "vague" Gamma(1, 1),
+is usually chosen once and reused for every study. In Chinese-restaurant terms, alpha is
+the pseudo-count of "tables not yet seen": the chance that the n-th unit opens a new
+table is alpha / (alpha + n - 1). The same alpha therefore implies *more* tables when
+there are more units, roughly E(alpha) log J. The size of the table a random unit joins
+does not work that way: its tail, Pr(W_SB > .5) = (b / (b + log 2))^a, involves no J at all.
+
+```{=html}
+<div id="w-defaults-drift" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/defaults-drift.js"></script>
+<script>
+  window.__dpxDefaultsDrift = DPX["defaults-drift"].mountWidget(document.getElementById("w-defaults-drift"), {});
+</script>
+```
+
+## How to read it
+
+- **Panel A.** Under Gamma(1, 1) the expected number of clusters is 4.16 at J = 50,
+  4.84 at J = 100 and 7.82 at J = 2000: the same "vague" default says something different
+  about heterogeneity in a 50-school study and in a 2000-site registry.
+- **Panel B.** The majority-mass tail is flat: .591 for Gamma(1, 1) at every J.
+- **Panel C (M-02).** The "conservative" literature defaults Gamma(1, 3) and Gamma(2, 4)
+  have a smaller E(alpha), so they imply fewer clusters, but a *larger* chance that a
+  randomly chosen unit sits in a cluster holding more than half of the population:
+  .812 and .726, against .591 for Gamma(1, 1). Switch **Focus** to compare.
+- The dotted guides mark the three applications in the paper: Bangert-Drowns (J = 48
+  studies), STAR (J = 79 schools) and the vocabulary checklist (N = 500 respondents).
+
+::: {.callout-note appearance="simple"}
+K_J is the number of fitted components (occupied clusters) among the J units.
+W_SB is the size-biased first weight: the share of the cluster that a randomly chosen
+unit belongs to. It is not the largest weight. The 90% band is computed live for
+J ≤ 500; beyond that it is read from values precomputed with the DPprior R package.
+:::
+
+Try a custom Gamma(a, b) with the sliders, or open the standalone version:
+[embed/defaults-drift.html](../../embed/defaults-drift.html) (for example
+`?a=1&b=3` starts the custom prior at Gamma(1, 3)).
+
+## The same idea as a video (A-16)
+
+The Gamma(1, 1) prior on K_J as J sweeps from 10 to 500, with the stick-breaking tail
+Pr(W_SB > .5) = .591 unchanged.
+
+```{=html}
+<video controls muted playsinline preload="metadata" style="width:100%;max-width:960px;border:1px solid var(--border);border-radius:8px"
+       aria-label="Animation: the prior pmf of K_J under Gamma(1, 1) for J from 10 to 500">
+  <source src="../../media/k_prior_by_J.mp4" type="video/mp4">
+  <a href="../../media/k_prior_by_J.mp4">Download the video (mp4, 14 s)</a>
+</video>
+```
+
+More videos: [Videos for talks](../media.qmd).

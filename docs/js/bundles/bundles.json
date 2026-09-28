@@ -1,0 +1,292 @@
+[
+  {
+    "name": "app-prior-strip",
+    "bytes": 48350,
+    "sha256": "6a5aa7a31aaf4713a7a16092a58307cf0aaddab7a09df5f5d54177fc504299ce"
+  },
+  {
+    "name": "bd-forest",
+    "bytes": 93072,
+    "sha256": "0db17e61a4ab756b1da3591e44d1ec5c2e3a6b86dee5913952a4018c58d7ae33"
+  },
+  {
+    "name": "bernoulli-sum",
+    "bytes": 12857,
+    "sha256": "f4354731b9075c53f943f90b97327165ec6797c90ebbbe58dcf9cf1821fa0c91"
+  },
+  {
+    "name": "collapse",
+    "bytes": 25649,
+    "sha256": "1995f4f18134c4e99e63b821501f15cb1cc98448e74fb5a2d778f6846d54aa9d"
+  },
+  {
+    "name": "crp-gibbs",
+    "bytes": 16337,
+    "sha256": "08e363a89135d7150eab323981c3a9baf658fc8d56abe78405a0545d3595581c"
+  },
+  {
+    "name": "crp-growth",
+    "bytes": 13953,
+    "sha256": "bab2f020b6b56af9bc60a29f75a212892d28109bbbefce0b937b737b548180df"
+  },
+  {
+    "name": "crp-unintended",
+    "bytes": 22252,
+    "sha256": "529b65f37b4c5b177f271d5ae0ad5e6c491b180656c02d4067278c5a86c75531"
+  },
+  {
+    "name": "crp",
+    "bytes": 14495,
+    "sha256": "26b2363930e5fa69dee851ddecd43a53ecd4adc9f07cfe1be339c44e0eec2dd8"
+  },
+  {
+    "name": "data-lineage-card",
+    "bytes": 58403,
+    "sha256": "6a34d4ec01740bb791a8299aac378233046e1abda8add8b62d528f8299437c77"
+  },
+  {
+    "name": "defaults-drift",
+    "bytes": 21496,
+    "sha256": "d7b5ed043df59302f06b9232d4edae62c98429b26a6215a5f6f6434ed0670392"
+  },
+  {
+    "name": "design-size",
+    "bytes": 105970,
+    "sha256": "6aca1a9becfdde019de879dc2a08d242cd639f73078d35cb7d378cf3d2c1ba66"
+  },
+  {
+    "name": "distributions-ladder",
+    "bytes": 11590,
+    "sha256": "de49d42d5456151cebedc73849c116023ca92c3a7f35ca0cb9ccf3c2c2fd475c"
+  },
+  {
+    "name": "dominance-ribbon",
+    "bytes": 18051,
+    "sha256": "c193906f9e9c3643034d988c8f8c53f668eb86ce438f3d1135917cc6d569501c"
+  },
+  {
+    "name": "doro-explorer",
+    "bytes": 19723,
+    "sha256": "03c3c0967db713f5057096da18cfc1ad5d3b75d19b909c2a8daf6998221bc56a"
+  },
+  {
+    "name": "dp-atoms",
+    "bytes": 17494,
+    "sha256": "a3c6e8e5ca5b3825bc873e9834f6b58fb4a268834ef1c816d04b7b21cd7ee888"
+  },
+  {
+    "name": "dpmm-generator",
+    "bytes": 14170,
+    "sha256": "ff42126a3d956f479334ea96c1a9dbd55fe48c7e5f09463160fbd53e52952080"
+  },
+  {
+    "name": "dual-anchor-frontier",
+    "bytes": 39303,
+    "sha256": "45c0cab535fb3452d257cd4760e69a4fc229af03e265b8ea274c77ed5b351e25"
+  },
+  {
+    "name": "effects-vs-partition-tiles",
+    "bytes": 59671,
+    "sha256": "a2028841792c2dba181917560f8e7c2f9e54e3a0b5750b7bd1ed8534bc040815"
+  },
+  {
+    "name": "elicitation-form",
+    "bytes": 31039,
+    "sha256": "9f1ca69127bd664448e029734748ce96d03aafafc99e0bf423c542c9804b6766"
+  },
+  {
+    "name": "eppf-panel",
+    "bytes": 11712,
+    "sha256": "24ce91f731bd387804561c2816fd12c17ce55fd8e5e6a2e5b5a0963b3c51ecea"
+  },
+  {
+    "name": "feasibility-map",
+    "bytes": 26816,
+    "sha256": "207512ccd596c32fb48f3f949061666a98bc2051dd492b0bff0563b221ab306e"
+  },
+  {
+    "name": "finite-mixture",
+    "bytes": 12557,
+    "sha256": "d505b663034ad04cdd92257038fd60aed3bd5e98b32843dc8688939c44dcfdc6"
+  },
+  {
+    "name": "gamma-mixing",
+    "bytes": 22166,
+    "sha256": "8688800035108f639434e02892fb2bab61033ab2f1e72266cf7db98e247a0172"
+  },
+  {
+    "name": "hoppe-urn",
+    "bytes": 16241,
+    "sha256": "2307d7c9482361418cc8d9420d1f6fcfe6342183615b00f578a3ab7ebbca624e"
+  },
+  {
+    "name": "kj-replicates",
+    "bytes": 11383,
+    "sha256": "4a783c5f00bb6db83397ff5b4c84d318964a16c4514e2c4fdb97b60bd67c155b"
+  },
+  {
+    "name": "lollipop",
+    "bytes": 14416,
+    "sha256": "bbd8d5549a00b4647f0dfae8bc09b8411a9bdb78b6384729db6d1e99d899eec0"
+  },
+  {
+    "name": "method-map",
+    "bytes": 60666,
+    "sha256": "db7121eecf2016d4236c1c910c4e3c7d8dffb58a314582e33872dc092018d097"
+  },
+  {
+    "name": "method-problems-strip",
+    "bytes": 59128,
+    "sha256": "7a553df847e34c6dbef6116b63a866e8208ed173c7c8b43eba7a540bf13eea67"
+  },
+  {
+    "name": "method-timeline",
+    "bytes": 60085,
+    "sha256": "96726fa2d63784e95497a5d3fab0123d0408ed4830cdb247511275570542549c"
+  },
+  {
+    "name": "misspecification",
+    "bytes": 128258,
+    "sha256": "65fbc6a78579c3c845f2de9833c60e604797f3742e47b7b49df833c938bb8a13"
+  },
+  {
+    "name": "newton-path",
+    "bytes": 24809,
+    "sha256": "5b062ca14d53b30e2ad82087d648cb75788e8439fad9bc234212c83c63324747"
+  },
+  {
+    "name": "objective-priors",
+    "bytes": 30048,
+    "sha256": "0fecc56d141fdd4634cd0fee54f291010b8af714ec42202ef0fceeb146666470"
+  },
+  {
+    "name": "paintbox",
+    "bytes": 12604,
+    "sha256": "579cdf2f1c1435f9e6a5b36b3a3911280ebc9fb895a5424dd0d019b8e883bd48"
+  },
+  {
+    "name": "partition-vs-effects",
+    "bytes": 160452,
+    "sha256": "4ba088c3391b4bbfe1a920f572186471f96115b9c7e604115429319eda410f4a"
+  },
+  {
+    "name": "prior-implications",
+    "bytes": 29462,
+    "sha256": "27a3ad11a906df03ae42a4fff21ff812b9045c0fb8c50851ad1e3fb9f24c20a8"
+  },
+  {
+    "name": "quasi-degenerate",
+    "bytes": 20903,
+    "sha256": "1821c4bf86ee66d93386183d5c09faa529e63e0265a6ef9a71b10123530b4e36"
+  },
+  {
+    "name": "rasch-density",
+    "bytes": 635020,
+    "sha256": "5c75a200253747c653b776be496b012823b2bb7d58ee07c2058c214995eff4d4"
+  },
+  {
+    "name": "rasch-kpmf",
+    "bytes": 44518,
+    "sha256": "532687b6d7eb66c362c5d1d0aa2c1293b8c1beac61f7f35cf944a62b659a2a14"
+  },
+  {
+    "name": "reconcile-dashboard",
+    "bytes": 23024,
+    "sha256": "5666a5038b936c549f9bb3ad69907c950460e4cd590c8e32d06425947d5c6ca3"
+  },
+  {
+    "name": "report-generator",
+    "bytes": 25093,
+    "sha256": "56df3e657b827765e1fac8539823a4a4d9bda277b954bc2c8b5d0612cf067414"
+  },
+  {
+    "name": "scal-explorer",
+    "bytes": 61233,
+    "sha256": "049409210552b20e4c2860574842569e216440915a1dcfd76a9bde3cef1aec9b"
+  },
+  {
+    "name": "sim-dashboard",
+    "bytes": 229466,
+    "sha256": "ca526bba80d67355c7ad68415c8c420901f632603b9ab5634f49eede5eee531f"
+  },
+  {
+    "name": "smoke-pmf",
+    "bytes": 11414,
+    "sha256": "d8ba6d0bcc58ae03eca4c91d69ee03344e8794beea1e3abf63483d157009446c"
+  },
+  {
+    "name": "spec-sensitivity",
+    "bytes": 56724,
+    "sha256": "2d2ffbb1883c30cc1fe3d48df46a9608236e1edba29ff73658cd79c22c0c0383"
+  },
+  {
+    "name": "ssi-explorer",
+    "bytes": 87290,
+    "sha256": "e82ae6456ae77e16901da4406016b80928b80e107054118a20ba255629304e81"
+  },
+  {
+    "name": "stick-breaking",
+    "bytes": 11663,
+    "sha256": "3793149b2c7647c3d4b0df5f94a8924d8dba7d447c29abd44a1d465b84fed449"
+  },
+  {
+    "name": "stirling-gamma",
+    "bytes": 27757,
+    "sha256": "7abcfdb0f3e4850326fd3fa09e91dfe99022e0a5218c93f9e4eb1f6ba52d669f"
+  },
+  {
+    "name": "timing-badges",
+    "bytes": 21885,
+    "sha256": "1085bb3ba90856c78e32f5f12b6060616eb73f1de4ce0566055ee4d86b017b87"
+  },
+  {
+    "name": "transported-vs-recalibrated",
+    "bytes": 23159,
+    "sha256": "109090309bc9994dc82c6e29765edba2fea343e8e5ca44ddba45deacd9040bd7"
+  },
+  {
+    "name": "tsmm-calibrator",
+    "bytes": 27029,
+    "sha256": "cf9df59f27ba4282d059b6c03e7168685f26b5a326ac936b768d921ee78a6b83"
+  },
+  {
+    "name": "tsmm-parity-table",
+    "bytes": 23580,
+    "sha256": "6b6289b2014bd9cadd6dc07e2457f90dc9d607579d533590bb0b055ec95b6060"
+  },
+  {
+    "name": "two-lenses",
+    "bytes": 18032,
+    "sha256": "bb533a43cba7dd3f68cd6753bdfe7ebc1702197539eb92b0c2ed5e9e03984489"
+  },
+  {
+    "name": "unintended-prior",
+    "bytes": 15217,
+    "sha256": "cb35b403d890091ad438dd304a3cffe11c526c4c1912f4c414c616d3b0e12a35"
+  },
+  {
+    "name": "unit-caterpillar",
+    "bytes": 146566,
+    "sha256": "e70f3cb8f6533923aafecee2dd1f431987acc23d2b6b8c1cb9fb9b55c21fef7d"
+  },
+  {
+    "name": "vif-sensitivity",
+    "bytes": 27424,
+    "sha256": "6d09b5df9cc658d0e07d6b928214b390e7fed589fd1c757017c27db7f02bd4c3"
+  },
+  {
+    "name": "wmax-bounds",
+    "bytes": 22457,
+    "sha256": "f87cba5494860c7187c6c26fddf5405ffaada087aef416699610ea934fea9511"
+  },
+  {
+    "name": "worked-example",
+    "bytes": 21844,
+    "sha256": "116210d7b3602130a5887f67a8f061a779b8c40420e5be817850a6b2c11a7e02"
+  },
+  {
+    "name": "workflow-stepper",
+    "bytes": 41200,
+    "sha256": "4fada97ede6dbf8cb4cb32efd9c105656d265eee21214e6d4ff830c2780a7391"
+  }
+]

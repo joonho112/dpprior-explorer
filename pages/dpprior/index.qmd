@@ -1,0 +1,51 @@
+---
+title: "Part 4 · The DPprior principle"
+---
+
+State a design-conditional target, calibrate Gamma(a, b) to it, diagnose the implied
+weights, and decide whether a Dual-Anchor refinement is needed. Start with
+[the workflow](workflow.qmd) (C-13), which walks the six steps with the paper's J = 50 example,
+or with [the worked example](worked-example-j50.qmd) (C-15), which shows the three priors on
+one strip.
+
+## 1 State the target
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [From what you expect to a prior](elicitation.qmd) | C-05 | An interval, a confidence level or a CV becomes (mu_K, sigma^2), then Gamma(a, b) and a dominance check; STAR triggers at .510 |
+| [Where a Gamma prior exists](feasibility.qmd) | C-06 | The (mu_K, sigma^2) plane: below the profile bound (4.52 at mu_K = 6.5, J = 100) no Gamma prior, above (mu_K − 1)(J − mu_K) no count; drag a target |
+
+## 2 Calibrate with TSMM
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [Calibrate a count target](calibrator.qmd) | C-02 | Live TSMM: a target (mu_K, sigma^2) at J gives Gamma(a, b) in milliseconds, or the reason it cannot |
+| [Stage 1, then Stage 2](stage1-stage2.qmd) | C-07 | The J = 50 example: A1 start (2.667, 2.608), five Newton steps to (1.4082, 1.0770) over the contours of the moment error, R and browser |
+| [TSMM checked against R](tsmm-parity.qmd) | C-01 | Ten calibration targets solved in R and in the browser; the infeasible one refused by both |
+| [Why the exact computation is cheap](why-fast.qmd) | C-10, C-12, C-11 | K_J is a sum of Bernoulli draws (the convolution equals the Stirling pmf), the Gamma mixture is a finite sum, and a TSMM solve takes milliseconds |
+
+## 3 Diagnose the weights
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [Confidence moves the tails, not the middle](vif-sensitivity.qmd) | C-03, C-04 | Table 2 live: VIF 1.25 to 5 moves Pr(W_SB > .5) .53 to .61 but Pr(W_SB > .9) .15 to .36 |
+| [One alpha, two lenses](../bridge/two-lenses.qmd) | C-04 | The same prior as a count distribution and as a weight distribution; J moves only the count |
+| [Dominance: W_SB and the largest weight](../bridge/dominance.qmd) | C-16 | Pr(W_SB > t) against the band for the largest weight W_max |
+
+## 4 to 6 Trigger, refine, and the hard bound
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [The Dual-Anchor frontier](dual-anchor.qmd) | C-08 | 29 values of lambda at J = 50: the largest one at or below the .40 trigger is .30, Gamma(2.3158, 1.4204), .398, E K 5.88; the hard bound .25 costs E K 7.49 |
+| [Two anchors, one prior](two-anchors.qmd) | C-09 | TSMM → Dual-Anchor in four linked views: E K 5.00 → 5.88, Pr(W_SB > .5) .497 → .398, E(rho) .518 → .439 |
+| [Worked example: J = 50](worked-example-j50.qmd) | C-15 | TSMM → Dual-Anchor → hard bound on one strip: .497 → .398 → .250 |
+
+## The whole workflow
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [The workflow, step by step](workflow.qmd) | C-13 | Six clickable steps; the J = 50 example fills them in and the .497 > .40 branch lights up |
+| [Reporting the prior](checklist.qmd) | C-14 | The paper's eight-item checklist as a form, with missing items flagged and a paragraph to copy |
+
+The [Gamma mixing page](../bridge/gamma-mixing.qmd) (C-12) shows how the exact pmf is built
+from a grid of alpha values. Every widget is also listed in the [catalog](../../catalog.qmd).

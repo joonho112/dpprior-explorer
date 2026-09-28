@@ -1,0 +1,43 @@
+---
+title: "From the Hoppe urn to stick-breaking"
+subtitle: "Catalog P-06 · rung 5 · after Broderick (MLSS 2016, part II)"
+description: "An urn with one black ball of mass alpha grows new colours; the colour shares settle down to stick-breaking weights, and the first colour's share is Beta(1, alpha)."
+toc: false
+---
+
+Put one black ball of mass alpha in an urn. Draw a ball with probability proportional to
+its mass. If it is the black ball, put it back together with a ball of a *new* colour. If it
+is a coloured ball, put it back with one more ball of the *same* colour. After n draws there
+are n coloured balls, and the chance that the next draw brings a new colour is
+alpha / (alpha + n). This is Hoppe's urn, and it is the [Chinese restaurant
+process](crp.qmd) with colours for tables.
+
+```{=html}
+<div id="w-urn" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/hoppe-urn.js"></script>
+<script>
+  window.__dpxUrn = DPX["hoppe-urn"].mountWidget(document.getElementById("w-urn"), {});
+</script>
+```
+
+## What to try
+
+- **Step** (or Enter) a few times and follow the step strip: the first draw must take the
+  black ball, so the first colour appears at once.
+- **+100, auto.** The colour shares stop moving much after a few hundred draws. The bar is
+  one draw of stick-breaking weights, in the order the colours appeared (the same colours as
+  the [stick-breaking](stick-breaking.qmd) widget).
+- **Repeat 1000 times.** A thousand fresh urns: the first colour's share lines up with the
+  Beta(1, alpha) density. That is the first stick-breaking piece, and the share of the cluster
+  a randomly chosen unit belongs to, W_SB, has the same Beta(1, alpha) distribution given
+  alpha.
+- **alpha.** A small alpha keeps one colour dominant; a large alpha keeps opening new ones.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part II); the mathematics is re-implemented and no code is copied.
+:::
+
+Standalone version: [embed/hoppe-urn.html](../../embed/hoppe-urn.html), for example
+`?alpha=0.5&n=200`.

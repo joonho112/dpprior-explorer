@@ -1,0 +1,60 @@
+---
+title: "From what you expect to a prior"
+subtitle: "Catalog C-05"
+description: "An elicitation form: state what you expect about the number of clusters as an interval, a confidence level or a coefficient of variation, and watch it become a count target, a Gamma(a, b) prior and a dominance check."
+toc: false
+---
+
+Say what you expect about K_J, the number of clusters among your J units, in the way that
+comes most naturally: an interval you would bet on with some probability, a confidence level,
+or a coefficient of variation. The form turns the statement into a mean and a variance for
+K_J, solves the Gamma(a, b) hyperprior with the same exact moments (TSMM), and checks the
+weights that prior implies.
+
+```{=html}
+<div id="w-elicit" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/elicitation-form.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    ["J", "mu"].forEach(function (k) { var v = q.get(k); if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v; });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxElicit = DPX["elicitation-form"].mountWidget(document.getElementById("w-elicit"), spec);
+  })();
+</script>
+```
+
+- **An interval.** "Between k_L and k_U with probability q" is read through a normal proxy:
+  sigma_K = (k_U − k_L) / (2z), with z = 1.2816 at 80% and 1.96 at 95%. The mean is the value
+  you give ("about 5"), or the midpoint.
+- **STAR** (J = 79): "about 5 clusters, between 2 and 8 with 80% probability" asks for
+  sigma^2 = 5.48 and gives Gamma(5.134, 4.939). Its Pr(W_SB > .5) is .510, above .40, so the
+  dominance trigger fires. The Bangert-Drowns (J = 48) and Vocabulary (J = 500) statements
+  trigger too.
+- **When the statement is too sure.** At J = 100, "[3, 10] with 80% probability" asks for
+  sigma^2 = 7.46 and gives Gamma(6.82, 4.82), with Pr(W_SB > .5) = .4002, just above the .40
+  trigger, and Pr(W_SB > .9) = .070. The same interval at 95% asks for sigma^2 = 3.19, below 4.52, the smallest variance
+  any Gamma prior with mean 6.5 can give. The form says "no solution" and names the largest
+  probability that would work.
+- **A confidence level or a CV** skips the interval: high, medium and low confidence mean
+  VIF 1.5, 2.5 and 5 in sigma^2 = VIF (mu_K − 1), and a CV gives sigma^2 = (CV_K mu_K)^2.
+
+When the trigger fires, the paper's next step is the Dual-Anchor refinement, which gives up a
+little of the count target for less dominance: see [the J = 50 worked example](worked-example-j50.qmd).
+To set (mu_K, sigma^2) directly, use [the calibrator](calibrator.qmd).
+
+::: {.callout-note appearance="simple"}
+Converted by dp-core `intervalToMoments`, `vifToVariance` and `cvToVariance`; solved by
+`tsmmFit`, which is checked against DPprior 2.0.0 on [the parity page](tsmm-parity.qmd).
+:::
+
+::: {.callout-tip appearance="simple"}
+**In DPprior Studio.** To target a whole pmf for K_J instead of a mean and a variance, use the custom-pmf mode of the Elicit panel of [DPprior Studio](https://joonho.shinyapps.io/dpprior-studio/), the Shiny app that
+accompanies the package (built on DPprior 1.1.0; it may take a moment to wake up). This site does
+not rebuild what Studio already does.
+:::
+
+Standalone version: [embed/elicitation-form.html](../../embed/elicitation-form.html)
+(for example `?preset=i95`).

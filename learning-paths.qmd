@@ -1,0 +1,85 @@
+---
+title: "Learning paths"
+subtitle: "Three routes through the pool, with the settings to use and what to notice"
+description: "A 25-minute beginner route, a 45-minute researcher route and a 90-minute course route through the DPprior Explorer widgets, each step with its link, time, setting and the number to notice, plus notes for instructors."
+toc: true
+---
+
+Each step opens a page (or a standalone widget with the setting already in its address). The
+times are for a first pass; every widget has more to try. The same routes are in the
+[catalog](catalog.qmd) as audience filters:
+[beginners](catalog.html?audience=beginner),
+[researchers](catalog.html?audience=researcher),
+[a course](catalog.html?audience=course).
+
+## Beginners: 25 minutes {#beginner}
+
+From "why not a fixed number of clusters?" to the prior that says more than it seems to.
+
+::: {.dpx-table-scroll tabindex="0" role="region" aria-label="Beginner route, scrollable table"}
+| Step | Widget | Minutes | Do | Notice |
+|---|---|---:|---|---|
+| 1 | [Why nonparametric Bayes? (P-00)](pages/dpm/why-nonparametric.qmd) | 4 | [K = 2, N = 100](embed/finite-mixture.html?K=2&n=100&seed=1), then [K = infinity, N = 500](embed/finite-mixture.html?preset=inf&n=500) | Only the infinite model keeps opening new cells as N grows. |
+| 2 | [Stick-breaking (P-05)](pages/dpm/stick-breaking.qmd) | 5 | alpha [0.5](embed/stick-breaking.html?alpha=0.5), [2](embed/stick-breaking.html?alpha=2), [10](embed/stick-breaking.html?alpha=10) | Pr(w_1 > .5) = .5^alpha: .707 at alpha = 0.5, .25 at 2, below .001 at 10. |
+| 3 | [Chinese restaurant process (P-07)](pages/dpm/crp.qmd) | 6 | [alpha = 1](embed/crp.html?alpha=1): Seat 10, then Seat 100 | Tables open slowly, about alpha log N: 4.95 expected after 79 customers. |
+| 4 | [One alpha, two lenses (C-04)](pages/bridge/two-lenses.qmd) | 5 | [Gamma(1, 1), J = 100](embed/two-lenses.html?a=1&b=1&J=100) | One prior, two readings: E K_100 = 4.84 clusters, yet Pr(W_SB > .5) = .591. |
+| 5 | [The unintended prior (M-03)](pages/problems/unintended-prior.qmd) | 5 | [the default setting](embed/unintended-prior.html): Gamma(1.60, 1.22), J = 50 | A prior tuned to "about five clusters" still puts a random unit in a majority cluster with probability .487. |
+:::
+
+## Researchers: 45 minutes {#researcher}
+
+What default hyperpriors imply, how the published methods fix one summary, and how DPprior
+calibrates both.
+
+::: {.dpx-table-scroll tabindex="0" role="region" aria-label="Researcher route, scrollable table"}
+| Step | Widget | Minutes | Do | Notice |
+|---|---|---:|---|---|
+| 1 | [Same default, different J (M-01)](pages/problems/defaults-drift.qmd) | 5 | [Gamma(1, 1) across J](embed/defaults-drift.html) | E K_J = 4.16 at J = 50, 4.84 at 100, 7.82 at 2000, while Pr(W_SB > .5) stays .591. |
+| 2 | [The unintended prior (M-03)](pages/problems/unintended-prior.qmd) | 5 | [default](embed/unintended-prior.html) | The count target is met; the weight tail (.487) is not stated anywhere. |
+| 3 | [DORO, SCAL and SSI (M-04)](pages/problems/method-problems-strip.qmd) | 6 | [J = 500](embed/method-problems-strip.html?J=500) | Each method pins one summary and leaves the other free. |
+| 4 | [The method map (M-15)](pages/problems/method-map.qmd) | 6 | [J = 100](embed/method-map.html?J=100), then [J = 500](embed/method-map.html?J=500&preset=headline) | Defaults and methods on one (E K_J, Pr(W_SB > .5)) plane move as J changes. |
+| 5 | [TSMM calibrator (C-02)](pages/dpprior/calibrator.qmd) | 6 | [J = 50, about 5 clusters, variance 10](embed/tsmm-calibrator.html?preset=j50) | Two-moment matching gives Gamma(1.4082, 1.0770) in a few Newton steps. |
+| 6 | [Elicitation form (C-05)](pages/dpprior/elicitation.qmd) | 5 | [the STAR preset](embed/elicitation-form.html?preset=star) | Three routes to (mu_K, sigma²), and the badge when Pr(W_SB > .5) passes .40. |
+| 7 | [Dual-Anchor frontier (C-08)](pages/dpprior/dual-anchor.qmd) | 6 | [default](embed/dual-anchor-frontier.html) | The rule picks lambda = .30: Gamma(2.3158, 1.4204), Pr(W_SB > .5) = .398. |
+| 8 | [Partition vs effects (A-11)](pages/applications/partition-vs-effects.qmd) | 6 | [STAR](embed/partition-vs-effects.html), then [Bangert-Drowns](embed/partition-vs-effects.html?app=bd) | The partition moves (Pr(K_J = 1) .560 to .064 in STAR), the effects do not (RMS .0088). |
+:::
+
+## A course: 90 minutes {#course}
+
+The DPM ladder from the bottom rung to the sampler, the exercises, and two bridge pages that
+turn the ladder into a statement about priors.
+
+::: {.dpx-table-scroll tabindex="0" role="region" aria-label="Course route, scrollable table"}
+| Part | Widgets | Minutes | Do | Notice |
+|---|---|---:|---|---|
+| Rung 0 | [Why nonparametric Bayes? (P-00)](pages/dpm/why-nonparametric.qmd) | 6 | [K = 2](embed/finite-mixture.html?K=2&n=100&seed=1), [K = 5](embed/finite-mixture.html?K=5&n=300), [K = infinity](embed/finite-mixture.html?preset=inf&n=500) | Fixed cells against cells that open as data arrive. |
+| Rungs 1-2 | [Beta and Dirichlet (P-01, P-02)](pages/dpm/beta-dirichlet.qmd) | 7 | move a from 0.01 to 1000 | Small a gives all-or-nothing weights, large a nearly even ones. |
+| Rung 3 | [Paintbox (P-03, P-04)](pages/dpm/paintbox.qmd) | 7 | many components, few clusters | Components are the atoms; clusters are the ones units occupy. |
+| Rung 4 | [Stick-breaking (P-05, P-17)](pages/dpm/stick-breaking.qmd) | 7 | alpha [0.5](embed/stick-breaking.html?alpha=0.5), [2](embed/stick-breaking.html?alpha=2), [10](embed/stick-breaking.html?alpha=10); the video | Size-biased order: large pieces come first. |
+| Rung 5 | [Hoppe urn (P-06)](pages/dpm/urn-to-sticks.qmd) | 5 | draw balls | The urn and the stick are the same process. |
+| Rung 6 | [Chinese restaurant (P-07, P-08, P-14, P-15)](pages/dpm/crp.qmd) | 12 | [alpha = 1](embed/crp.html?alpha=1); [100 replicates](embed/kj-replicates.html?J=100&alpha=1&n=200&seed=1) | K_J is a random variable: E K_100 = 5.19 at alpha = 1. |
+| Rung 7 | [DP mixture and atoms (P-09 to P-12)](pages/dpm/dpmm.qmd) | 8 | generate a DP mixture | Components created against clusters that hold points. |
+| Rung 8 | [Collapsed Gibbs sampler (P-13)](pages/dpm/crp-gibbs.qmd) | 8 | [one cluster to start](embed/crp-gibbs.html?preset=one&n=5&seed=1) | The sampler reseats one point at a time. |
+| Exercises | [Five exercises](pages/dpm/exercises.qmd#exercises) | 15 | work them with the widgets | Conjugacy, a GEM simulator, how the number of tables grows with N and its expectation by hand, two lenses. |
+| Bridge | [1000 restaurants (M-05)](pages/bridge/crp-unintended.qmd) | 8 | [Gamma(1.6, 1.22), J = 50](embed/crp-unintended.html?a=1.6&b=1.22&J=50&seed=1) | The simulated tables match the exact pmf of K_J (mean 5.05). |
+| Bridge | [Collapse (M-06)](pages/bridge/collapse.qmd) | 7 | [Gamma(1, 1)](embed/collapse.html?preset=g11) | Prior Pr(K_J = 1) is a statement about the prior, not the data. |
+:::
+
+## Instructor notes {#instructor-notes}
+
+- **Offline.** Every widget is a small script bundled with the site, so the pages and the
+  standalone versions also work from a downloaded copy of the site (file://) with no network.
+  The [videos](pages/media.qmd) and the [static fallbacks](pages/applications/talk-fallbacks.qmd)
+  need no JavaScript at all.
+- **The same draws for everyone.** Widgets with random draws take a seed (`?seed=1` in the
+  links above), so a class sees the same sticks, tables and points.
+- **Three confusions to name early.** Components against clusters (K_J counts the occupied
+  ones); the size-biased weight W_SB against the largest weight W_max (the first is a lower
+  bound for the second when t ≥ 1/2); prior collapse Pr(K_J = 1) against posterior collapse
+  Pr(K_J = 1 | data). The [vocabulary](pages/vocabulary.qmd) page has the site's terms.
+- **Timing.** The course route fits one 90-minute session with the exercises as an in-class
+  break; the beginner route works as the first half hour of a workshop, the researcher route as
+  a lab after a talk on the paper.
+- **After the session.** The [catalog](catalog.qmd) lists all 72 visualizations with what each
+  one shows; the [released data](pages/applications/data.qmd) page lists the tables the
+  evidence pages read.

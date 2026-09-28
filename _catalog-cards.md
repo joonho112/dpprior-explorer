@@ -1,0 +1,916 @@
+```{=html}
+<form class="dpx-catalog-filter" aria-label="Filter the catalog" onsubmit="return false">
+<label>Section <select id="f-section"><option value="">all sections</option><option value="dpm">1 · Learn the DPM</option><option value="bridge">2 · CRP bridge</option><option value="problems">3 · Default problems</option><option value="dpprior">4 · DPprior</option><option value="applications">5 · Evidence</option><option value="tools">Tools</option></select></label>
+<label>Ladder rung <select id="f-rung"><option value="">all</option><option value="0">0 · Why nonparametric Bayes?</option><option value="1">1 · Beta</option><option value="2">2 · Dirichlet</option><option value="3">3 · Paintbox</option><option value="4">4 · Stick-breaking</option><option value="5">5 · Hoppe urn</option><option value="6">6 · Chinese restaurant process</option><option value="7">7 · DP mixture and atoms</option><option value="8">8 · Collapsed Gibbs sampler</option></select></label>
+<label>Audience <select id="f-audience"><option value="">everyone</option><option value="beginner">Beginners</option><option value="researcher">Researchers</option><option value="course">A course</option></select></label>
+<button type="button" id="f-reset" class="dpx-btn">Show all</button>
+</form>
+<p class="dpx-catalog-count" id="f-count" aria-live="polite" data-all="72 visualizations (70 built, 2 planned).">72 visualizations (70 built, 2 planned).</p>
+<h2 class="anchored" id="axis-dpm">1 · Learn the DPM (P-)</h2>
+<div class="dpx-cards">
+<article class="dpx-card" id="P-00" data-section="dpm" data-rung="0" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-00.png" alt="Thumbnail of P-00 Why nonparametric Bayes?" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-00</span> Step 6.1 · done</p>
+    <h3>Why nonparametric Bayes?</h3>
+    <p class="dpx-card-concept">A finite mixture fixes its number of cells before seeing data, while a Dirichlet process keeps unbroken stick mass for cells nobody has used yet, so the number of occupied cells can grow with N.</p>
+    <p><strong>You do:</strong> The viewer switches between K = 2, K = 5 and K = infinity, moves N from 10 to 500, and presses Redraw (or Enter) for new weights, centres and points.</p>
+    <p><strong>You see:</strong> A two-dimensional scatter coloured by cell with the occupied cell centres marked, and a bar of the cell weights above the shares of the N points, with a dashed 'new cells' piece of unbroken stick when K is infinite.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded Dirichlet, Beta(1, alpha), normal) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/why-nonparametric.html">page</a> · <a href="embed/finite-mixture.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-01" data-section="dpm" data-rung="1" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-01.png" alt="Thumbnail of P-01 Beta lollipop" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-01</span> Step 6.2 · done</p>
+    <h3>Beta lollipop</h3>
+    <p class="dpx-card-concept">rho_1 ~ Beta(a_1, a_2) with rho_2 = 1 - rho_1 is the two-component case of the Dirichlet: small a gives nearly all-or-nothing draws and large a nearly even ones.</p>
+    <p><strong>You do:</strong> The viewer moves the shared a on a log slider from 0.01 to 1000 or sets a_1 and a_2 separately, presses Draw again (or Enter), and switches on auto-draw at two draws per second and the twenty ghosts.</p>
+    <p><strong>You see:</strong> Two lollipop stems for rho_1 and rho_2 with the previous twenty draws as faint dots, and the Beta(a_1, a_2) density of rho_1 with the current draw marked in red.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded, log-scale Dirichlet) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/beta-dirichlet.html">page</a> · <a href="embed/beta-lollipop.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-02" data-section="dpm" data-rung="2" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-02.png" alt="Thumbnail of P-02 Dirichlet lollipop and ternary view" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-02</span> Step 6.2 · done</p>
+    <h3>Dirichlet lollipop and ternary view</h3>
+    <p class="dpx-card-concept">rho ~ Dirichlet(a_1, ..., a_K) spreads a draw evenly when a is large and concentrates it on few components when a is small; at K = 3 each draw is a point in a triangle.</p>
+    <p><strong>You do:</strong> The viewer sets K from 2 to 12 and a (shared or per component), draws again or auto-draws, and at K = 3 picks the presets a = 0.5, a = 5 and a = (40, 10, 10).</p>
+    <p><strong>You see:</strong> K lollipop stems with ghosts and a 1/K reference line and, at K = 3, 300 draws in the triangle that gather in the corners (a = 0.5), in the centre (a = 5) or towards rho_1 = 2/3 (a = (40, 10, 10)).</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded, log-scale Dirichlet) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/beta-dirichlet.html">page</a> · <a href="embed/dirichlet-lollipop.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-03" data-section="dpm" data-rung="3" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-03.png" alt="Thumbnail of P-03 Large-K paintbox with falling markers" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-03</span> Step 6.3 · done</p>
+    <h3>Large-K paintbox with falling markers</h3>
+    <p class="dpx-card-concept">A Dirichlet(a, ..., a) draw with K = 1000 and a = 0.01 cuts the unit interval into a few wide pieces and many slivers; uniform drops occupy far fewer pieces (clusters) than there are components.</p>
+    <p><strong>You do:</strong> The viewer presses Drop 1, Drop 10 or Drop 100 and New rho, moves a from 0.001 to 1 and K from 100 to 5000, and hovers over the bar or uses the piece picker.</p>
+    <p><strong>You see:</strong> The unit-interval bar with hit pieces turning from grey to blue as red markers fall, the number of drops and of occupied pieces against the exact expectation (24.2 after 100 drops at K = 1000, a = 0.01), the equivalent alpha = K a, and one piece's rho_k.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded, log-scale Dirichlet) + Canvas 2D</p>
+    <p class="dpx-card-links"><a href="pages/dpm/paintbox.html">page</a> · <a href="embed/paintbox.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-04" data-section="dpm" data-rung="3" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-04.png" alt="Thumbnail of P-04 Order-of-appearance staircase" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-04</span> Step 6.3 · done</p>
+    <h3>Order-of-appearance staircase</h3>
+    <p class="dpx-card-concept">Numbering clusters in the order they are first hit gives a concave staircase: new clusters appear ever more rarely, roughly like alpha log N with alpha = K a.</p>
+    <p><strong>You do:</strong> The viewer drops points in the linked paintbox and switches the drop-number axis between linear and log scales.</p>
+    <p><strong>You see:</strong> Every drop plotted at (drop number, cluster by order of appearance), first hits in blue joined by a step frontier, with component and cluster counters in step with the paintbox.</p>
+    <p class="dpx-card-engine">dp-core sampler + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/paintbox.html">page</a> · <a href="embed/paintbox.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-05" data-section="dpm" data-rung="4" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-05.png" alt="Thumbnail of P-05 GEM stick-breaking staircase" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-05</span> Step 4.1 · done</p>
+    <h3>GEM stick-breaking staircase</h3>
+    <p class="dpx-card-concept">With V_k ~ Beta(1, alpha) and w_k = V_k times what is left, a small alpha lets the first piece take most of the stick (E[w_1] = 1/(1 + alpha), Pr(w_1 &gt; .5) = 0.5^alpha).</p>
+    <p><strong>You do:</strong> The viewer moves the alpha slider or picks the presets 0.5, 1, 2, 10 and 100, presses Break again (Enter) or Step, switches between size-biased and ranked order, and turns on 20 ghost rows.</p>
+    <p><strong>You see:</strong> A stick broken piece by piece in a staircase with each V_k and w_k labelled, the E[w_1] and Pr(w_1 &gt; .5) read-outs, a collapse badge when one piece exceeds .9, and 20 more sticks drawn on a canvas.</p>
+    <p class="dpx-card-engine">dp-core sampler (mulberry32, Beta(1, alpha)) + D3 7.9.0 SVG transitions + Canvas ghost rows</p>
+    <p class="dpx-card-links"><a href="pages/dpm/stick-breaking.html">page</a> · <a href="embed/stick-breaking.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-06" data-section="dpm" data-rung="5" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-06.png" alt="Thumbnail of P-06 Hoppe urn to stick-breaking" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-06</span> Step 6.4 · done</p>
+    <h3>Hoppe urn to stick-breaking</h3>
+    <p class="dpx-card-concept">Hoppe's urn with one black ball of mass alpha is the Chinese restaurant process; its colour shares converge to one draw of stick-breaking weights, so the first colour's long-run share is W_1 ~ Beta(1, alpha).</p>
+    <p><strong>You do:</strong> The viewer sets alpha, draws one ball at a time (Step or Enter), adds 10 or 100, plays automatically at three speeds, resets, and runs the 1000-urn experiment.</p>
+    <p><strong>You see:</strong> The urn with its black alpha ball and coloured balls, a strip of the first four draws with their probabilities, the colour-share bar and the first colour's share settling over draws, and a histogram of 1000 first-colour shares on the Beta(1, alpha) density.</p>
+    <p class="dpx-card-engine">dp-core CRP sampler (seeded) + D3 7.9.0 + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/urn-to-sticks.html">page</a> · <a href="embed/hoppe-urn.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-07" data-section="dpm" data-rung="6" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-07.png" alt="Thumbnail of P-07 Chinese restaurant process" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-07</span> Step 4.2 · done</p>
+    <h3>Chinese restaurant process</h3>
+    <p class="dpx-card-concept">Customer n + 1 joins table k with probability n_k/(alpha + n) and a new table with probability alpha/(alpha + n): alpha is a pseudo-count for the tables not seen yet.</p>
+    <p><strong>You do:</strong> The viewer sets alpha (presets 0.01, 0.5, 1, 2), seats 1, 10 or 100 customers, plays or pauses at three speeds, resets, changes the seed, and switches the labels to sites and clusters.</p>
+    <p><strong>You see:</strong> Tables as circles growing with occupancy, the next customer's probability bar with the new-table piece highlighted, the product of seating probabilities for the first eight arrivals, and the STAR read-out alpha/(alpha + 78) = 1.3% at alpha = 1 and 6.0% at alpha = 5.</p>
+    <p class="dpx-card-engine">dp-core CRP sampler (seeded) + D3 7.9.0 SVG transitions</p>
+    <p class="dpx-card-links"><a href="pages/dpm/crp.html">page</a> · <a href="embed/crp.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-08" data-section="dpm" data-rung="6" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-08.png" alt="Thumbnail of P-08 How K_N grows" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-08</span> Step 4.4 · done</p>
+    <h3>How K_N grows</h3>
+    <p class="dpx-card-concept">E[K_N] = sum alpha/(alpha + n - 1), about alpha log N, and the distribution of K_N at the current N is the Antoniak pmf, which is the prior of K_J for J = N.</p>
+    <p><strong>You do:</strong> The viewer sets alpha, adds 1, 10, 100 or 1000 customers, switches the N axis between linear and log, and turns 20 ghost paths on or off.</p>
+    <p><strong>You see:</strong> The K_N staircase with the E[K_N] curve and the alpha log N line, 20 ghost paths, and the exact pmf of K_N at the current N with ghost endpoints and guides at N = 48, 79 and 500.</p>
+    <p class="dpx-card-engine">dp-core (CRP sampler, condMean, condPmf) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/crp.html">page</a> · <a href="embed/crp-growth.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-09" data-section="dpm" data-rung="7" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-09.png" alt="Thumbnail of P-09 DP mixture generator (N, components, clusters)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-09</span> Step 6.5 · done</p>
+    <h3>DP mixture generator (N, components, clusters)</h3>
+    <p class="dpx-card-concept">Generating a Dirichlet process mixture by lazy stick-breaking creates pieces and means only when a point needs them, so points, components created and clusters grow at different speeds and some components stay empty.</p>
+    <p><strong>You do:</strong> The viewer sets alpha (default 2), sigma0 (1.5) and sigma (0.3), adds 1, 10 or 100 points (Enter adds one), resets, and hovers over a piece of the stick or uses the component picker.</p>
+    <p><strong>You see:</strong> The stick with occupied pieces coloured, empty broken pieces grey, the white unbroken rest and a red mark at the last u; a scatter coloured by cluster with black squares at every component mean, used or not; and components and clusters against N with E(K_N | alpha) dashed.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded Beta(1, alpha), normal) + D3 7.9.0 + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/dpmm.html">page</a> · <a href="embed/dpmm.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-10" data-section="dpm" data-rung="7" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-10.png" alt="Thumbnail of P-10 Distributions ladder (Beta, Dirichlet, GEM, DP atoms)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-10</span> Step 6.6 · done</p>
+    <h3>Distributions ladder (Beta, Dirichlet, GEM, DP atoms)</h3>
+    <p class="dpx-card-concept">One concentration alpha drives Beta, Dirichlet, GEM and Dirichlet process draws whose support grows from two points to K points, to the positive integers, to the real line.</p>
+    <p><strong>You do:</strong> The viewer moves the shared alpha, draws each row separately (or new atom locations for row 4), and presses Redraw all (or Enter).</p>
+    <p><strong>You see:</strong> Four linked rows: two lollipops, ten lollipops, thirty GEM lollipops with the remaining mass shown as '...', and the same GEM weights moving to locations phi_k ~ N(0, 1) on a continuous axis with the largest atom labelled.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded Dirichlet, GEM, normal) + Observable Plot 0.6.17 + D3 7.9.0 transitions</p>
+    <p class="dpx-card-links"><a href="pages/dpm/dp-and-atoms.html">page</a> · <a href="embed/distributions-ladder.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-11" data-section="dpm" data-rung="7" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-11.png" alt="Thumbnail of P-11 A draw G from the Dirichlet process" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-11</span> Step 6.7 · done</p>
+    <h3>A draw G from the Dirichlet process</h3>
+    <p class="dpx-card-concept">A Dirichlet process draw G = sum_k w_k delta(phi_k) combines GEM(alpha) weights with locations from the base distribution, so it is discrete and draws from it repeat.</p>
+    <p><strong>You do:</strong> The viewer sets alpha and the spread sigma0 of the base distribution, presses New G (or Enter), sets N and presses Sample N points.</p>
+    <p><strong>You see:</strong> Three linked panels: the weights by index, the same weights as atoms at phi_k over the shaded base density with the largest labelled rho_k @ phi_k, and N draws from G stacked on the atoms they hit.</p>
+    <p class="dpx-card-engine">dp-core sampler (seeded GEM, normal) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/dp-and-atoms.html">page</a> · <a href="embed/dp-atoms.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-12" data-section="dpm" data-rung="7" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-12.png" alt="Thumbnail of P-12 DP or not: finite versus GEM" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-12</span> Step 6.7 · done</p>
+    <h3>DP or not: finite versus GEM</h3>
+    <p class="dpx-card-concept">A finite Dirichlet mixture uses at most K components however large N gets, while stick-breaking weights keep supplying new components, so K_N grows like alpha log N; with a_k = alpha/K a large-K mixture imitates the Dirichlet process for a long time but still cannot pass K.</p>
+    <p><strong>You do:</strong> The viewer switches the P-11 widget to its comparison view, sets alpha, chooses flat Dirichlet(1, ..., 1) or Dirichlet(alpha/K) weights for the finite models, and redraws.</p>
+    <p><strong>You see:</strong> Weight bars for one GEM draw and for Dirichlet draws with K = 5 and K = 50, and K_N against N up to 10,000 on a log axis for each draw with its expectation: the finite curves flatten at their ceilings while the GEM curve keeps rising.</p>
+    <p class="dpx-card-engine">dp-core sampler + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/dp-and-atoms.html">page</a> · <a href="embed/dp-or-not.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-13" data-section="dpm" data-rung="8" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-13.png" alt="Thumbnail of P-13 Collapsed Gibbs CRP sampler" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-13</span> Step 6.9 · done</p>
+    <h3>Collapsed Gibbs CRP sampler</h3>
+    <p class="dpx-card-concept">Collapsed Gibbs sampling for a DP mixture resamples each point's cluster with probability proportional to the CRP prior weight times the fit, and alpha = 0.01 is a strong prior against new clusters.</p>
+    <p><strong>You do:</strong> The viewer picks a start (one cluster, singletons or a random split), steps one point (Enter) or one sweep, runs ten sweeps or plays at three speeds, moves alpha live from 0.01 to 10, and toggles the true means.</p>
+    <p><strong>You see:</strong> The 100 points coloured by cluster with a large X on the point just resampled and diamonds at cluster means, a bar of the CRP prior weights above the posterior with the new-cluster piece dashed, and K after each sweep settling near 4.</p>
+    <p class="dpx-card-engine">dp-core gibbs.ts (Neal Algorithm 3, seeded) + D3 7.9.0 + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/crp-gibbs.html">page</a> · <a href="embed/crp-gibbs.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-14" data-section="dpm" data-rung="6" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-14.png" alt="Thumbnail of P-14 EPPF exchangeability panel" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-14</span> Step 6.11 · done</p>
+    <h3>EPPF exchangeability panel</h3>
+    <p class="dpx-card-concept">The probability of a Chinese restaurant seating is a product of factors whose value does not depend on the arrival order: the EPPF alpha^K prod (|C| - 1)! / prod (alpha + n - 1) depends only on the table sizes.</p>
+    <p><strong>You do:</strong> The viewer shuffles the arrival order of Broderick's eight customers {1, 2, 7, 8}, {3, 5, 6}, {4} (Enter shuffles), moves alpha, draws a new seating, and opens the answer to the E[K_N] exercise.</p>
+    <p><strong>You see:</strong> The customers in arrival order coloured by table, each with its factor alpha/(alpha + n - 1) or m/(alpha + n - 1), the product against the closed-form EPPF (equal to 1e-12 in every order; 1/3360 at alpha = 1), and E[K_8] = sum alpha/(alpha + n - 1).</p>
+    <p class="dpx-card-engine">dp-core (lgamma, log rising factorial, CRP sampler) + D3 7.9.0</p>
+    <p class="dpx-card-links"><a href="pages/dpm/eppf.html">page</a> · <a href="embed/eppf-panel.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-15" data-section="dpm" data-rung="6" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-15.png" alt="Thumbnail of P-15 K_J as a random variable: 100 replicates" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-15</span> Step 6.12 · done</p>
+    <h3>K_J as a random variable: 100 replicates</h3>
+    <p class="dpx-card-concept">Seating J customers with the same alpha in many restaurants gives many different K_J; their distribution is the Antoniak pmf, the building block of every prior statement about K_J.</p>
+    <p><strong>You do:</strong> The viewer sets J and alpha, presses 100 replicates (or Enter) repeatedly or clears, and works through five exercises whose answers open in collapsible boxes.</p>
+    <p><strong>You see:</strong> Dots for the simulated K_J stacking on bars of the expected counts, the mean against E(K_J | alpha) (5.19 at J = 100, alpha = 1), the caption that K_J is the number of fitted components, and exercise answers computed by the engine in the browser.</p>
+    <p class="dpx-card-engine">dp-core (CRP sampler, condPmf, condMean, rgem, mixMoments, wsbTail) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpm/exercises.html">page</a> · <a href="embed/kj-replicates.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-16" data-section="dpm" data-rung="" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-16.png" alt="Thumbnail of P-16 The DPM ladder hub" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-16</span> Step 6.10 · done</p>
+    <h3>The DPM ladder hub</h3>
+    <p class="dpx-card-concept">Nine rungs lead from why a fixed number of mixture cells is not enough to a sampler that fits a Dirichlet process mixture, each rung a page of widgets.</p>
+    <p><strong>You do:</strong> The viewer clicks a rung of the ladder (rung 0 at the bottom, rung 8 at the top) to open its page and reads its status badge.</p>
+    <p><strong>You see:</strong> A ladder drawing with nine linked rungs and their catalog ids, done or planned badges read from the catalog, a table of the rung pages, and the Broderick (MLSS 2016 Cádiz; 2012 tutorial) and Giordano attribution with the note that the GPL-3 demos are not ported.</p>
+    <p class="dpx-card-engine">Quarto 1.9.37 + inline SVG built from catalog.json (scripts/pre-render.ts)</p>
+    <p class="dpx-card-links"><a href="pages/dpm/index.html">page</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="P-17" data-section="dpm" data-rung="4" data-audience="beginner course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/P-17.png" alt="Thumbnail of P-17 Stick-breaking by alpha (video)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>P-17</span> Step 4.8 · done</p>
+    <h3>Stick-breaking by alpha (video)</h3>
+    <p class="dpx-card-concept">As alpha moves from 0.5 to 2 to 10, the first piece stops dominating the stick; shown without any runtime dependency.</p>
+    <p><strong>You do:</strong> The viewer plays a 15-second video on the page or in a slide.</p>
+    <p><strong>You see:</strong> Fifty ranked stick ribbons re-arranging at each alpha: at 0.5 the first piece swallows most of the stick, at 10 the stick is finely divided, with E[w1] and Pr(w1 &gt; .5) in the subtitle.</p>
+    <p class="dpx-card-engine">gganimate 1.0.11 + ffmpeg 8.1.2 (H.264) + theme_DPprior (DPprior 2.0.0 via load_all)</p>
+    <p class="dpx-card-links"><a href="pages/dpm/stick-breaking.html">page</a> · <a href="media/stick_alpha.mp4">video</a></p>
+  </div>
+</article>
+</div>
+<h2 class="anchored" id="axis-problems">3 · Problems with default hyperpriors (M-)</h2>
+<div class="dpx-cards">
+<article class="dpx-card" id="M-01" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-01.png" alt="Thumbnail of M-01 Same default, different J" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-01</span> Step 3.3 · done</p>
+    <h3>Same default, different J</h3>
+    <p class="dpx-card-concept">A fixed Gamma default lets the expected number of clusters E K_J drift upward with J (about E(alpha) log J), while the majority-mass tail Pr(W_SB &gt; .5) = (b/(b + log 2))^a does not depend on J.</p>
+    <p><strong>You do:</strong> The viewer toggles Gamma(1,1), Gamma(2,4), Gamma(1,3), alpha = 1 and a custom Gamma(a, b) on and off, moves the custom sliders, and switches the 90% band and the J guides at 48, 79 and 500.</p>
+    <p><strong>You see:</strong> The Gamma(1,1) curve rising from 4.16 clusters at J = 50 and 4.84 at J = 100 to 7.82 at J = 2000, next to flat majority-mass lines at .591, .726 and .812.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 (vendored); J &gt; 500 band precomputed in R</p>
+    <p class="dpx-card-links"><a href="pages/problems/defaults-drift.html">page</a> · <a href="embed/defaults-drift.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-02" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-02.png" alt="Thumbnail of M-02 &quot;Conservative&quot; defaults Gamma(1,3) and Gamma(2,4)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-02</span> Step 3.3 · done</p>
+    <h3>&quot;Conservative&quot; defaults Gamma(1,3) and Gamma(2,4)</h3>
+    <p class="dpx-card-concept">Literature defaults with a smaller E(alpha) imply fewer clusters but more majority-mass dominance, not less.</p>
+    <p><strong>You do:</strong> The viewer switches the focus between Gamma(1,1), Gamma(2,4) and Gamma(1,3) and reads the expected cluster counts at the application sizes J = 48, 79 and 500.</p>
+    <p><strong>You see:</strong> Size-biased weight densities whose shaded area above .5 grows from .591 to .726 to .812, with E K_J read-outs for the Bangert-Drowns, STAR and vocabulary sizes.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 (vendored); same module as M-01</p>
+    <p class="dpx-card-links"><a href="pages/problems/defaults-drift.html">page</a> · <a href="embed/defaults-drift.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-03" data-section="problems" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-03.png" alt="Thumbnail of M-03 The unintended prior" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-03</span> Step 3.4 · done</p>
+    <h3>The unintended prior</h3>
+    <p class="dpx-card-concept">&quot;About five clusters&quot; (mean 5.05, SD 3.06) and a .49 chance of majority-mass dominance come from the same Gamma(1.60, 1.22) hyperprior at J = 50.</p>
+    <p><strong>You do:</strong> The viewer moves the a and b sliders (default 1.60 and 1.22), the J slider (default 50) and the tail threshold t.</p>
+    <p><strong>You see:</strong> The induced K_50 pmf against negative-binomial target circles, the size-biased weight density with .487 shaded above .5 and .183 above .9, and a Chinese-restaurant sentence stating the majority-table probability.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 (vendored)</p>
+    <p class="dpx-card-links"><a href="pages/problems/unintended-prior.html">page</a> · <a href="embed/unintended-prior.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-04" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-04.png" alt="Thumbnail of M-04 DORO, SCAL and SSI side by side" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-04</span> Step 4.7 · done</p>
+    <h3>DORO, SCAL and SSI side by side</h3>
+    <p class="dpx-card-concept">Three published rules each imply an odd count or weight distribution: DORO-Unif cannot be flat, SCAL clamps P(K = 1) at .34, and SSI-Weight lets E K_J grow without bound.</p>
+    <p><strong>You do:</strong> The viewer picks J for DORO-Unif (48, 79, 100, 500), m for SCAL (6, 10, 25, 50, 75, 100), and moves the SSI J slider from 25 to 5000.</p>
+    <p><strong>You see:</strong> DORO's flat target against its hump-shaped pmf (P(K = 1) = .070, .073 leaking), SCAL's P(K = 1) held at .34 while the shortcut reaches .834 at m = 100, SSI's E K_J rising from 6.44 to 20.9 with fixed tails .25 and .05, and a vague Gamma(1, 1) tile (.168, .591).</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17; (a, b) from r-export/02_methods_catalog.R (method_catalog.json)</p>
+    <p class="dpx-card-links"><a href="pages/problems/method-problems-strip.html">page</a> · <a href="embed/method-problems-strip.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-05" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-05.png" alt="Thumbnail of M-05 The unintended prior in 1000 restaurants" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-05</span> Step 5.5 · done</p>
+    <h3>The unintended prior in 1000 restaurants</h3>
+    <p class="dpx-card-concept">Run as a Chinese restaurant process, Gamma(1.60, 1.22) at J = 50 gives about five tables per restaurant and, in most restaurants, one table seating more than half of the customers.</p>
+    <p><strong>You do:</strong> The viewer presses Simulate 1000 restaurants (a new seed each time), moves the a, b and J sliders, and hovers over or arrows through a wall of 1000 squares to open one restaurant.</p>
+    <p><strong>You see:</strong> A histogram of occupied tables over 1000 restaurants against the exact pmf of K_J (mean 5.05), a histogram of the largest table's share with the part above one half shaded, the wall of restaurants coloured by majority, one restaurant's tables, and a caption separating Pr(W_SB &gt; .5) = .487 from Pr(W_max &gt; .5) = .636.</p>
+    <p class="dpx-card-engine">dp-core CRP sampler (seeded) and mixing + Observable Plot 0.6.17 + Canvas + D3 7.9.0</p>
+    <p class="dpx-card-links"><a href="pages/bridge/crp-unintended.html">page</a> · <a href="embed/crp-unintended.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-06" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-06.png" alt="Thumbnail of M-06 Collapse: everyone at the first table" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-06</span> Step 5.8 · done</p>
+    <h3>Collapse: everyone at the first table</h3>
+    <p class="dpx-card-concept">Prior mass near alpha = 0 produces the prior collapse probability P(K_J = 1): Gamma(1, 1) has Pr(alpha &lt; .1) = .095 and P(K_100 = 1) = .168, and prior collapse differs from posterior collapse Pr(K_J = 1 | data).</p>
+    <p><strong>You do:</strong> The viewer picks Gamma(1, 1), the Table 2 TSMM prior at VIF 5 or Gamma(1, 3) (or sets a and b), chooses a restaurant alpha of 0.02, 0.1 or 1, and presses Play (or Enter) to seat 79 customers.</p>
+    <p><strong>You see:</strong> The density of log alpha with the mass below .1 shaded (.095 or .182), prior P(K_J = 1) bars at J = 50, 79, 100 and 500 (.168 at 100), 79 customers gathering at one table at alpha = 0.02, and a caption contrasting the STAR prior .175 with the released posterior .560.</p>
+    <p class="dpx-card-engine">dp-core mixing and CRP sampler (seeded) + Observable Plot 0.6.17 + D3 7.9.0 + released JSON (confidence_levels, app_priors)</p>
+    <p class="dpx-card-links"><a href="pages/bridge/collapse.html">page</a> · <a href="embed/collapse.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-07" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-07.png" alt="Thumbnail of M-07 What Gamma(1, 1) actually says" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-07</span> Step 5.9 · done</p>
+    <h3>What Gamma(1, 1) actually says</h3>
+    <p class="dpx-card-concept">A hyperprior that is vague about alpha still makes definite statements about clusters: under Gamma(1, 1), Pr(alpha &lt;= .5) = .393, E K_100 = 4.84, Pr(W_SB &gt; .5) = .591 at every J, and P(K_100 = 1) = .168.</p>
+    <p><strong>You do:</strong> The viewer picks Gamma(1, 1), Gamma(2, 4), Gamma(1, 3) or Gamma(0.037, 0.037) (or sets a and b), chooses J from 10 to 5000, and draws new sets of 79 sites.</p>
+    <p><strong>You see:</strong> Five tiles: the density of log alpha with the mass at or below .5 shaded, the pmf of K_J (a precomputed band for J above 500), the J-free W_SB tail, twenty simulated sets of 79 sites, and P(K_J = 1) across J with the chosen J marked (.834 for Gamma(0.037, 0.037) at J = 100).</p>
+    <p class="dpx-card-engine">dp-core mixing, weights and CRP sampler + Observable Plot 0.6.17 + precomputed JSON (kj_bands_J_gt_500)</p>
+    <p class="dpx-card-links"><a href="pages/bridge/gamma11.html">page</a> · <a href="embed/prior-implications.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-08" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-08.png" alt="Thumbnail of M-08 Method timeline with one-line errors" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-08</span> Step 7.4 · done</p>
+    <h3>Method timeline with one-line errors</h3>
+    <p class="dpx-card-concept">From Antoniak (1974) to the paper's SSI-Weight (2025), each rule for choosing the Gamma hyperprior assumes something about alpha and implies something else about the count and the weights.</p>
+    <p><strong>You do:</strong> The viewer selects one of nine years (click, Enter or Space; arrow keys move between years).</p>
+    <p><strong>You see:</strong> A card with the rule's assumption, implied count, implied weights, J dependence, one-line error, evidence recomputed with dp-core (for example Pr(W_SB &gt; .5) = .654 for the tabulated SCAL prior against .591 for Gamma(1, 1), and P(K_100 = 1) = .834 for the SCAL shortcut) and links to the matching explorers.</p>
+    <p class="dpx-card-engine">dp-core + SVG; records and timeline from r-export/02_methods_catalog.R (method_catalog.json)</p>
+    <p class="dpx-card-links"><a href="pages/problems/index.html">page</a> · <a href="embed/method-timeline.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-09" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-09.png" alt="Thumbnail of M-09 DORO explorer: a flat count target the Gamma cannot reach" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-09</span> Step 7.5 · done</p>
+    <h3>DORO explorer: a flat count target the Gamma cannot reach</h3>
+    <p class="dpx-card-concept">Two Gamma parameters cannot draw DORO's flat count target on 1 to n: the KL-closest Gamma is a spike at one cluster plus a hump near n, the gap grows with n, b goes to 0, and the prior expects about n / 2 clusters.</p>
+    <p><strong>You do:</strong> The viewer moves n from 5 to 100, or switches to DORO-Unif (flat on 1 to 2 mu_K - 1 at J = 100) and picks mu_K = 5, 10 or 30.</p>
+    <p><strong>You see:</strong> The flat target against the live KL-optimal pmf, the KL gap rising from .005 at n = 5 to .095 at n = 100, E K_n following n / 2 against Gamma(1, 1)'s log growth, E(alpha) = 73 and E K = 28.4 at n = 53, and for DORO-Unif (mu_K = 5) P(K = 1) = .070, .073 beyond 9 and Pr(W_SB &gt; .5) = .547.</p>
+    <p class="dpx-card-engine">dp-core solvers (doroKL) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/doro.html">page</a> · <a href="embed/doro-explorer.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-10" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-10.png" alt="Thumbnail of M-10 SCAL explorer: clamped count tails and the shortcut's collapse" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-10</span> Step 7.6 · done</p>
+    <h3>SCAL explorer: clamped count tails and the shortcut's collapse</h3>
+    <p class="dpx-card-concept">Fixing P(K_m = 1) = .34 and P(K_m &gt;= ceil(2 ln m)) = .15 at every m pins the count tails but not the weights, and the shortcut a = b = exp(-0.033 m) collapses to one cluster beyond m of about 25.</p>
+    <p><strong>You do:</strong> The viewer moves m from 6 to 100 and toggles the shortcut overlay.</p>
+    <p><strong>You see:</strong> The live solution's pmf with the two tails fixed at .340 and .150, Pr(W_SB &gt; .5) drifting from .590 to .652 above the vague .591, the tabulated Gamma(0.403, 0.370) at m = 100 (E K 4.74, Pr(W_SB &gt; .5) = .654, tails .340 and .148), and the shortcut reaching P(K = 1) = .834 with E K = 2.97 at m = 100.</p>
+    <p class="dpx-card-engine">dp-core solvers (scalSolve) + Observable Plot 0.6.17 + method_catalog.json (tabulated values)</p>
+    <p class="dpx-card-links"><a href="pages/problems/scal.html">page</a> · <a href="embed/scal-explorer.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-11" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-11.png" alt="Thumbnail of M-11 SSI explorer: fixed weights, a count that never stops growing" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-11</span> Step 7.7 · done</p>
+    <h3>SSI explorer: fixed weights, a count that never stops growing</h3>
+    <p class="dpx-card-concept">Fixing only the weight tails (Pr(W_SB &gt; .5) = .25, Pr(W_SB &gt; .9) = .05) makes the prior J-invariant, so the expected number of clusters grows without bound: 6.44 at J = 25, 20.9 at J = 5000.</p>
+    <p><strong>You do:</strong> The viewer picks SSI-Weight, Vicentini and Jermyn's exemplars Gamma(1.814, 1.036) and Gamma(1, 0.693), or sets two tails solved live by ssiSolve, and moves J from 25 to 5000 on a log slider.</p>
+    <p><strong>You see:</strong> An unchanging W_SB density with its .250 and .050 tails beside an E K_J curve that rises from 6.44 to 10.05 at J = 100 and 20.9 at J = 5000 (90% band up to J = 500, E K only above); setting the tails to .25 and .05 reproduces Gamma(2.179, 0.780).</p>
+    <p class="dpx-card-engine">dp-core solvers (ssiSolve), mixing and weights + Observable Plot 0.6.17 + method_catalog.json</p>
+    <p class="dpx-card-links"><a href="pages/problems/ssi.html">page</a> · <a href="embed/ssi-explorer.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-12" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-12.png" alt="Thumbnail of M-12 Quasi-degenerate Gamma(eps, eps)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-12</span> Step 7.8 · done</p>
+    <h3>Quasi-degenerate Gamma(eps, eps)</h3>
+    <p class="dpx-card-concept">Gamma(eps, eps) looks flat on the log-alpha scale, yet its mass runs off to alpha = 0: the least informative-looking prior is the most informative about K.</p>
+    <p><strong>You do:</strong> The viewer moves eps from 1 to 0.001 on a log slider (presets 1, 0.1, 0.037, 0.001) and toggles J = 50, 100, 500.</p>
+    <p><strong>You see:</strong> The density of log10 alpha flattening while Pr(alpha &lt; 1e-12) grows to .967, and P(K_J = 1) rising toward 1 for every J: .834 at eps = 0.037 and J = 100, above .99 at eps = 0.001; each read-out repeats the moments with twice the quadrature nodes.</p>
+    <p class="dpx-card-engine">dp-core mixing (log-alpha trapezoid, node-doubling check) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/other-defaults.html">page</a> · <a href="embed/quasi-degenerate.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-13" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-13.png" alt="Thumbnail of M-13 K_n-diffuse priors on the relative axis k / n" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-13</span> Step 7.8 · done</p>
+    <h3>K_n-diffuse priors on the relative axis k / n</h3>
+    <p class="dpx-card-concept">Priors chosen by eye to be 'diffuse in K' at one n (Gamma(5, 0.5) at 74, Gamma(3.5, 0.5) at 53, Gamma(10, 1)) change shape with n and are extreme in the weights (Pr(W_SB &gt; .5) about .01).</p>
+    <p><strong>You do:</strong> The viewer picks Gamma(10, 1), Gamma(5, 0.5) or Gamma(3.5, 0.5) and n = 10, 53, 74 or 100.</p>
+    <p><strong>You see:</strong> n x P(K_n = k) against k / n for the four n, the chosen n bold with its 90% interval: Gamma(5, 0.5) at n = 74 gives E K = 21.0 and [11, 32]; beside it Pr(W_SB &gt; .5) of .005, .013 and .048 against .591 for Gamma(1, 1).</p>
+    <p class="dpx-card-engine">dp-core mixing + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/other-defaults.html">page</a> · <a href="embed/kn-diffuse.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-14" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-14.png" alt="Thumbnail of M-14 Jeffreys vs DORO" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-14</span> Step 7.9 · done</p>
+    <h3>Jeffreys vs DORO</h3>
+    <p class="dpx-card-concept">Two 'objective' priors contradict each other: DORO wants K_n flat on 1 to n, while the Jeffreys prior for alpha makes K_n symmetric about n / 2 with spikes at one cluster and at all singletons.</p>
+    <p><strong>You do:</strong> The viewer switches n between 10 and 100 and the view between the implied count K_n and the prior density of alpha.</p>
+    <p><strong>You see:</strong> At n = 100 the Jeffreys pmf, a U with P(K = 1) = .054 and P(K = 100) = .054 over a floor near .007 (E K = 49.8), against DORO's flat 1/100 target and its best Gamma (a spike at 1 and a hump near 90; E K = 53.7); on the alpha scale the Jeffreys density with 4.3% of its mass above 1e4 against DORO's Gamma. The Stirling-gamma overlay is M-19.</p>
+    <p class="dpx-card-engine">R grid (r-export/06_jeffreys_sg_grid.R, jeffreys_sg.json) + dp-core doroKL + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/other-defaults.html">page</a> · <a href="embed/objective-priors.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-15" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-15.png" alt="Thumbnail of M-15 The method map" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-15</span> Step 7.12 · done</p>
+    <h3>The method map</h3>
+    <p class="dpx-card-concept">Placed on one plane, expected clusters against the majority-mass probability, the published priors show that one alpha cannot buy few clusters and little dominance for free: the corner is nearly empty except for the Dual-Anchor.</p>
+    <p><strong>You do:</strong> The viewer switches J between 50, 100 and 500, shows all 37 catalog priors or the seven labelled ones, and hovers or chooses a prior to open its strip.</p>
+    <p><strong>You see:</strong> At J = 100: Vague (4.84, .591), Gamma(2, 4) (3.20, .726), DORO-Unif (4.99, .547), SCAL (4.74, .654), SSI-Weight (10.05, .250), TSMM (5.00, .557) and Dual-Anchor (6.65, .399) with the shaded box E K in [2, 10], Pr(W_SB &gt; .5) &lt;= .40 and the hard .25 line; changing J moves points sideways only; the strip shows the pmf and W_SB density and links (a, b, J) to M-07.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 (pointer tips) + method_catalog.json</p>
+    <p class="dpx-card-links"><a href="pages/problems/method-map.html">page</a> · <a href="embed/method-map.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-16" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-16.png" alt="Thumbnail of M-16 Transported versus recalibrated count priors" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-16</span> Step 7.13 · done</p>
+    <h3>Transported versus recalibrated count priors</h3>
+    <p class="dpx-card-concept">A count prior calibrated at one J and carried to another expects the wrong number of clusters; recalibrated at each J it keeps the count but its dominance rises with J.</p>
+    <p><strong>You do:</strong> The viewer chooses the reference J (25, 50, 100, 500) and toggles the 5th to 95th percentile bands.</p>
+    <p><strong>You see:</strong> The recalibrated E K_J flat at 5.00 (J = 15 to 500, band [1, 11]) against Gamma(2.1062, 3.0789) carried from J = 500 (2.36 at J = 10, 5.00 at 500), and below it Pr(W_SB &gt; .5) for the recalibrated priors rising .495, .555, .652 at J = 50, 100, 500.</p>
+    <p class="dpx-card-engine">count_prior_by_J.json (r-export/03_recalibrate_by_J.R, TSMM by DPprior 2.0.0) + dp-core + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/method-map.html">page</a> · <a href="embed/transported-vs-recalibrated.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-17" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-17.png" alt="Thumbnail of M-17 Dominance ribbon" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-17</span> Step 5.6 · done</p>
+    <h3>Dominance ribbon</h3>
+    <p class="dpx-card-concept">Under a hyperprior, each stick-breaking draw's first piece is the size-biased weight W_SB, and the share of draws whose first piece passes one half estimates S(.5) = Pr(W_SB &gt; .5).</p>
+    <p><strong>You do:</strong> The viewer picks the hyperprior Gamma(1, 1), Gamma(1, 3) or the J = 50 Dual-Anchor prior, presses Redraw (or Enter) for new seeds, and hovers over or arrows through the rows.</p>
+    <p><strong>You see:</strong> Fifty Canvas rows of stick-breaking pieces with the first piece in colour, red dots on rows whose first piece passes one half, a dashed line at one half, and the running share against the exact S(.5) (.591, .812, .398).</p>
+    <p class="dpx-card-engine">dp-core GEM sampler (seeded) + Canvas 2D</p>
+    <p class="dpx-card-links"><a href="pages/bridge/dominance.html">page</a> · <a href="embed/dominance-ribbon.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-18" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-18.png" alt="Thumbnail of M-18 Order of appearance versus size" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-18</span> Step 5.6 · done</p>
+    <h3>Order of appearance versus size</h3>
+    <p class="dpx-card-concept">The first stick-breaking piece (W_SB) is often not the largest piece (W_max), but a first piece above one half always is, so Pr(W_SB &gt; .5) is a lower bound for Pr(W_max &gt; .5).</p>
+    <p><strong>You do:</strong> The viewer switches the dominance ribbon to the breaking-order-versus-size view, changes the hyperprior, redraws, and hovers over a row.</p>
+    <p><strong>You see:</strong> Twenty of the same draws, each in breaking order and sorted by size, with the largest piece and the first piece outlined and red dots on rows where the first piece is not the largest.</p>
+    <p class="dpx-card-engine">dp-core GEM sampler (seeded) + Canvas 2D</p>
+    <p class="dpx-card-links"><a href="pages/bridge/dominance.html">page</a> · <a href="embed/sb-vs-ranked.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="M-19" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/M-19.png" alt="Thumbnail of M-19 Stirling-gamma vs Gamma(2, 4)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>M-19</span> Step 7.10 · done</p>
+    <h3>Stirling-gamma vs Gamma(2, 4)</h3>
+    <p class="dpx-card-concept">The Stirling-gamma prior pins E K_n at a / b for every n, while Gamma(2, 4) drifts like log n; the weight implications the Sg papers did not report move instead.</p>
+    <p><strong>You do:</strong> The viewer moves n from 10 to 10,000 on a log slider and toggles Sg(4, 1, n) and Sg(1, 0.25, n).</p>
+    <p><strong>You see:</strong> E K_n flat at 4 for both Sg priors (n = 10 to 2000) against Gamma(2, 4) at 2.86 (n = 50), 3.20 (100), 4.35 (1,000) and 5.51 (10,000); and Pr(W_SB &gt; .5) for Sg(4, 1, n) rising from .31 at n = 10 to .77 at n = 2000 while Gamma(2, 4) stays at .726.</p>
+    <p class="dpx-card-engine">R grid (r-export/06_jeffreys_sg_grid.R, jeffreys_sg.json) + dp-core digamma path + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/problems/other-defaults.html">page</a> · <a href="embed/stirling-gamma.html">standalone</a></p>
+  </div>
+</article>
+</div>
+<h2 class="anchored" id="axis-dpprior">4 · The DPprior principle (C-)</h2>
+<div class="dpx-cards">
+<article class="dpx-card" id="C-01" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-01.png" alt="Thumbnail of C-01 TSMM parity table (R vs browser)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-01</span> Step 8.3 · done</p>
+    <h3>TSMM parity table (R vs browser)</h3>
+    <p class="dpx-card-concept">The browser engine's TSMM Newton solves the same calibration targets as the DPprior R package and agrees with it, including the target that has no solution.</p>
+    <p><strong>You do:</strong> The viewer chooses a row (J = 50; J = 100 at four VIF levels; STAR, Bangert-Drowns, vocabulary; [3, 10] at 80% and 95%) to see the browser's Newton path.</p>
+    <p><strong>You see:</strong> R and browser (a, b) side by side with the largest difference (at most 2.9e-8), Newton steps and status, J = 50 (5, 10) -&gt; (1.4082, 1.0770) and STAR (5.134, 4.939), and a 'no solution' badge for [3, 10] at 95% (minimum variance 4.52 at alpha* = 1.386).</p>
+    <p class="dpx-card-engine">dp-core tsmm + tsmm_fits.json (DPprior 2.0.0 golden)</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/tsmm-parity.html">page</a> · <a href="embed/tsmm-parity-table.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-02" data-section="dpprior" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-02.png" alt="Thumbnail of C-02 Live TSMM calibrator" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-02</span> Step 8.4 · done</p>
+    <h3>Live TSMM calibrator</h3>
+    <p class="dpx-card-concept">A count target (mu_K, sigma^2) at J units determines one Gamma(a, b) hyperprior, found in milliseconds by two-stage moment matching, unless the target is outside the support (at or above (mu_K - 1)(J - mu_K)) or at or below the profile minimum variance; just above that minimum the exact prior is nearly a point mass.</p>
+    <p><strong>You do:</strong> The viewer moves J (10 to 500), mu_K and sigma^2 (or picks a VIF of 1.25, 1.5, 2.5 or 5), or chooses an example, and presses Calibrate (or Enter).</p>
+    <p><strong>You see:</strong> Status, (a, b), E(alpha), CV(alpha), the achieved mean and variance of K_J against the target with the residual, the alpha density and the implied K_J pmf: J = 50 (5, 10) -&gt; Gamma(1.4082, 1.0770), STAR J = 79 (5, 5.48) -&gt; Gamma(5.134, 4.939), J = 100 VIF 2.5 -&gt; Gamma(1.666, 1.646); [3, 10] at 95% shows 'no solution' against the profile bound.</p>
+    <p class="dpx-card-engine">dp-core tsmm + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/calibrator.html">page</a> · <a href="embed/tsmm-calibrator.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-03" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-03.png" alt="Thumbnail of C-03 VIF sensitivity (Table 2)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-03</span> Step 8.5 · done</p>
+    <h3>VIF sensitivity (Table 2)</h3>
+    <p class="dpx-card-concept">With the target mean fixed, the confidence (VIF) changes the variance of alpha: majority dominance hardly moves, while extreme dominance and the mass near alpha = 0 grow.</p>
+    <p><strong>You do:</strong> The viewer picks VIF 1.25, 1.5, 2.5 or 5 (or any value on a log slider) at J = 100 and mu_K = 5.</p>
+    <p><strong>You see:</strong> Gamma(a, b) from (7.13, 7.41) to (0.62, 0.56), Pr(W_SB &gt; .5) .53 to .61, Pr(W_SB &gt; .9) .15 to .36 and Pr(alpha &lt; .1) 0 to .18 in tiles and in a recomputed Table 2, with the calibrated prior shown in the C-04 two-lenses panels.</p>
+    <p class="dpx-card-engine">dp-core tsmm + two-lenses.js (C-04, imported unchanged) + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/vif-sensitivity.html">page</a> · <a href="embed/vif-sensitivity.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-04" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-04.png" alt="Thumbnail of C-04 One alpha, two lenses" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-04</span> Step 5.3 · done</p>
+    <h3>One alpha, two lenses</h3>
+    <p class="dpx-card-concept">One concentration alpha, fixed or under a Gamma(a, b) prior, sets both the count view (the pmf of K_J, which depends on J) and the weight view (the W_SB density and E(rho), which do not).</p>
+    <p><strong>You do:</strong> The viewer switches between a Gamma(a, b) prior and a fixed alpha (log slider 0.01 to 100), picks the presets Gamma(1, 1), Gamma(2, 4) or Gamma(1, 3), and moves J from 10 to 500.</p>
+    <p><strong>You see:</strong> The K_J pmf with its mean and 90% interval on the left, the alpha density in the middle, and the W_SB density with the areas above .5 and .9 shaded plus an E(rho) gauge on the right; moving J changes only the left panel.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 (vendored)</p>
+    <p class="dpx-card-links"><a href="pages/bridge/two-lenses.html">page</a> · <a href="embed/two-lenses.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-05" data-section="dpprior" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-05.png" alt="Thumbnail of C-05 Elicitation form: three routes" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-05</span> Step 8.6 · done</p>
+    <h3>Elicitation form: three routes</h3>
+    <p class="dpx-card-concept">A statement about K_J (an interval with a probability, a confidence level or a CV) fixes a count target (mu_K, sigma^2), which TSMM turns into Gamma(a, b); the implied weights are then checked against the dominance trigger Pr(W_SB &gt; .5) &gt; .40.</p>
+    <p><strong>You do:</strong> The viewer picks a route (interval, VIF or CV), types J, the expected count and the interval, probability, VIF or CV, or presses STAR, Bangert-Drowns, Vocabulary or the [3, 10] examples.</p>
+    <p><strong>You see:</strong> Live (mu_K, sigma^2), Gamma(a, b), E(alpha), CV(alpha), the K_J pmf and the W_SB density, with a red trigger badge when Pr(W_SB &gt; .5) &gt; .40: STAR (5, 5.48) -&gt; Gamma(5.134, 4.939), .510 triggers; [3, 10] at 80% -&gt; Gamma(6.82, 4.82), .400/.070; at 95% sigma^2 = 3.19 is below 4.52 and shows 'no solution' with the largest workable probability.</p>
+    <p class="dpx-card-engine">dp-core elicit + tsmm + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/elicitation.html">page</a> · <a href="embed/elicitation-form.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-06" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-06.png" alt="Thumbnail of C-06 Feasibility map (mu_K, sigma^2)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-06</span> Step 8.7 · done</p>
+    <h3>Feasibility map (mu_K, sigma^2)</h3>
+    <p class="dpx-card-concept">A count target has a Gamma hyperprior only between two curves: the profile bound v_J(alpha*) below (no mixture over alpha is tighter than the point mass alpha* with the same mean) and (mu_K - 1)(J - mu_K) above (no count on 1..J varies more).</p>
+    <p><strong>You do:</strong> The viewer picks J (50, 79, 100, 500) or an example ([3, 10] at 80% or 95%, STAR) and drags the target point, or moves the mu_K and sigma^2 sliders.</p>
+    <p><strong>You see:</strong> The red no-Gamma region under the profile bound, the grey no-count region, the gold edge where the exact prior is nearly a point mass (CV(alpha) &lt; .01), and the target with its status and (a, b): at J = 100 the curve passes 4.52 at mu_K = 6.5 (alpha* = 1.386); (6.5, 3.19) falls in the red region, (6.5, 7.46) gives Gamma(6.82, 4.82).</p>
+    <p class="dpx-card-engine">dp-core tsmm (profileBound, tsmmMoments, tsmmFit) + elicit + D3 7.9 (drag)</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/feasibility.html">page</a> · <a href="embed/feasibility-map.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-07" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-07.png" alt="Thumbnail of C-07 Stage 1 -&gt; Stage 2 Newton path" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-07</span> Step 8.8 · done</p>
+    <h3>Stage 1 -&gt; Stage 2 Newton path</h3>
+    <p class="dpx-card-concept">TSMM starts from a closed form that is exact under a negative-binomial proxy (Stage 1, A1) and then runs Newton on the exact moments of K_J (Stage 2); the residual falls quadratically.</p>
+    <p><strong>You do:</strong> The viewer drags the Newton step slider (0 to 5) or presses Play, and toggles the R path, the browser path, the exact pmf and the Stage 1 proxy.</p>
+    <p><strong>You see:</strong> Contours of log10 |F| over (log a, log b) with the path from (2.667, 2.608) to (1.4082, 1.0770); at step 0 the exact moments are 4.415 and 5.618 (residual -0.59, -4.38) while the proxy has 5 and 10; |F| 4.42 -&gt; 3.55 -&gt; 0.41 -&gt; 0.009 -&gt; 5e-6 -&gt; 1e-11 in R and the browser alike.</p>
+    <p class="dpx-card-engine">dp-core tsmm + mixing + Observable Plot 0.6.17 (contour) + data/released/newton_trace.json</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/stage1-stage2.html">page</a> · <a href="embed/newton-path.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-08" data-section="dpprior" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-08.png" alt="Thumbnail of C-08 Dual-Anchor lambda frontier" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-08</span> Step 8.9 · done</p>
+    <h3>Dual-Anchor lambda frontier</h3>
+    <p class="dpx-card-concept">Weighing the count anchor by lambda and a weight anchor by 1 - lambda trades the count target for less dominance; the paper takes the largest lambda whose prior is at or below the .40 trigger, and reports the hard bound .25 only as a sensitivity analysis.</p>
+    <p><strong>You do:</strong> The viewer moves the lambda slider over the 29 grid values, picks TSMM, the paper's choice or the hard bound, or selects an application's Dual-Anchor or hard prior.</p>
+    <p><strong>You see:</strong> Pr(W_SB &gt; .5) and E K_50 along lambda with the .40 and .25 lines, eligible points in colour and ineligible ones in grey: lambda = .30 -&gt; Gamma(2.3158, 1.4204), .398, E K 5.88; lambda = 1 -&gt; Gamma(1.4082, 1.0770), .497, 5.00; hard -&gt; Gamma(5.2745, 2.3059), .250, 7.49; STAR and Vocabulary hard bounds nearly point masses at alpha = 2.</p>
+    <p class="dpx-card-engine">dp-core mixing + weights + Observable Plot 0.6.17 + data/released/dual_anchor_grid.json, app_priors.json</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/dual-anchor.html">page</a> · <a href="embed/dual-anchor-frontier.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-09" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-09.png" alt="Thumbnail of C-09 Reconcile dashboard: TSMM to Dual-Anchor" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-09</span> Step 8.10 · done</p>
+    <h3>Reconcile dashboard: TSMM to Dual-Anchor</h3>
+    <p class="dpx-card-concept">One Gamma prior drives the prior on alpha, the count K_J, the weights and co-clustering at once; the Dual-Anchor refinement trades about one expected cluster for a large drop in dominance.</p>
+    <p><strong>You do:</strong> The viewer presses 'TSMM → Dual-Anchor' (or 'Back to TSMM') and fine-tunes a and b with sliders.</p>
+    <p><strong>You see:</strong> The alpha density, the K_50 pmf with the target 5, the W_SB density with Pr(W_SB &gt; .5) on a bar against the .40 trigger and the .25 hard bound, and the E(rho) gauge animate together: E K 5.00 -&gt; 5.88, Pr(W_SB &gt; .5) .497 -&gt; .398, E(rho) .518 -&gt; .439; immediate under reduced motion.</p>
+    <p class="dpx-card-engine">dp-core mixing + weights + Observable Plot 0.6.17 + D3 7.9 transition</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/two-anchors.html">page</a> · <a href="embed/reconcile-dashboard.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-10" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-10.png" alt="Thumbnail of C-10 Why it is cheap: K_J as a Bernoulli sum" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-10</span> Step 8.11 · done</p>
+    <h3>Why it is cheap: K_J as a Bernoulli sum</h3>
+    <p class="dpx-card-concept">Given alpha, K_J is a sum of independent Bernoulli(alpha / (alpha + i - 1)) draws, so its pmf is an O(J^2) convolution equal to the Stirling (Antoniak) pmf, and its mean and variance are finite sums.</p>
+    <p><strong>You do:</strong> The viewer sets J (10 to 500) and alpha, moves the 'units added' slider or presses Play convolution.</p>
+    <p><strong>You see:</strong> The success probabilities fill in unit by unit while the pmf builds up by convolution toward the exact pmf (dots); tiles show E K = sum p_i and Var K = sum p_i (1 - p_i); at J = 500 and alpha = 1 the convolution matches the Stirling pmf within 1e-10 and E K = H_500 = 6.79; immediate under reduced motion.</p>
+    <p class="dpx-card-engine">dp-core count (condPmf) + Observable Plot 0.6.17 + D3 7.9 transition</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/why-fast.html">page</a> · <a href="embed/bernoulli-sum.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-11" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-11.png" alt="Thumbnail of C-11 Timing badges vs grid search and MCMC" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-11</span> Step 8.12 · done</p>
+    <h3>Timing badges vs grid search and MCMC</h3>
+    <p class="dpx-card-concept">Because moments of K_J are one pass over an alpha grid, a TSMM calibration takes milliseconds, so design sweeps over J and mu_K need no MCMC; MCMC is for fitting the model to data.</p>
+    <p><strong>You do:</strong> The viewer presses Run Newton, pmf J = 500 or Sweep 150 targets.</p>
+    <p><strong>You see:</strong> Measured medians of five runs (TSMM Newton for J = 50 and the exact pmf of K_500), an estimate for a 200 x 200 grid search from the measured cost of one evaluation, the paper's MCMC design (57,151 admitted fits, four chains of 12,000 iterations), and a sweep of 150 calibrations with Pr(W_SB &gt; .5) against J.</p>
+    <p class="dpx-card-engine">dp-core tsmm + mixing + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/why-fast.html">page</a> · <a href="embed/timing-badges.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-12" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-12.png" alt="Thumbnail of C-12 Gamma mixing: nodes to marginal pmf" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-12</span> Step 5.4 · done</p>
+    <h3>Gamma mixing: nodes to marginal pmf</h3>
+    <p class="dpx-card-concept">The marginal pmf of K_J is the prior-weighted average of the conditional pmfs at alpha nodes on log alpha, and the number of nodes sets its accuracy.</p>
+    <p><strong>You do:</strong> The viewer drags the node count from 20 to 400, sets a and b (presets Gamma(1, 1) and Gamma(1.60, 1.22)) and J, switches between mixing and a single alpha at the prior mean, and hovers over one node.</p>
+    <p><strong>You see:</strong> Thin conditional pmfs drawn as dark as their slice probabilities adding up to the thick marginal pmf against the dashed exact one, an error panel on the 20-node scale with the L1 gap, and the hovered node's alpha, weight and distance from the marginal.</p>
+    <p class="dpx-card-engine">dp-core mixing + D3 7.9.0 transitions</p>
+    <p class="dpx-card-links"><a href="pages/bridge/gamma-mixing.html">page</a> · <a href="embed/gamma-mixing.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-13" data-section="dpprior" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-13.png" alt="Thumbnail of C-13 Workflow stepper" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-13</span> Step 8.13 · done</p>
+    <h3>Workflow stepper</h3>
+    <p class="dpx-card-concept">The DPprior workflow is six fixed steps: state (J, mu_K, sigma^2), calibrate with TSMM, diagnose K_J and the weights, check the .40 trigger, refine with the Dual-Anchor rule or keep TSMM, and report the .25 hard bound separately.</p>
+    <p><strong>You do:</strong> The viewer clicks a step (or moves with Tab, Enter and the arrow keys) and presses 'Fill in the J = 50 example'.</p>
+    <p><strong>You see:</strong> The six-box flow fills with (5, 10) -&gt; Gamma(1.4082, 1.0770) -&gt; Pr(W_SB &gt; .5) = .497 &gt; .40 (the branch to refinement lights up) -&gt; lambda = .30, Gamma(2.3158, 1.4204), .398 -&gt; hard bound Gamma(5.2745, 2.3059), .250; each step has a small live chart and a link to its tool (C-05, C-02, C-09, C-08).</p>
+    <p class="dpx-card-engine">SVG (D3 7.9) + dp-core + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/workflow.html">page</a> · <a href="embed/workflow-stepper.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-14" data-section="dpprior" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-14.png" alt="Thumbnail of C-14 Reporting checklist and paragraph generator" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-14</span> Step 8.14 · done</p>
+    <h3>Reporting checklist and paragraph generator</h3>
+    <p class="dpx-card-concept">A calibrated hyperprior is reported with eight items fixed before posterior simulation: J, the elicited statement and moments, (a, b) and software, the K_J interval, the weight diagnostics, the Dual-Anchor details when triggered, the separate hard bound, and a posterior sensitivity variant.</p>
+    <p><strong>You do:</strong> The viewer fills in the eight-item form (or presses 'Fill in the J = 50 example'), clears an item to see the warning, and presses 'Copy the paragraph'.</p>
+    <p><strong>You see:</strong> A completeness strip and per-item marks, computed items 4 and 5 and the trigger decision, an aria-live warning listing missing items, and a paragraph that ends with the summary line J=50, Gamma(2.3158,1.4204), S(.5)=.398, lambda=.30.</p>
+    <p class="dpx-card-engine">dp-core mixing + weights + Clipboard API + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/checklist.html">page</a> · <a href="embed/report-generator.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-15" data-section="dpprior" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-15.png" alt="Thumbnail of C-15 J = 50 worked example strip" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-15</span> Step 4.5 · done</p>
+    <h3>J = 50 worked example strip</h3>
+    <p class="dpx-card-concept">After count calibration, a majority-mass tail above the .40 trigger calls for Dual-Anchor refinement, which costs about 0.9 expected clusters; a hard .25 bound costs about 2.5 and is reported as sensitivity.</p>
+    <p><strong>You do:</strong> The viewer switches the focus between TSMM, Dual-Anchor and the hard bound and turns on the Stage 1 initializer.</p>
+    <p><strong>You see:</strong> The alpha priors Gamma(1.4082, 1.0770), Gamma(2.3158, 1.4204) and Gamma(5.2745, 2.3059), K_50 pmfs with 5.00 [1, 11], 5.88 [2, 12] and 7.49 [3, 13], tail bars .497, .398 and .250 against the .40 trigger, and the initializer's 4.415 and 5.618 missing the target 5 and 10.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17; exact (a, b) and Newton trace from the replication package (worked_example_j50.json)</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/worked-example-j50.html">page</a> · <a href="embed/worked-example.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-16" data-section="bridge" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-16.png" alt="Thumbnail of C-16 W_SB tail and the W_max band" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-16</span> Step 5.7 · done</p>
+    <h3>W_SB tail and the W_max band</h3>
+    <p class="dpx-card-concept">For t of one half or more, Pr(W_SB &gt; t) &lt;= Pr(W_max &gt; t) &lt;= min(1, S(t)/t) (Proposition 1), so the size-biased tail is a lower bound for the largest-weight tail, which dp-core also computes exactly.</p>
+    <p><strong>You do:</strong> The viewer picks Gamma(1, 1), Gamma(1, 3), the J = 50 Dual-Anchor prior or the STAR Dual-Anchor prior (or sets a and b), moves t from .5 to .99, and switches on the STAR posterior panel.</p>
+    <p><strong>You see:</strong> The band between S(t) and min(1, S(t)/t) with the exact Pr(W_max &gt; t) inside (at t = .5 under Gamma(1, 1): .591, .728, 1), and, with the switch, four STAR posterior dominance summaries for five priors read from app_priors.json with a read-not-recomputed caption.</p>
+    <p class="dpx-card-engine">dp-core weights + Observable Plot 0.6.17 + released JSON (app_priors)</p>
+    <p class="dpx-card-links"><a href="pages/bridge/dominance.html">page</a> · <a href="embed/wmax-bounds.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="C-17" data-section="tools" data-rung="" data-audience="researcher" data-status="planned">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/C-17.png" alt="Thumbnail of C-17 Studio-lite (shinylive)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>C-17</span> Step 10.3 · planned</p>
+    <h3>Studio-lite (shinylive)</h3>
+    <p class="dpx-card-concept">The DPprior R code running in the browser without a server, giving the same Gamma(a, b) as the R package, Studio and the site's calibrator.</p>
+    <p><strong>You do:</strong> The viewer would enter J, mu_K and a confidence level, press Fit and compare the answer with C-02.</p>
+    <p><strong>You see:</strong> Not built yet: installing shinylive and the Quarto shinylive extension waits for the site owner's approval; the hosted DPprior Studio is linked meanwhile.</p>
+    <p class="dpx-card-engine">shinylive (R, webR) + quarto-ext/shinylive (not installed)</p>
+    <p class="dpx-card-links"><a href="pages/tools.html">page</a></p>
+  </div>
+</article>
+</div>
+<h2 class="anchored" id="axis-evidence">5 · Evidence and real data (A-)</h2>
+<div class="dpx-cards">
+<article class="dpx-card" id="A-01" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-01.png" alt="Thumbnail of A-01 STAR 79-school caterpillar" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-01</span> Step 9.2 · done</p>
+    <h3>STAR 79-school caterpillar</h3>
+    <p class="dpx-card-concept">In Project STAR the school-level treatment effects hardly depend on the prior on alpha: switching from Vague to the Dual-Anchor prior moves the posterior means by about .009 RMS.</p>
+    <p><strong>You do:</strong> The viewer switches the prior (Vague, DORO-Unif, TSMM, Dual-Anchor lambda = .20, hard bound), sorts by the raw estimate, the posterior mean or the school number, and turns on the shift arrows.</p>
+    <p><strong>You see:</strong> 79 posterior means and 95% intervals moving by a D3 transition, the intervals that exclude 0 in red, raw estimates as rings, and badges computed from star_units.json: RMS shift .0088 and largest .049 under Dual-Anchor.</p>
+    <p class="dpx-card-engine">D3 7.9 transition + data/released/star_units.json + app-captions.js</p>
+    <p class="dpx-card-links"><a href="pages/applications/star.html">page</a> · <a href="embed/star-caterpillar.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-02" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-02.png" alt="Thumbnail of A-02 STAR prior K strip and posterior tiles (Table 4)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-02</span> Step 9.3 · done</p>
+    <h3>STAR prior K strip and posterior tiles (Table 4)</h3>
+    <p class="dpx-card-concept">In STAR the five priors imply very different beliefs about K_79, and the posterior number of clusters and the collapse probability follow the prior, while the school effects (A-01) do not move.</p>
+    <p><strong>You do:</strong> The viewer switches the prior (in step with A-01 on the same page) and toggles between the prior pmf of K and the prior-versus-posterior intervals.</p>
+    <p><strong>You see:</strong> Prior pmfs of K_79 computed with dp-core (Vague 4.61 [1, 11] .591, Dual-Anchor 6.24 [3, 10] .385, hard bound 7.93 [4, 12] .250, nearly a point mass), and posterior tiles read from app_priors.json: E(K | data) 1.96 -&gt; 4.47, collapse .560 -&gt; .064, largest observed share .920 -&gt; .724.</p>
+    <p class="dpx-card-engine">dp-core mixing + weights + Observable Plot 0.6.17 + data/released/app_priors.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/star.html">page</a> · <a href="embed/app-prior-strip.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-03" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-03.png" alt="Thumbnail of A-03 Bangert-Drowns 48-study forest" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-03</span> Step 9.4 · done</p>
+    <h3>Bangert-Drowns 48-study forest</h3>
+    <p class="dpx-card-concept">In the writing-to-learn meta-analysis, as in STAR, the study effects and moderator slopes hardly depend on the prior on alpha, while the posterior number of clusters and the collapse probability follow it.</p>
+    <p><strong>You do:</strong> The viewer switches the prior, sorts by the reported effect, the standard error or the study number, and turns on the moderator summary.</p>
+    <p><strong>You see:</strong> 48 reported effects with 95% CIs next to posterior means and 95% intervals, the posterior intervals that exclude 0 (13 of 48 under Vague and Dual-Anchor) in red, a REML random-effects diamond .222 [.132, .312] with I² 58.4% computed from the released effects, header tiles E(K | data) 1.89 -&gt; 3.31 and collapse .548 -&gt; .190, and posterior slopes on grade and length.</p>
+    <p class="dpx-card-engine">D3 7.9 transition + Observable Plot 0.6.17 + data/released/bd_units.json, app_priors.json, bd_moderator.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/bangert-drowns.html">page</a> · <a href="embed/bd-forest.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-04" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-04.png" alt="Thumbnail of A-04 Rasch K_500 posterior pmf (Fig. 8)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-04</span> Step 9.5 · done</p>
+    <h3>Rasch K_500 posterior pmf (Fig. 8)</h3>
+    <p class="dpx-card-concept">In the vocabulary Rasch application the prior on alpha sets how many ability groups the mixture uses: from 3.51 (Gamma(1, 3)) to 8.99 (the hard bound) in posterior expectation.</p>
+    <p><strong>You do:</strong> The viewer checks priors on and off, switches between an overlay and small multiples, and turns on the Count-25 sensitivity.</p>
+    <p><strong>You see:</strong> Posterior pmfs of K_500 with the elicited 5 dotted, 95% intervals ([2, 10] Vague, [3, 12] Dual-Anchor, [5, 14] hard), Pr(2 &lt;= K &lt;= 10) tiles and E(alpha | y) badges (.38 to 2.00); the Count-25 sensitivity ends at 11.72.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/rasch_pmf.json, rasch_posterior.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/vocabulary-rasch.html">page</a> · <a href="embed/rasch-kpmf.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-05" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-05.png" alt="Thumbnail of A-05 Rasch ability density bands and WLE scores" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-05</span> Step 9.6 · done</p>
+    <h3>Rasch ability density bands and WLE scores</h3>
+    <p class="dpx-card-concept">In the vocabulary Rasch model the prior on alpha changes the number of ability groups (A-04) but neither the fitted ability distribution (densities within .002 of each other) nor the person scores.</p>
+    <p><strong>You do:</strong> The viewer checks priors on and off (in step with A-04 on the same page), toggles the Gaussian benchmark and the respondent dots, and hovers over a respondent.</p>
+    <p><strong>You see:</strong> Density bands under five priors that overlap almost exactly, flatter than the grey Gaussian benchmark; 500 respondents' WLE scores by raw score (hover: raw score, WLE, SE) with the 63 perfect scores in gold and score-group WLE plus or minus one SE (1.73 at 13); tiles: largest posterior-ability shift .031 logits (Dual-Anchor) and WLE shift at most .006.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/rasch_density.json, rasch_gaussian.json, rasch_wle.json, rasch_respondents.json, rasch_posterior.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/vocabulary-rasch.html">page</a> · <a href="embed/rasch-density.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-06" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-06.png" alt="Thumbnail of A-06 Simulation dashboard (Fig. 4)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-06</span> Step 9.7 · done</p>
+    <h3>Simulation dashboard (Fig. 4)</h3>
+    <p class="dpx-card-concept">Across the paper's simulation cells the prior on alpha moves the posterior number of clusters, the collapse rate and the coverage of K*, but not the error of the site effects.</p>
+    <p><strong>You do:</strong> The viewer picks a metric (posterior mean K_J, collapse, coverage, RMSE), checks priors on and off, switches the grand-mean prior (N(0, 1), N(0, .01), N(0, 100)) and hovers over a cell.</p>
+    <p><strong>You see:</strong> Nine small panels (K* by I) with five priors each: at K* = 5, I = .2 Vague 1.50 / .725, TSMM 1.75 / .616, Dual-Anchor 3.00 / .315, SSI-Weight 3.41 / .383 (E K / collapse); RMSE .234 to .238 at I = .2; SSI-Weight coverage 0 at K* = 30; retained 8,607 of 9,000 fits.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 (facets) + data/released/cell_summary.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/simulation.html">page</a> · <a href="embed/sim-dashboard.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-07" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-07.png" alt="Thumbnail of A-07 Effects vs partition tiles" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-07</span> Step 9.7 · done</p>
+    <h3>Effects vs partition tiles</h3>
+    <p class="dpx-card-concept">In one simulation cell the site-effect RMSE is the same under every prior while the collapse rate and the number of clusters are not; the same holds with unequal cluster weights and with a fixed Dual-Anchor lambda.</p>
+    <p><strong>You do:</strong> The viewer picks the data (headline, unequal weights, fixed lambda), the cell and whether the partition is shown as collapse or E K_J.</p>
+    <p><strong>You see:</strong> Two bar panels side by side: RMSE bars within a few thousandths of each other against collapse bars from .31 to .73; with fixed lambda .16 / .5 / .9 the posterior K is 2.47 / 1.76 / 1.54 and the RMSE moves by less than .001.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/headline_primary.json, unequal_weights.json, fixed_lambda.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/simulation.html">page</a> · <a href="embed/effects-vs-partition-tiles.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-08" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-08.png" alt="Thumbnail of A-08 Elicited-mean misspecification (Fig. 5)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-08</span> Step 9.8 · done</p>
+    <h3>Elicited-mean misspecification (Fig. 5)</h3>
+    <p class="dpx-card-concept">When the elicited mean mu_K is off by a factor of two, the posterior number of clusters follows mu_K, not the true K*: cells that share mu_K give the same posterior whatever K* is.</p>
+    <p><strong>You do:</strong> The viewer picks K*, I, the metric and the horizontal axis (r or mu_K), switches priors on and off, moves the r slider and hovers over a cell.</p>
+    <p><strong>You see:</strong> Trajectories on a log r axis (TSMM at K* = 10, I = .2: 1.51, 3.41, 15.03), the cells (K* = 5, r = 2) and (K* = 10, r = 1) joined by a highlight line at 3.41, one curve for all K* on the mu_K axis, and crosses where the calibration was rejected at mu_K = 2.5.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/misspecification.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/simulation.html">page</a> · <a href="embed/misspecification.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-09" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-09.png" alt="Thumbnail of A-09 Design size J = 25 to 200 (Fig. 6)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-09</span> Step 9.9 · done</p>
+    <h3>Design size J = 25 to 200 (Fig. 6)</h3>
+    <p class="dpx-card-concept">Adding sites does not rescue the default prior: Vague stays collapsed at J = 200, Dual-Anchor moves toward the reference count as its selected lambda falls, and SSI-Weight ignores the design.</p>
+    <p><strong>You do:</strong> The viewer moves the J slider from 25 to 200, picks K*, I and the metric, and switches priors on and off.</p>
+    <p><strong>You see:</strong> Trajectories over J (log axis): Vague collapse at least .765 even at J = 200, Dual-Anchor 1.53 to 3.50 and SSI-Weight 2.17 to 2.99 at K* = 5, I = .2, and four lambda badges .70, .30, .16, .09 with the one at the slider's J highlighted.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/design_size.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/simulation.html">page</a> · <a href="embed/design-size.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-10" data-section="problems" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-10.png" alt="Thumbnail of A-10 SSI-Weight against a true K* = 30" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-10</span> Step 7.7 · done</p>
+    <h3>SSI-Weight against a true K* = 30</h3>
+    <p class="dpx-card-concept">A weight-only prior leaves the count unprotected: in the paper's simulation at J = 100 the SSI-Weight posterior mean of K stays near 3.4 for K* = 5, 10 and 30, and the 95% interval never covers K* = 30.</p>
+    <p><strong>You do:</strong> The viewer chooses the true K* (5, 10, 30) and the information level I (0.2, 0.5, 0.8), and moves J.</p>
+    <p><strong>You see:</strong> At J = 100 and I = 0.2, posterior means 3.41, 3.42 and 3.39 with average 95% intervals from 1 to about 13.8 beside a red star at the true K*; coverage 1.00, 1.00 and 0.</p>
+    <p class="dpx-card-engine">dp-core + Observable Plot 0.6.17 + released simulation summaries (headline_primary.json)</p>
+    <p class="dpx-card-links"><a href="pages/problems/ssi.html">page</a> · <a href="embed/ssi-truth.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-11" data-section="applications" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-11.png" alt="Thumbnail of A-11 The partition moves, the effects do not (2 x 3 grid)" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-11</span> Step 9.10 · done</p>
+    <h3>The partition moves, the effects do not (2 x 3 grid)</h3>
+    <p class="dpx-card-concept">Fitted to the same data, Vague, TSMM and Dual-Anchor give clearly different posterior partitions but nearly the same unit effects: the prior on alpha is a statement about the partition.</p>
+    <p><strong>You do:</strong> The viewer switches between Project STAR and Bangert-Drowns and between two top views (K_J = 1, 2, 3 or more, or the largest weight), and hovers over or pins a column.</p>
+    <p><strong>You see:</strong> Three columns: coloured partition bars on top that change with the prior against a dashed Vague outline (STAR Pr(K_J = 1) .560, .200, .064), and grey unit dot-whiskers below that barely move (RMS shift from Vague: STAR TSMM .0071 and Dual-Anchor .0088; Bangert-Drowns Dual-Anchor .0071).</p>
+    <p class="dpx-card-engine">D3 + data/released/app_sensitivity.json, app_priors.json, star_units.json, bd_units.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/partition-vs-effects.html">page</a> · <a href="embed/partition-vs-effects.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-12" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-12.png" alt="Thumbnail of A-12 Specification sensitivity: wide scale and HC3" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-12</span> Step 9.10 · done</p>
+    <h3>Specification sensitivity: wide scale and HC3</h3>
+    <p class="dpx-card-concept">The model specification can move the partition summaries as much as the prior: a wide-scale grand-mean prior and the schoolwise OLS/HC3 input change the Figure 7 summaries and the unit effects.</p>
+    <p><strong>You do:</strong> The viewer switches the application and the specification (primary, wide scale N(0, 100), OLS/HC3 input for STAR).</p>
+    <p><strong>You see:</strong> Figure 7-style dot-intervals (E(K_J | y) with 95% interval, largest observed share, largest atom weight, .5 guide) with the primary fit as grey rings: STAR Dual-Anchor 4.47 to 2.85 clusters and collapse .064 to .318 under the wide scale; unit means moving by RMS .169 to .174 under HC3, about 20 times the prior effect.</p>
+    <p class="dpx-card-engine">Observable Plot 0.6.17 + data/released/app_sensitivity.json</p>
+    <p class="dpx-card-links"><a href="pages/applications/partition-vs-effects.html">page</a> · <a href="embed/spec-sensitivity.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-13" data-section="applications" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-13.png" alt="Thumbnail of A-13 Data lineage and licence cards" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-13</span> Step 9.1 · done</p>
+    <h3>Data lineage and licence cards</h3>
+    <p class="dpx-card-concept">Every released table the evidence pages read has a declared source, level, size, caption, checksum and licence scope, and a gate that refuses individual-level fields and tables without a rights statement.</p>
+    <p><strong>You do:</strong> The viewer filters the cards by family (applications, simulation, calibration, Rasch) and opens a card to see the source file in the replication package, the columns and the checksum.</p>
+    <p><strong>You see:</strong> A card for every released table, each with its caption, what its CC BY 4.0 licence covers (the whole file, the author's contribution, or the IRW derived licence), its upstream source and terms, and an individual-level badge (only rasch_respondents.json is on the respondent-level allowlist), a chart of table sizes, and the fixed captions of the evidence pages, including 8,607 of 9,000 retained simulation fits.</p>
+    <p class="dpx-card-engine">data/released/data_contract.json (.js twin) + app-captions.js + Observable Plot 0.6.17</p>
+    <p class="dpx-card-links"><a href="pages/applications/data.html">page</a> · <a href="embed/data-lineage-card.html">standalone</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-14" data-section="applications" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-14.png" alt="Thumbnail of A-14 Static fallbacks for talks" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-14</span> Step 4.9 · done</p>
+    <h3>Static fallbacks for talks</h3>
+    <p class="dpx-card-concept">Every live widget used in a talk has a still at its presentation preset, so a slide still works when JavaScript cannot run.</p>
+    <p><strong>You do:</strong> The viewer only looks: the images are shown in slides or on one page.</p>
+    <p><strong>You see:</strong> P-05 at alpha 0.5, 2 and 10, M-01 at Gamma(1, 1) (4.16 at J = 50 to 7.82 at J = 2000), M-03 at Gamma(1.60, 1.22) (.487 and .183), C-15 (.497, .398, .250), and paper Figures 4 and 7.</p>
+    <p class="dpx-card-engine">headless Chrome screenshots of the file:// embed pages (verification/capture_thumbs.mjs); paper figures from the replication package</p>
+    <p class="dpx-card-links"><a href="pages/applications/talk-fallbacks.html">page</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-15" data-section="applications" data-rung="" data-audience="researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-15.png" alt="Thumbnail of A-15 reveal.js embedding proof of concept" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-15</span> Step 4.10 · done</p>
+    <h3>reveal.js embedding proof of concept</h3>
+    <p class="dpx-card-concept">The same widgets run inside a reveal.js deck opened from a local folder, with a video, a still image and an online iframe as fallbacks in a fixed order.</p>
+    <p><strong>You do:</strong> The presenter steps through the deck, moves the live P-05, C-15 and M-01 widgets and the P-05 preset buttons (alpha 0.5, 2, 10), and plays the video.</p>
+    <p><strong>You see:</strong> Live widgets and a local iframe working from file:// with no network (net-log audit: 0 remote requests), the video, the C-15 still (.497, .398, .250) and M-01 at 4.16 (J = 50) to 7.82 (J = 2000), plus a slide that shows why inline OJS needs a web server.</p>
+    <p class="dpx-card-engine">Quarto revealjs 1.9.37 (preload-iframes, MathML) + classic-script widget bundles + iframe + mp4</p>
+    <p class="dpx-card-links"><a href="pages/applications/talk-fallbacks.html">page</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="A-16" data-section="applications" data-rung="" data-audience="beginner researcher course" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/A-16.png" alt="Thumbnail of A-16 Two videos: the CRP at alpha = 1 and 5, the K prior by J" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>A-16</span> Step 10.1 · done</p>
+    <h3>Two videos: the CRP at alpha = 1 and 5, the K prior by J</h3>
+    <p class="dpx-card-concept">The default alpha against a larger one in the Chinese restaurant, and the drift of the Gamma(1, 1) prior on K_J with J, fixed as narrated videos with no runtime dependency.</p>
+    <p><strong>You do:</strong> The viewer plays a 13-second video on the page or in a slide.</p>
+    <p><strong>You see:</strong> 79 arrivals at alpha = 1 (5 tables, one with 51 customers) next to alpha = 5 (15 tables) with a K_N counter and E[K_N | alpha]; then the Gamma(1, 1) pmf of K_J for J = 10 to 500 (mean 2.65 to 6.44) with Pr(W_SB &gt; .5) = .591 unchanged (media/k_prior_by_J.mp4).</p>
+    <p class="dpx-card-engine">gganimate 1.0.11 + ffmpeg 8.1.2 (H.264) + theme_DPprior and moments from DPprior 2.0.0 (load_all)</p>
+    <p class="dpx-card-links"><a href="pages/media.html">page</a> · <a href="media/crp_growth.mp4">video</a></p>
+  </div>
+</article>
+</div>
+<h2 class="anchored" id="axis-complementary">Complementary tools (X-)</h2>
+<div class="dpx-cards">
+<article class="dpx-card" id="X-01" data-section="tools" data-rung="" data-audience="researcher" data-status="planned">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/X-01.png" alt="Thumbnail of X-01 Observable Framework: defaults by J" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>X-01</span> Step 10.2 · planned</p>
+    <h3>Observable Framework: defaults by J</h3>
+    <p class="dpx-card-concept">The same default-prior drift as M-01 rebuilt as an Observable Framework page with an R data loader, to judge when Framework beats Quarto.</p>
+    <p><strong>You do:</strong> The viewer would pick a prior and move J on a log slider.</p>
+    <p><strong>You see:</strong> Not built yet: npm create @observablehq needs a new tool and network access, which wait for the site owner's approval.</p>
+    <p class="dpx-card-engine">Observable Framework + R data loader (not installed)</p>
+    <p class="dpx-card-links"><a href="pages/tools.html">page</a></p>
+  </div>
+</article>
+<article class="dpx-card" id="X-02" data-section="tools" data-rung="" data-audience="researcher" data-status="done">
+  <div class="dpx-card-thumb"><img src="catalog/thumbs/X-02.png" alt="Thumbnail of X-02 The alpha sweep in plotly and ggiraph" loading="lazy"></div>
+  <div class="dpx-card-body">
+    <p class="dpx-card-id"><span>X-02</span> Step 10.4 · done</p>
+    <h3>The alpha sweep in plotly and ggiraph</h3>
+    <p class="dpx-card-concept">The conditional pmf of K_100 and the size-biased weight density across alpha, made with R htmlwidgets to compare that route with the site's dp-core widgets.</p>
+    <p><strong>You do:</strong> The viewer plays or drags the plotly frame slider over 40 values of alpha and reads the ggiraph chart and the measured cost table.</p>
+    <p><strong>You see:</strong> The pmf of K_100 moving right and the weight density moving toward 0 as alpha grows (E[K_100 | alpha = 1] = 5.19), the ggiraph chart as a picture (its JavaScript is GPL-3 and is not shipped), and a measured size table (plotly.js 3.5 MB).</p>
+    <p class="dpx-card-engine">plotly 4.12 + ggiraph 0.9.6 + htmlwidgets 1.6.4 (R), data from DPprior 2.0.0</p>
+    <p class="dpx-card-links"><a href="pages/dpprior/plotly-alpha-sweep.html">page</a></p>
+  </div>
+</article>
+</div>
+<script>
+(function () {
+  var byId = function (id) { return document.getElementById(id); };
+  var keys = ["section", "rung", "audience"];
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".dpx-card"));
+  function apply() {
+    var s = byId("f-section").value, r = byId("f-rung").value, a = byId("f-audience").value, n = 0;
+    cards.forEach(function (c) {
+      var ok = (!s || c.dataset.section === s) && (!r || c.dataset.rung === r) && (!a || c.dataset.audience.split(" ").indexOf(a) >= 0);
+      c.hidden = !ok;
+      if (ok) n += 1;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".dpx-cards"), function (g) {
+      var any = Array.prototype.some.call(g.children, function (c) { return !c.hidden; });
+      g.hidden = !any;
+      var h = g.previousElementSibling;
+      if (h && h.tagName === "H2") h.hidden = !any;
+    });
+    var count = byId("f-count");
+    count.textContent = n === cards.length ? count.dataset.all : "Showing " + n + " of " + cards.length + " visualizations.";
+  }
+  keys.forEach(function (k) { byId("f-" + k).addEventListener("change", apply); });
+  byId("f-reset").addEventListener("click", function () { keys.forEach(function (k) { byId("f-" + k).value = ""; }); apply(); });
+  var q = new URLSearchParams(location.search);
+  keys.forEach(function (k) { if (q.get(k) !== null) byId("f-" + k).value = q.get(k); });
+  apply();
+})();
+</script>
+```

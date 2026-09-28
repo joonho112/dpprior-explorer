@@ -1,0 +1,33 @@
+---
+title: "Vocabulary"
+description: "The terms used across the site, with their notation in Broderick's tutorials and in the DPprior paper."
+---
+
+The site follows the notation of the DPprior paper and of Broderick's MLSS 2016
+lectures, which use `alpha` for the concentration parameter. Her 2012 tutorial writes
+`theta` for the same quantity.
+
+| Term | Meaning on this site | Also written as |
+|---|---|---|
+| **alpha** | Concentration parameter of the Dirichlet process. In the Chinese restaurant process it is the pseudo-count of "tables not yet seen": the n-th customer opens a new table with probability alpha / (alpha + n − 1). | theta (Broderick 2012) |
+| **Gamma(a, b)** | Hyperprior on alpha with shape a and rate b, so E(alpha) = a / b. | — |
+| **J** | Number of units whose effects or traits are modelled: sites, schools, studies, respondents. | N (Broderick; the number of customers) |
+| **K_J** | Number of occupied clusters among the J units: the number of *fitted components*. E(K_J \| alpha) = Σ alpha / (alpha + i − 1) ≈ alpha log J. | K_N (Broderick), "number of clusters" |
+| **components vs clusters** | Components are the infinitely many atoms of the Dirichlet process; clusters are the components that at least one of the J units actually occupies. K_J counts clusters. | — |
+| **w_k** | Population weight of component k (its share of the whole population). | rho_k (Broderick), pi_k |
+| **stick-breaking (GEM)** | w_1 = V_1, w_k = V_k ∏_{j<k}(1 − V_j) with V_k ~ Beta(1, alpha). The order in which pieces are broken off is the size-biased order. | GEM(alpha) |
+| **size-biased order** | The order in which clusters are met when units are drawn at random: large clusters tend to come first. | order of appearance |
+| **W_SB** | Size-biased first weight: the population share of the cluster that a randomly chosen unit belongs to. W_SB \| alpha ~ Beta(1, alpha), and under Gamma(a, b), Pr(W_SB > t) = (b / (b − log(1 − t)))^a. It is *not* the largest weight. | w_1 in size-biased order |
+| **W_max** | The largest population weight. For t ≥ 1/2, Pr(W_SB > t) ≤ Pr(W_max > t) ≤ Pr(W_SB > t) / t. | — |
+| **rho** | Co-clustering probability Σ_k w_k^2: the chance that two randomly chosen units share a cluster. E(rho \| alpha) = 1 / (1 + alpha). | — |
+| **majority-mass dominance** | Pr(W_SB > .5): a random unit belongs to a cluster holding more than half of the population. | dominance |
+| **extreme dominance** | Pr(W_SB > .9): a random unit belongs to a cluster holding more than 90% of the population. | — |
+| **Proposition 1 band** | For t ≥ 1/2, S(t) ≤ Pr(W_max > t) ≤ min(1, S(t) / t) with S(t) = Pr(W_SB > t); the size-biased tail is a lower bound for the largest-weight tail. | — |
+| **collapse** | K_J = 1: all units in one cluster. Always said as a *prior* statement, Pr(K_J = 1), or a *posterior* one, Pr(K_J = 1 \| data). | — |
+| **CRP** | Chinese restaurant process: the sequential seating rule that generates the partition of the J units. | Pólya urn (Hoppe urn) |
+| **DP, DPM** | Dirichlet process; Dirichlet process mixture (the model in which each cluster has its own effect or trait distribution). | DPMM |
+
+Terms such as size-biased weight, dominance, the Proposition 1 band and prior versus
+posterior collapse come from the DPprior paper; they do not appear in Broderick's
+tutorials. The CRP, stick-breaking and GEM terms follow Broderick. K_J always counts fitted
+components (occupied clusters) among the J units.

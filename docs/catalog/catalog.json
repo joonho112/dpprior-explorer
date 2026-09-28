@@ -1,0 +1,2150 @@
+[
+  {
+    "id": "P-00",
+    "name": "Why nonparametric Bayes?",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 0,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "A finite mixture fixes its number of cells before seeing data, while a Dirichlet process keeps unbroken stick mass for cells nobody has used yet, so the number of occupied cells can grow with N.",
+    "does": "The viewer switches between K = 2, K = 5 and K = infinity, moves N from 10 to 500, and presses Redraw (or Enter) for new weights, centres and points.",
+    "sees": "A two-dimensional scatter coloured by cell with the occupied cell centres marked, and a bar of the cell weights above the shares of the N points, with a dashed 'new cells' piece of unbroken stick when K is infinite.",
+    "engine": "dp-core sampler (seeded Dirichlet, Beta(1, alpha), normal) + Observable Plot 0.6.17",
+    "page": "pages/dpm/why-nonparametric.html",
+    "embed": "embed/finite-mixture.html",
+    "step": "Step 6.1",
+    "thumb": "catalog/thumbs/P-00.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "K = 2, N = 100",
+        "query": "?K=2&n=100&seed=1"
+      },
+      {
+        "label": "K = 5",
+        "query": "?K=5&n=300"
+      },
+      {
+        "label": "K = infinity",
+        "query": "?preset=inf&n=500"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-01",
+    "name": "Beta lollipop",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 1,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "rho_1 ~ Beta(a_1, a_2) with rho_2 = 1 - rho_1 is the two-component case of the Dirichlet: small a gives nearly all-or-nothing draws and large a nearly even ones.",
+    "does": "The viewer moves the shared a on a log slider from 0.01 to 1000 or sets a_1 and a_2 separately, presses Draw again (or Enter), and switches on auto-draw at two draws per second and the twenty ghosts.",
+    "sees": "Two lollipop stems for rho_1 and rho_2 with the previous twenty draws as faint dots, and the Beta(a_1, a_2) density of rho_1 with the current draw marked in red.",
+    "engine": "dp-core sampler (seeded, log-scale Dirichlet) + Observable Plot 0.6.17",
+    "page": "pages/dpm/beta-dirichlet.html",
+    "embed": "embed/beta-lollipop.html",
+    "step": "Step 6.2",
+    "thumb": "catalog/thumbs/P-01.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "a = 1",
+        "query": "?a=1&seed=1"
+      },
+      {
+        "label": "a = 0.01",
+        "query": "?a=0.01"
+      },
+      {
+        "label": "a = 1000",
+        "query": "?a=1000"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-02",
+    "name": "Dirichlet lollipop and ternary view",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 2,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "rho ~ Dirichlet(a_1, ..., a_K) spreads a draw evenly when a is large and concentrates it on few components when a is small; at K = 3 each draw is a point in a triangle.",
+    "does": "The viewer sets K from 2 to 12 and a (shared or per component), draws again or auto-draws, and at K = 3 picks the presets a = 0.5, a = 5 and a = (40, 10, 10).",
+    "sees": "K lollipop stems with ghosts and a 1/K reference line and, at K = 3, 300 draws in the triangle that gather in the corners (a = 0.5), in the centre (a = 5) or towards rho_1 = 2/3 (a = (40, 10, 10)).",
+    "engine": "dp-core sampler (seeded, log-scale Dirichlet) + Observable Plot 0.6.17",
+    "page": "pages/dpm/beta-dirichlet.html",
+    "embed": "embed/dirichlet-lollipop.html",
+    "step": "Step 6.2",
+    "thumb": "catalog/thumbs/P-02.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "K = 3, a = 0.5",
+        "query": "?preset=corners&seed=1"
+      },
+      {
+        "label": "a = 5",
+        "query": "?preset=centre"
+      },
+      {
+        "label": "a = (40, 10, 10)",
+        "query": "?preset=tilted"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-03",
+    "name": "Large-K paintbox with falling markers",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 3,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "A Dirichlet(a, ..., a) draw with K = 1000 and a = 0.01 cuts the unit interval into a few wide pieces and many slivers; uniform drops occupy far fewer pieces (clusters) than there are components.",
+    "does": "The viewer presses Drop 1, Drop 10 or Drop 100 and New rho, moves a from 0.001 to 1 and K from 100 to 5000, and hovers over the bar or uses the piece picker.",
+    "sees": "The unit-interval bar with hit pieces turning from grey to blue as red markers fall, the number of drops and of occupied pieces against the exact expectation (24.2 after 100 drops at K = 1000, a = 0.01), the equivalent alpha = K a, and one piece's rho_k.",
+    "engine": "dp-core sampler (seeded, log-scale Dirichlet) + Canvas 2D",
+    "page": "pages/dpm/paintbox.html",
+    "embed": "embed/paintbox.html",
+    "step": "Step 6.3",
+    "thumb": "catalog/thumbs/P-03.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "K = 1000, a = 0.01, 100 drops",
+        "query": "?n=100&seed=1"
+      },
+      {
+        "label": "K = 5000, a = 0.002",
+        "query": "?K=5000&a=0.002&n=200"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-04",
+    "name": "Order-of-appearance staircase",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 3,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Numbering clusters in the order they are first hit gives a concave staircase: new clusters appear ever more rarely, roughly like alpha log N with alpha = K a.",
+    "does": "The viewer drops points in the linked paintbox and switches the drop-number axis between linear and log scales.",
+    "sees": "Every drop plotted at (drop number, cluster by order of appearance), first hits in blue joined by a step frontier, with component and cluster counters in step with the paintbox.",
+    "engine": "dp-core sampler + Observable Plot 0.6.17",
+    "page": "pages/dpm/paintbox.html",
+    "embed": "embed/paintbox.html",
+    "step": "Step 6.3",
+    "thumb": "catalog/thumbs/P-04.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "200 drops",
+        "query": "?n=200&seed=1"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-05",
+    "name": "GEM stick-breaking staircase",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 4,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "With V_k ~ Beta(1, alpha) and w_k = V_k times what is left, a small alpha lets the first piece take most of the stick (E[w_1] = 1/(1 + alpha), Pr(w_1 > .5) = 0.5^alpha).",
+    "does": "The viewer moves the alpha slider or picks the presets 0.5, 1, 2, 10 and 100, presses Break again (Enter) or Step, switches between size-biased and ranked order, and turns on 20 ghost rows.",
+    "sees": "A stick broken piece by piece in a staircase with each V_k and w_k labelled, the E[w_1] and Pr(w_1 > .5) read-outs, a collapse badge when one piece exceeds .9, and 20 more sticks drawn on a canvas.",
+    "engine": "dp-core sampler (mulberry32, Beta(1, alpha)) + D3 7.9.0 SVG transitions + Canvas ghost rows",
+    "page": "pages/dpm/stick-breaking.html",
+    "embed": "embed/stick-breaking.html",
+    "step": "Step 4.1",
+    "thumb": "catalog/thumbs/P-05.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 0.5",
+        "query": "?alpha=0.5"
+      },
+      {
+        "label": "alpha = 2",
+        "query": "?alpha=2"
+      },
+      {
+        "label": "alpha = 10",
+        "query": "?alpha=10"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented, no GPL code"
+  },
+  {
+    "id": "P-06",
+    "name": "Hoppe urn to stick-breaking",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 5,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Hoppe's urn with one black ball of mass alpha is the Chinese restaurant process; its colour shares converge to one draw of stick-breaking weights, so the first colour's long-run share is W_1 ~ Beta(1, alpha).",
+    "does": "The viewer sets alpha, draws one ball at a time (Step or Enter), adds 10 or 100, plays automatically at three speeds, resets, and runs the 1000-urn experiment.",
+    "sees": "The urn with its black alpha ball and coloured balls, a strip of the first four draws with their probabilities, the colour-share bar and the first colour's share settling over draws, and a histogram of 1000 first-colour shares on the Beta(1, alpha) density.",
+    "engine": "dp-core CRP sampler (seeded) + D3 7.9.0 + Observable Plot 0.6.17",
+    "page": "pages/dpm/urn-to-sticks.html",
+    "embed": "embed/hoppe-urn.html",
+    "step": "Step 6.4",
+    "thumb": "catalog/thumbs/P-06.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 1, 200 draws",
+        "query": "?alpha=1&n=200&seed=1"
+      },
+      {
+        "label": "alpha = 0.5",
+        "query": "?alpha=0.5&n=200"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-07",
+    "name": "Chinese restaurant process",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 6,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Customer n + 1 joins table k with probability n_k/(alpha + n) and a new table with probability alpha/(alpha + n): alpha is a pseudo-count for the tables not seen yet.",
+    "does": "The viewer sets alpha (presets 0.01, 0.5, 1, 2), seats 1, 10 or 100 customers, plays or pauses at three speeds, resets, changes the seed, and switches the labels to sites and clusters.",
+    "sees": "Tables as circles growing with occupancy, the next customer's probability bar with the new-table piece highlighted, the product of seating probabilities for the first eight arrivals, and the STAR read-out alpha/(alpha + 78) = 1.3% at alpha = 1 and 6.0% at alpha = 5.",
+    "engine": "dp-core CRP sampler (seeded) + D3 7.9.0 SVG transitions",
+    "page": "pages/dpm/crp.html",
+    "embed": "embed/crp.html",
+    "step": "Step 4.2",
+    "thumb": "catalog/thumbs/P-07.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 1",
+        "query": "?alpha=1"
+      },
+      {
+        "label": "alpha = 0.01",
+        "query": "?alpha=0.01"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-08",
+    "name": "How K_N grows",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 6,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "E[K_N] = sum alpha/(alpha + n - 1), about alpha log N, and the distribution of K_N at the current N is the Antoniak pmf, which is the prior of K_J for J = N.",
+    "does": "The viewer sets alpha, adds 1, 10, 100 or 1000 customers, switches the N axis between linear and log, and turns 20 ghost paths on or off.",
+    "sees": "The K_N staircase with the E[K_N] curve and the alpha log N line, 20 ghost paths, and the exact pmf of K_N at the current N with ghost endpoints and guides at N = 48, 79 and 500.",
+    "engine": "dp-core (CRP sampler, condMean, condPmf) + Observable Plot 0.6.17",
+    "page": "pages/dpm/crp.html",
+    "embed": "embed/crp-growth.html",
+    "step": "Step 4.4",
+    "thumb": "catalog/thumbs/P-08.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 1, N = 100",
+        "query": "?alpha=1&J=100"
+      },
+      {
+        "label": "alpha = 2, N = 500",
+        "query": "?alpha=2&J=500"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part III); mathematics re-implemented"
+  },
+  {
+    "id": "P-09",
+    "name": "DP mixture generator (N, components, clusters)",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 7,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Generating a Dirichlet process mixture by lazy stick-breaking creates pieces and means only when a point needs them, so points, components created and clusters grow at different speeds and some components stay empty.",
+    "does": "The viewer sets alpha (default 2), sigma0 (1.5) and sigma (0.3), adds 1, 10 or 100 points (Enter adds one), resets, and hovers over a piece of the stick or uses the component picker.",
+    "sees": "The stick with occupied pieces coloured, empty broken pieces grey, the white unbroken rest and a red mark at the last u; a scatter coloured by cluster with black squares at every component mean, used or not; and components and clusters against N with E(K_N | alpha) dashed.",
+    "engine": "dp-core sampler (seeded Beta(1, alpha), normal) + D3 7.9.0 + Observable Plot 0.6.17",
+    "page": "pages/dpm/dpmm.html",
+    "embed": "embed/dpmm.html",
+    "step": "Step 6.5",
+    "thumb": "catalog/thumbs/P-09.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 2, 50 points",
+        "query": "?alpha=2&n=50&seed=1"
+      },
+      {
+        "label": "alpha = 5, 300 points",
+        "query": "?alpha=5&n=300"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-10",
+    "name": "Distributions ladder (Beta, Dirichlet, GEM, DP atoms)",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 7,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "One concentration alpha drives Beta, Dirichlet, GEM and Dirichlet process draws whose support grows from two points to K points, to the positive integers, to the real line.",
+    "does": "The viewer moves the shared alpha, draws each row separately (or new atom locations for row 4), and presses Redraw all (or Enter).",
+    "sees": "Four linked rows: two lollipops, ten lollipops, thirty GEM lollipops with the remaining mass shown as '...', and the same GEM weights moving to locations phi_k ~ N(0, 1) on a continuous axis with the largest atom labelled.",
+    "engine": "dp-core sampler (seeded Dirichlet, GEM, normal) + Observable Plot 0.6.17 + D3 7.9.0 transitions",
+    "page": "pages/dpm/dp-and-atoms.html",
+    "embed": "embed/distributions-ladder.html",
+    "step": "Step 6.6",
+    "thumb": "catalog/thumbs/P-10.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 2",
+        "query": "?alpha=2&seed=1"
+      },
+      {
+        "label": "alpha = 10",
+        "query": "?alpha=10"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-11",
+    "name": "A draw G from the Dirichlet process",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 7,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "A Dirichlet process draw G = sum_k w_k delta(phi_k) combines GEM(alpha) weights with locations from the base distribution, so it is discrete and draws from it repeat.",
+    "does": "The viewer sets alpha and the spread sigma0 of the base distribution, presses New G (or Enter), sets N and presses Sample N points.",
+    "sees": "Three linked panels: the weights by index, the same weights as atoms at phi_k over the shaded base density with the largest labelled rho_k @ phi_k, and N draws from G stacked on the atoms they hit.",
+    "engine": "dp-core sampler (seeded GEM, normal) + Observable Plot 0.6.17",
+    "page": "pages/dpm/dp-and-atoms.html",
+    "embed": "embed/dp-atoms.html",
+    "step": "Step 6.7",
+    "thumb": "catalog/thumbs/P-11.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 2, N = 100",
+        "query": "?alpha=2&n=100&seed=1"
+      },
+      {
+        "label": "alpha = 10",
+        "query": "?alpha=10&n=300"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-12",
+    "name": "DP or not: finite versus GEM",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 7,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "A finite Dirichlet mixture uses at most K components however large N gets, while stick-breaking weights keep supplying new components, so K_N grows like alpha log N; with a_k = alpha/K a large-K mixture imitates the Dirichlet process for a long time but still cannot pass K.",
+    "does": "The viewer switches the P-11 widget to its comparison view, sets alpha, chooses flat Dirichlet(1, ..., 1) or Dirichlet(alpha/K) weights for the finite models, and redraws.",
+    "sees": "Weight bars for one GEM draw and for Dirichlet draws with K = 5 and K = 50, and K_N against N up to 10,000 on a log axis for each draw with its expectation: the finite curves flatten at their ceilings while the GEM curve keeps rising.",
+    "engine": "dp-core sampler + Observable Plot 0.6.17",
+    "page": "pages/dpm/dp-and-atoms.html",
+    "embed": "embed/dp-or-not.html",
+    "step": "Step 6.7",
+    "thumb": "catalog/thumbs/P-12.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "flat finite weights, alpha = 2",
+        "query": "?alpha=2&seed=1"
+      },
+      {
+        "label": "same total mass (alpha/K)",
+        "query": "?alpha=2&preset=scaled"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part I; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-13",
+    "name": "Collapsed Gibbs CRP sampler",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 8,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Collapsed Gibbs sampling for a DP mixture resamples each point's cluster with probability proportional to the CRP prior weight times the fit, and alpha = 0.01 is a strong prior against new clusters.",
+    "does": "The viewer picks a start (one cluster, singletons or a random split), steps one point (Enter) or one sweep, runs ten sweeps or plays at three speeds, moves alpha live from 0.01 to 10, and toggles the true means.",
+    "sees": "The 100 points coloured by cluster with a large X on the point just resampled and diamonds at cluster means, a bar of the CRP prior weights above the posterior with the new-cluster piece dashed, and K after each sweep settling near 4.",
+    "engine": "dp-core gibbs.ts (Neal Algorithm 3, seeded) + D3 7.9.0 + Observable Plot 0.6.17",
+    "page": "pages/dpm/crp-gibbs.html",
+    "embed": "embed/crp-gibbs.html",
+    "step": "Step 6.9",
+    "thumb": "catalog/thumbs/P-13.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "from one cluster, 5 sweeps",
+        "query": "?preset=one&n=5&seed=1"
+      },
+      {
+        "label": "from singletons",
+        "query": "?preset=singletons&n=3"
+      },
+      {
+        "label": "alpha = 1",
+        "query": "?alpha=1&n=20"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part III; 2012 tutorial); sampler re-implemented in dp-core"
+  },
+  {
+    "id": "P-14",
+    "name": "EPPF exchangeability panel",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 6,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "The probability of a Chinese restaurant seating is a product of factors whose value does not depend on the arrival order: the EPPF alpha^K prod (|C| - 1)! / prod (alpha + n - 1) depends only on the table sizes.",
+    "does": "The viewer shuffles the arrival order of Broderick's eight customers {1, 2, 7, 8}, {3, 5, 6}, {4} (Enter shuffles), moves alpha, draws a new seating, and opens the answer to the E[K_N] exercise.",
+    "sees": "The customers in arrival order coloured by table, each with its factor alpha/(alpha + n - 1) or m/(alpha + n - 1), the product against the closed-form EPPF (equal to 1e-12 in every order; 1/3360 at alpha = 1), and E[K_8] = sum alpha/(alpha + n - 1).",
+    "engine": "dp-core (lgamma, log rising factorial, CRP sampler) + D3 7.9.0",
+    "page": "pages/dpm/eppf.html",
+    "embed": "embed/eppf-panel.html",
+    "step": "Step 6.11",
+    "thumb": "catalog/thumbs/P-14.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "alpha = 1",
+        "query": "?alpha=1&seed=1"
+      },
+      {
+        "label": "alpha = 3",
+        "query": "?alpha=3"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-15",
+    "name": "K_J as a random variable: 100 replicates",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 6,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Seating J customers with the same alpha in many restaurants gives many different K_J; their distribution is the Antoniak pmf, the building block of every prior statement about K_J.",
+    "does": "The viewer sets J and alpha, presses 100 replicates (or Enter) repeatedly or clears, and works through five exercises whose answers open in collapsible boxes.",
+    "sees": "Dots for the simulated K_J stacking on bars of the expected counts, the mean against E(K_J | alpha) (5.19 at J = 100, alpha = 1), the caption that K_J is the number of fitted components, and exercise answers computed by the engine in the browser.",
+    "engine": "dp-core (CRP sampler, condPmf, condMean, rgem, mixMoments, wsbTail) + Observable Plot 0.6.17",
+    "page": "pages/dpm/exercises.html",
+    "embed": "embed/kj-replicates.html",
+    "step": "Step 6.12",
+    "thumb": "catalog/thumbs/P-15.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 100, alpha = 1, 200 replicates",
+        "query": "?J=100&alpha=1&n=200&seed=1"
+      },
+      {
+        "label": "J = 50, alpha = 2",
+        "query": "?J=50&alpha=2&n=200"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-16",
+    "name": "The DPM ladder hub",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "Nine rungs lead from why a fixed number of mixture cells is not enough to a sampler that fits a Dirichlet process mixture, each rung a page of widgets.",
+    "does": "The viewer clicks a rung of the ladder (rung 0 at the bottom, rung 8 at the top) to open its page and reads its status badge.",
+    "sees": "A ladder drawing with nine linked rungs and their catalog ids, done or planned badges read from the catalog, a table of the rung pages, and the Broderick (MLSS 2016 Cádiz; 2012 tutorial) and Giordano attribution with the note that the GPL-3 demos are not ported.",
+    "engine": "Quarto 1.9.37 + inline SVG built from catalog.json (scripts/pre-render.ts)",
+    "page": "pages/dpm/index.html",
+    "embed": null,
+    "step": "Step 6.10",
+    "thumb": "catalog/thumbs/P-16.png",
+    "status": "done",
+    "attribution": "After Broderick (MLSS 2016, parts I-III; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "P-17",
+    "name": "Stick-breaking by alpha (video)",
+    "axis": "dpm",
+    "section": "dpm",
+    "rung": 4,
+    "audience": [
+      "beginner",
+      "course"
+    ],
+    "concept": "As alpha moves from 0.5 to 2 to 10, the first piece stops dominating the stick; shown without any runtime dependency.",
+    "does": "The viewer plays a 15-second video on the page or in a slide.",
+    "sees": "Fifty ranked stick ribbons re-arranging at each alpha: at 0.5 the first piece swallows most of the stick, at 10 the stick is finely divided, with E[w1] and Pr(w1 > .5) in the subtitle.",
+    "engine": "gganimate 1.0.11 + ffmpeg 8.1.2 (H.264) + theme_DPprior (DPprior 2.0.0 via load_all)",
+    "page": "pages/dpm/stick-breaking.html",
+    "embed": null,
+    "media": "media/stick_alpha.mp4",
+    "step": "Step 4.8",
+    "thumb": "catalog/thumbs/P-17.png",
+    "status": "done",
+    "attribution": "After Broderick (MLSS 2016); simulated from the definition in R"
+  },
+  {
+    "id": "M-01",
+    "name": "Same default, different J",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "A fixed Gamma default lets the expected number of clusters E K_J drift upward with J (about E(alpha) log J), while the majority-mass tail Pr(W_SB > .5) = (b/(b + log 2))^a does not depend on J.",
+    "does": "The viewer toggles Gamma(1,1), Gamma(2,4), Gamma(1,3), alpha = 1 and a custom Gamma(a, b) on and off, moves the custom sliders, and switches the 90% band and the J guides at 48, 79 and 500.",
+    "sees": "The Gamma(1,1) curve rising from 4.16 clusters at J = 50 and 4.84 at J = 100 to 7.82 at J = 2000, next to flat majority-mass lines at .591, .726 and .812.",
+    "engine": "dp-core + Observable Plot 0.6.17 (vendored); J > 500 band precomputed in R",
+    "page": "pages/problems/defaults-drift.html",
+    "embed": "embed/defaults-drift.html",
+    "step": "Step 3.3",
+    "thumb": "catalog/thumbs/M-01.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1,1) default view",
+        "query": ""
+      },
+      {
+        "label": "custom Gamma(1,3)",
+        "query": "?a=1&b=3"
+      }
+    ]
+  },
+  {
+    "id": "M-02",
+    "name": "\"Conservative\" defaults Gamma(1,3) and Gamma(2,4)",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Literature defaults with a smaller E(alpha) imply fewer clusters but more majority-mass dominance, not less.",
+    "does": "The viewer switches the focus between Gamma(1,1), Gamma(2,4) and Gamma(1,3) and reads the expected cluster counts at the application sizes J = 48, 79 and 500.",
+    "sees": "Size-biased weight densities whose shaded area above .5 grows from .591 to .726 to .812, with E K_J read-outs for the Bangert-Drowns, STAR and vocabulary sizes.",
+    "engine": "dp-core + Observable Plot 0.6.17 (vendored); same module as M-01",
+    "page": "pages/problems/defaults-drift.html",
+    "embed": "embed/defaults-drift.html",
+    "step": "Step 3.3",
+    "thumb": "catalog/thumbs/M-02.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "focus Gamma(1,3)",
+        "query": "?preset=conservative"
+      }
+    ]
+  },
+  {
+    "id": "M-03",
+    "name": "The unintended prior",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "\"About five clusters\" (mean 5.05, SD 3.06) and a .49 chance of majority-mass dominance come from the same Gamma(1.60, 1.22) hyperprior at J = 50.",
+    "does": "The viewer moves the a and b sliders (default 1.60 and 1.22), the J slider (default 50) and the tail threshold t.",
+    "sees": "The induced K_50 pmf against negative-binomial target circles, the size-biased weight density with .487 shaded above .5 and .183 above .9, and a Chinese-restaurant sentence stating the majority-table probability.",
+    "engine": "dp-core + Observable Plot 0.6.17 (vendored)",
+    "page": "pages/problems/unintended-prior.html",
+    "embed": "embed/unintended-prior.html",
+    "step": "Step 3.4",
+    "thumb": "catalog/thumbs/M-03.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "paper Fig. 1",
+        "query": ""
+      },
+      {
+        "label": "vague Gamma(1,1), J = 100",
+        "query": "?a=1&b=1&J=100"
+      }
+    ]
+  },
+  {
+    "id": "M-04",
+    "name": "DORO, SCAL and SSI side by side",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Three published rules each imply an odd count or weight distribution: DORO-Unif cannot be flat, SCAL clamps P(K = 1) at .34, and SSI-Weight lets E K_J grow without bound.",
+    "does": "The viewer picks J for DORO-Unif (48, 79, 100, 500), m for SCAL (6, 10, 25, 50, 75, 100), and moves the SSI J slider from 25 to 5000.",
+    "sees": "DORO's flat target against its hump-shaped pmf (P(K = 1) = .070, .073 leaking), SCAL's P(K = 1) held at .34 while the shortcut reaches .834 at m = 100, SSI's E K_J rising from 6.44 to 20.9 with fixed tails .25 and .05, and a vague Gamma(1, 1) tile (.168, .591).",
+    "engine": "dp-core + Observable Plot 0.6.17; (a, b) from r-export/02_methods_catalog.R (method_catalog.json)",
+    "page": "pages/problems/method-problems-strip.html",
+    "embed": "embed/method-problems-strip.html",
+    "step": "Step 4.7",
+    "thumb": "catalog/thumbs/M-04.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 100, m = 100",
+        "query": ""
+      },
+      {
+        "label": "DORO at the vocabulary size",
+        "query": "?J=500"
+      }
+    ]
+  },
+  {
+    "id": "M-05",
+    "name": "The unintended prior in 1000 restaurants",
+    "axis": "problems",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "Run as a Chinese restaurant process, Gamma(1.60, 1.22) at J = 50 gives about five tables per restaurant and, in most restaurants, one table seating more than half of the customers.",
+    "does": "The viewer presses Simulate 1000 restaurants (a new seed each time), moves the a, b and J sliders, and hovers over or arrows through a wall of 1000 squares to open one restaurant.",
+    "sees": "A histogram of occupied tables over 1000 restaurants against the exact pmf of K_J (mean 5.05), a histogram of the largest table's share with the part above one half shaded, the wall of restaurants coloured by majority, one restaurant's tables, and a caption separating Pr(W_SB > .5) = .487 from Pr(W_max > .5) = .636.",
+    "engine": "dp-core CRP sampler (seeded) and mixing + Observable Plot 0.6.17 + Canvas + D3 7.9.0",
+    "page": "pages/bridge/crp-unintended.html",
+    "embed": "embed/crp-unintended.html",
+    "step": "Step 5.5",
+    "thumb": "catalog/thumbs/M-05.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "paper Fig. 1 prior, seed 1",
+        "query": "?a=1.6&b=1.22&J=50&seed=1"
+      },
+      {
+        "label": "Gamma(1, 3)",
+        "query": "?a=1&b=3&J=50"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "M-06",
+    "name": "Collapse: everyone at the first table",
+    "axis": "problems",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "Prior mass near alpha = 0 produces the prior collapse probability P(K_J = 1): Gamma(1, 1) has Pr(alpha < .1) = .095 and P(K_100 = 1) = .168, and prior collapse differs from posterior collapse Pr(K_J = 1 | data).",
+    "does": "The viewer picks Gamma(1, 1), the Table 2 TSMM prior at VIF 5 or Gamma(1, 3) (or sets a and b), chooses a restaurant alpha of 0.02, 0.1 or 1, and presses Play (or Enter) to seat 79 customers.",
+    "sees": "The density of log alpha with the mass below .1 shaded (.095 or .182), prior P(K_J = 1) bars at J = 50, 79, 100 and 500 (.168 at 100), 79 customers gathering at one table at alpha = 0.02, and a caption contrasting the STAR prior .175 with the released posterior .560.",
+    "engine": "dp-core mixing and CRP sampler (seeded) + Observable Plot 0.6.17 + D3 7.9.0 + released JSON (confidence_levels, app_priors)",
+    "page": "pages/bridge/collapse.html",
+    "embed": "embed/collapse.html",
+    "step": "Step 5.8",
+    "thumb": "catalog/thumbs/M-06.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1)",
+        "query": "?preset=g11"
+      },
+      {
+        "label": "TSMM, VIF 5",
+        "query": "?preset=vif5"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016, part II; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "M-07",
+    "name": "What Gamma(1, 1) actually says",
+    "axis": "problems",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "A hyperprior that is vague about alpha still makes definite statements about clusters: under Gamma(1, 1), Pr(alpha <= .5) = .393, E K_100 = 4.84, Pr(W_SB > .5) = .591 at every J, and P(K_100 = 1) = .168.",
+    "does": "The viewer picks Gamma(1, 1), Gamma(2, 4), Gamma(1, 3) or Gamma(0.037, 0.037) (or sets a and b), chooses J from 10 to 5000, and draws new sets of 79 sites.",
+    "sees": "Five tiles: the density of log alpha with the mass at or below .5 shaded, the pmf of K_J (a precomputed band for J above 500), the J-free W_SB tail, twenty simulated sets of 79 sites, and P(K_J = 1) across J with the chosen J marked (.834 for Gamma(0.037, 0.037) at J = 100).",
+    "engine": "dp-core mixing, weights and CRP sampler + Observable Plot 0.6.17 + precomputed JSON (kj_bands_J_gt_500)",
+    "page": "pages/bridge/gamma11.html",
+    "embed": "embed/prior-implications.html",
+    "step": "Step 5.9",
+    "thumb": "catalog/thumbs/M-07.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1), J = 100",
+        "query": "?preset=g11&J=100"
+      },
+      {
+        "label": "Gamma(0.037, 0.037), J = 100",
+        "query": "?preset=scal&J=100"
+      },
+      {
+        "label": "Gamma(1, 1), J = 5000",
+        "query": "?preset=g11&J=5000"
+      }
+    ]
+  },
+  {
+    "id": "M-08",
+    "name": "Method timeline with one-line errors",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "From Antoniak (1974) to the paper's SSI-Weight (2025), each rule for choosing the Gamma hyperprior assumes something about alpha and implies something else about the count and the weights.",
+    "does": "The viewer selects one of nine years (click, Enter or Space; arrow keys move between years).",
+    "sees": "A card with the rule's assumption, implied count, implied weights, J dependence, one-line error, evidence recomputed with dp-core (for example Pr(W_SB > .5) = .654 for the tabulated SCAL prior against .591 for Gamma(1, 1), and P(K_100 = 1) = .834 for the SCAL shortcut) and links to the matching explorers.",
+    "engine": "dp-core + SVG; records and timeline from r-export/02_methods_catalog.R (method_catalog.json)",
+    "page": "pages/problems/index.html",
+    "embed": "embed/method-timeline.html",
+    "step": "Step 7.4",
+    "thumb": "catalog/thumbs/M-08.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "DORO (2009)",
+        "query": "?preset=doro"
+      },
+      {
+        "label": "SCAL (2012)",
+        "query": "?preset=scal"
+      },
+      {
+        "label": "SSI (2025)",
+        "query": "?preset=ssi"
+      }
+    ]
+  },
+  {
+    "id": "M-09",
+    "name": "DORO explorer: a flat count target the Gamma cannot reach",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Two Gamma parameters cannot draw DORO's flat count target on 1 to n: the KL-closest Gamma is a spike at one cluster plus a hump near n, the gap grows with n, b goes to 0, and the prior expects about n / 2 clusters.",
+    "does": "The viewer moves n from 5 to 100, or switches to DORO-Unif (flat on 1 to 2 mu_K - 1 at J = 100) and picks mu_K = 5, 10 or 30.",
+    "sees": "The flat target against the live KL-optimal pmf, the KL gap rising from .005 at n = 5 to .095 at n = 100, E K_n following n / 2 against Gamma(1, 1)'s log growth, E(alpha) = 73 and E K = 28.4 at n = 53, and for DORO-Unif (mu_K = 5) P(K = 1) = .070, .073 beyond 9 and Pr(W_SB > .5) = .547.",
+    "engine": "dp-core solvers (doroKL) + Observable Plot 0.6.17",
+    "page": "pages/problems/doro.html",
+    "embed": "embed/doro-explorer.html",
+    "step": "Step 7.5",
+    "thumb": "catalog/thumbs/M-09.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Dorazio's fish data, n = 53",
+        "query": "?n=53"
+      },
+      {
+        "label": "DORO-Unif, mu_K = 5, J = 100",
+        "query": "?preset=unif5"
+      },
+      {
+        "label": "n = 100",
+        "query": "?n=100"
+      }
+    ],
+    "attribution": "after Dorazio (2009)"
+  },
+  {
+    "id": "M-10",
+    "name": "SCAL explorer: clamped count tails and the shortcut's collapse",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Fixing P(K_m = 1) = .34 and P(K_m >= ceil(2 ln m)) = .15 at every m pins the count tails but not the weights, and the shortcut a = b = exp(-0.033 m) collapses to one cluster beyond m of about 25.",
+    "does": "The viewer moves m from 6 to 100 and toggles the shortcut overlay.",
+    "sees": "The live solution's pmf with the two tails fixed at .340 and .150, Pr(W_SB > .5) drifting from .590 to .652 above the vague .591, the tabulated Gamma(0.403, 0.370) at m = 100 (E K 4.74, Pr(W_SB > .5) = .654, tails .340 and .148), and the shortcut reaching P(K = 1) = .834 with E K = 2.97 at m = 100.",
+    "engine": "dp-core solvers (scalSolve) + Observable Plot 0.6.17 + method_catalog.json (tabulated values)",
+    "page": "pages/problems/scal.html",
+    "embed": "embed/scal-explorer.html",
+    "step": "Step 7.6",
+    "thumb": "catalog/thumbs/M-10.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "m = 100 with the shortcut",
+        "query": "?n=100&preset=shortcut"
+      },
+      {
+        "label": "m = 25, where the shortcut starts to fail",
+        "query": "?n=25&preset=shortcut"
+      },
+      {
+        "label": "m = 6, the calibration size",
+        "query": "?n=6"
+      }
+    ],
+    "attribution": "after Murugiah and Sweeting (2012)"
+  },
+  {
+    "id": "M-11",
+    "name": "SSI explorer: fixed weights, a count that never stops growing",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Fixing only the weight tails (Pr(W_SB > .5) = .25, Pr(W_SB > .9) = .05) makes the prior J-invariant, so the expected number of clusters grows without bound: 6.44 at J = 25, 20.9 at J = 5000.",
+    "does": "The viewer picks SSI-Weight, Vicentini and Jermyn's exemplars Gamma(1.814, 1.036) and Gamma(1, 0.693), or sets two tails solved live by ssiSolve, and moves J from 25 to 5000 on a log slider.",
+    "sees": "An unchanging W_SB density with its .250 and .050 tails beside an E K_J curve that rises from 6.44 to 10.05 at J = 100 and 20.9 at J = 5000 (90% band up to J = 500, E K only above); setting the tails to .25 and .05 reproduces Gamma(2.179, 0.780).",
+    "engine": "dp-core solvers (ssiSolve), mixing and weights + Observable Plot 0.6.17 + method_catalog.json",
+    "page": "pages/problems/ssi.html",
+    "embed": "embed/ssi-explorer.html",
+    "step": "Step 7.7",
+    "thumb": "catalog/thumbs/M-11.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "SSI-Weight, J = 100",
+        "query": "?J=100"
+      },
+      {
+        "label": "SSI-Weight, J = 5000",
+        "query": "?J=5000"
+      },
+      {
+        "label": "Vicentini (1/2, 1/4, 1/4)",
+        "query": "?preset=half"
+      }
+    ],
+    "attribution": "after Vicentini and Jermyn (2025)"
+  },
+  {
+    "id": "M-12",
+    "name": "Quasi-degenerate Gamma(eps, eps)",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Gamma(eps, eps) looks flat on the log-alpha scale, yet its mass runs off to alpha = 0: the least informative-looking prior is the most informative about K.",
+    "does": "The viewer moves eps from 1 to 0.001 on a log slider (presets 1, 0.1, 0.037, 0.001) and toggles J = 50, 100, 500.",
+    "sees": "The density of log10 alpha flattening while Pr(alpha < 1e-12) grows to .967, and P(K_J = 1) rising toward 1 for every J: .834 at eps = 0.037 and J = 100, above .99 at eps = 0.001; each read-out repeats the moments with twice the quadrature nodes.",
+    "engine": "dp-core mixing (log-alpha trapezoid, node-doubling check) + Observable Plot 0.6.17",
+    "page": "pages/problems/other-defaults.html",
+    "embed": "embed/quasi-degenerate.html",
+    "step": "Step 7.8",
+    "thumb": "catalog/thumbs/M-12.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "eps = 0.037 (SCAL shortcut at m = 100)",
+        "query": "?a=0.037"
+      },
+      {
+        "label": "eps = 0.001 (BUGS)",
+        "query": "?a=0.001"
+      }
+    ]
+  },
+  {
+    "id": "M-13",
+    "name": "K_n-diffuse priors on the relative axis k / n",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Priors chosen by eye to be 'diffuse in K' at one n (Gamma(5, 0.5) at 74, Gamma(3.5, 0.5) at 53, Gamma(10, 1)) change shape with n and are extreme in the weights (Pr(W_SB > .5) about .01).",
+    "does": "The viewer picks Gamma(10, 1), Gamma(5, 0.5) or Gamma(3.5, 0.5) and n = 10, 53, 74 or 100.",
+    "sees": "n x P(K_n = k) against k / n for the four n, the chosen n bold with its 90% interval: Gamma(5, 0.5) at n = 74 gives E K = 21.0 and [11, 32]; beside it Pr(W_SB > .5) of .005, .013 and .048 against .591 for Gamma(1, 1).",
+    "engine": "dp-core mixing + Observable Plot 0.6.17",
+    "page": "pages/problems/other-defaults.html",
+    "embed": "embed/kn-diffuse.html",
+    "step": "Step 7.8",
+    "thumb": "catalog/thumbs/M-13.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(5, 0.5) at n = 74",
+        "query": "?preset=g5&n=74"
+      },
+      {
+        "label": "Gamma(10, 1) at n = 100",
+        "query": "?preset=g10&n=100"
+      }
+    ]
+  },
+  {
+    "id": "M-14",
+    "name": "Jeffreys vs DORO",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Two 'objective' priors contradict each other: DORO wants K_n flat on 1 to n, while the Jeffreys prior for alpha makes K_n symmetric about n / 2 with spikes at one cluster and at all singletons.",
+    "does": "The viewer switches n between 10 and 100 and the view between the implied count K_n and the prior density of alpha.",
+    "sees": "At n = 100 the Jeffreys pmf, a U with P(K = 1) = .054 and P(K = 100) = .054 over a floor near .007 (E K = 49.8), against DORO's flat 1/100 target and its best Gamma (a spike at 1 and a hump near 90; E K = 53.7); on the alpha scale the Jeffreys density with 4.3% of its mass above 1e4 against DORO's Gamma. The Stirling-gamma overlay is M-19.",
+    "engine": "R grid (r-export/06_jeffreys_sg_grid.R, jeffreys_sg.json) + dp-core doroKL + Observable Plot 0.6.17",
+    "page": "pages/problems/other-defaults.html",
+    "embed": "embed/objective-priors.html",
+    "step": "Step 7.9",
+    "thumb": "catalog/thumbs/M-14.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "n = 100, implied count",
+        "query": "?n=100"
+      },
+      {
+        "label": "n = 10, prior on alpha",
+        "query": "?n=10&preset=density"
+      }
+    ],
+    "attribution": "Jeffreys prior after Rodriguez (2013), via Vicentini and Jermyn (2025)"
+  },
+  {
+    "id": "M-15",
+    "name": "The method map",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Placed on one plane, expected clusters against the majority-mass probability, the published priors show that one alpha cannot buy few clusters and little dominance for free: the corner is nearly empty except for the Dual-Anchor.",
+    "does": "The viewer switches J between 50, 100 and 500, shows all 37 catalog priors or the seven labelled ones, and hovers or chooses a prior to open its strip.",
+    "sees": "At J = 100: Vague (4.84, .591), Gamma(2, 4) (3.20, .726), DORO-Unif (4.99, .547), SCAL (4.74, .654), SSI-Weight (10.05, .250), TSMM (5.00, .557) and Dual-Anchor (6.65, .399) with the shaded box E K in [2, 10], Pr(W_SB > .5) <= .40 and the hard .25 line; changing J moves points sideways only; the strip shows the pmf and W_SB density and links (a, b, J) to M-07.",
+    "engine": "dp-core + Observable Plot 0.6.17 (pointer tips) + method_catalog.json",
+    "page": "pages/problems/method-map.html",
+    "embed": "embed/method-map.html",
+    "step": "Step 7.12",
+    "thumb": "catalog/thumbs/M-15.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 100, all priors",
+        "query": "?J=100"
+      },
+      {
+        "label": "J = 500, the seven labelled priors",
+        "query": "?J=500&preset=headline"
+      }
+    ]
+  },
+  {
+    "id": "M-16",
+    "name": "Transported versus recalibrated count priors",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "A count prior calibrated at one J and carried to another expects the wrong number of clusters; recalibrated at each J it keeps the count but its dominance rises with J.",
+    "does": "The viewer chooses the reference J (25, 50, 100, 500) and toggles the 5th to 95th percentile bands.",
+    "sees": "The recalibrated E K_J flat at 5.00 (J = 15 to 500, band [1, 11]) against Gamma(2.1062, 3.0789) carried from J = 500 (2.36 at J = 10, 5.00 at 500), and below it Pr(W_SB > .5) for the recalibrated priors rising .495, .555, .652 at J = 50, 100, 500.",
+    "engine": "count_prior_by_J.json (r-export/03_recalibrate_by_J.R, TSMM by DPprior 2.0.0) + dp-core + Observable Plot 0.6.17",
+    "page": "pages/problems/method-map.html",
+    "embed": "embed/transported-vs-recalibrated.html",
+    "step": "Step 7.13",
+    "thumb": "catalog/thumbs/M-16.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "reference J = 500",
+        "query": "?J=500"
+      },
+      {
+        "label": "reference J = 50",
+        "query": "?J=50"
+      }
+    ]
+  },
+  {
+    "id": "M-17",
+    "name": "Dominance ribbon",
+    "axis": "problems",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "Under a hyperprior, each stick-breaking draw's first piece is the size-biased weight W_SB, and the share of draws whose first piece passes one half estimates S(.5) = Pr(W_SB > .5).",
+    "does": "The viewer picks the hyperprior Gamma(1, 1), Gamma(1, 3) or the J = 50 Dual-Anchor prior, presses Redraw (or Enter) for new seeds, and hovers over or arrows through the rows.",
+    "sees": "Fifty Canvas rows of stick-breaking pieces with the first piece in colour, red dots on rows whose first piece passes one half, a dashed line at one half, and the running share against the exact S(.5) (.591, .812, .398).",
+    "engine": "dp-core GEM sampler (seeded) + Canvas 2D",
+    "page": "pages/bridge/dominance.html",
+    "embed": "embed/dominance-ribbon.html",
+    "step": "Step 5.6",
+    "thumb": "catalog/thumbs/M-17.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1)",
+        "query": "?preset=g11&seed=1"
+      },
+      {
+        "label": "Gamma(1, 3)",
+        "query": "?preset=g13"
+      },
+      {
+        "label": "Dual-Anchor, J = 50",
+        "query": "?preset=da"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "M-18",
+    "name": "Order of appearance versus size",
+    "axis": "problems",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "The first stick-breaking piece (W_SB) is often not the largest piece (W_max), but a first piece above one half always is, so Pr(W_SB > .5) is a lower bound for Pr(W_max > .5).",
+    "does": "The viewer switches the dominance ribbon to the breaking-order-versus-size view, changes the hyperprior, redraws, and hovers over a row.",
+    "sees": "Twenty of the same draws, each in breaking order and sorted by size, with the largest piece and the first piece outlined and red dots on rows where the first piece is not the largest.",
+    "engine": "dp-core GEM sampler (seeded) + Canvas 2D",
+    "page": "pages/bridge/dominance.html",
+    "embed": "embed/sb-vs-ranked.html",
+    "step": "Step 5.6",
+    "thumb": "catalog/thumbs/M-18.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1)",
+        "query": "?preset=g11&seed=1"
+      }
+    ],
+    "attribution": "After Broderick (MLSS 2016; 2012 tutorial); mathematics re-implemented"
+  },
+  {
+    "id": "M-19",
+    "name": "Stirling-gamma vs Gamma(2, 4)",
+    "axis": "problems",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "The Stirling-gamma prior pins E K_n at a / b for every n, while Gamma(2, 4) drifts like log n; the weight implications the Sg papers did not report move instead.",
+    "does": "The viewer moves n from 10 to 10,000 on a log slider and toggles Sg(4, 1, n) and Sg(1, 0.25, n).",
+    "sees": "E K_n flat at 4 for both Sg priors (n = 10 to 2000) against Gamma(2, 4) at 2.86 (n = 50), 3.20 (100), 4.35 (1,000) and 5.51 (10,000); and Pr(W_SB > .5) for Sg(4, 1, n) rising from .31 at n = 10 to .77 at n = 2000 while Gamma(2, 4) stays at .726.",
+    "engine": "R grid (r-export/06_jeffreys_sg_grid.R, jeffreys_sg.json) + dp-core digamma path + Observable Plot 0.6.17",
+    "page": "pages/problems/other-defaults.html",
+    "embed": "embed/stirling-gamma.html",
+    "step": "Step 7.10",
+    "thumb": "catalog/thumbs/M-19.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "n = 100",
+        "query": "?n=100"
+      },
+      {
+        "label": "n = 10,000",
+        "query": "?n=10000"
+      }
+    ],
+    "attribution": "after Zito, Rigon and Dunson (2024)"
+  },
+  {
+    "id": "C-15",
+    "name": "J = 50 worked example strip",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "After count calibration, a majority-mass tail above the .40 trigger calls for Dual-Anchor refinement, which costs about 0.9 expected clusters; a hard .25 bound costs about 2.5 and is reported as sensitivity.",
+    "does": "The viewer switches the focus between TSMM, Dual-Anchor and the hard bound and turns on the Stage 1 initializer.",
+    "sees": "The alpha priors Gamma(1.4082, 1.0770), Gamma(2.3158, 1.4204) and Gamma(5.2745, 2.3059), K_50 pmfs with 5.00 [1, 11], 5.88 [2, 12] and 7.49 [3, 13], tail bars .497, .398 and .250 against the .40 trigger, and the initializer's 4.415 and 5.618 missing the target 5 and 10.",
+    "engine": "dp-core + Observable Plot 0.6.17; exact (a, b) and Newton trace from the replication package (worked_example_j50.json)",
+    "page": "pages/dpprior/worked-example-j50.html",
+    "embed": "embed/worked-example.html",
+    "step": "Step 4.5",
+    "thumb": "catalog/thumbs/C-15.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "TSMM focus",
+        "query": ""
+      },
+      {
+        "label": "Dual-Anchor focus",
+        "query": "?preset=da"
+      },
+      {
+        "label": "with initializer",
+        "query": "?preset=init"
+      }
+    ]
+  },
+  {
+    "id": "A-10",
+    "name": "SSI-Weight against a true K* = 30",
+    "axis": "evidence",
+    "section": "problems",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "A weight-only prior leaves the count unprotected: in the paper's simulation at J = 100 the SSI-Weight posterior mean of K stays near 3.4 for K* = 5, 10 and 30, and the 95% interval never covers K* = 30.",
+    "does": "The viewer chooses the true K* (5, 10, 30) and the information level I (0.2, 0.5, 0.8), and moves J.",
+    "sees": "At J = 100 and I = 0.2, posterior means 3.41, 3.42 and 3.39 with average 95% intervals from 1 to about 13.8 beside a red star at the true K*; coverage 1.00, 1.00 and 0.",
+    "engine": "dp-core + Observable Plot 0.6.17 + released simulation summaries (headline_primary.json)",
+    "page": "pages/problems/ssi.html",
+    "embed": "embed/ssi-truth.html",
+    "step": "Step 7.7",
+    "thumb": "catalog/thumbs/A-10.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "K* = 30",
+        "query": "?K=30"
+      },
+      {
+        "label": "K* = 5",
+        "query": "?K=5"
+      }
+    ],
+    "attribution": "simulation summaries from the DPprior replication package (CC BY 4.0)"
+  },
+  {
+    "id": "A-13",
+    "name": "Data lineage and licence cards",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "Every released table the evidence pages read has a declared source, level, size, caption, checksum and licence scope, and a gate that refuses individual-level fields and tables without a rights statement.",
+    "does": "The viewer filters the cards by family (applications, simulation, calibration, Rasch) and opens a card to see the source file in the replication package, the columns and the checksum.",
+    "sees": "A card for every released table, each with its caption, what its CC BY 4.0 licence covers (the whole file, the author's contribution, or the IRW derived licence), its upstream source and terms, and an individual-level badge (only rasch_respondents.json is on the respondent-level allowlist), a chart of table sizes, and the fixed captions of the evidence pages, including 8,607 of 9,000 retained simulation fits.",
+    "engine": "data/released/data_contract.json (.js twin) + app-captions.js + Observable Plot 0.6.17",
+    "page": "pages/applications/data.html",
+    "embed": "embed/data-lineage-card.html",
+    "step": "Step 9.1",
+    "thumb": "catalog/thumbs/A-13.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "All tables",
+        "query": ""
+      },
+      {
+        "label": "Rasch vocabulary",
+        "query": "?preset=rasch"
+      }
+    ]
+  },
+  {
+    "id": "A-14",
+    "name": "Static fallbacks for talks",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Every live widget used in a talk has a still at its presentation preset, so a slide still works when JavaScript cannot run.",
+    "does": "The viewer only looks: the images are shown in slides or on one page.",
+    "sees": "P-05 at alpha 0.5, 2 and 10, M-01 at Gamma(1, 1) (4.16 at J = 50 to 7.82 at J = 2000), M-03 at Gamma(1.60, 1.22) (.487 and .183), C-15 (.497, .398, .250), and paper Figures 4 and 7.",
+    "engine": "headless Chrome screenshots of the file:// embed pages (verification/capture_thumbs.mjs); paper figures from the replication package",
+    "page": "pages/applications/talk-fallbacks.html",
+    "embed": null,
+    "step": "Step 4.9",
+    "thumb": "catalog/thumbs/A-14.png",
+    "status": "done"
+  },
+  {
+    "id": "A-15",
+    "name": "reveal.js embedding proof of concept",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "The same widgets run inside a reveal.js deck opened from a local folder, with a video, a still image and an online iframe as fallbacks in a fixed order.",
+    "does": "The presenter steps through the deck, moves the live P-05, C-15 and M-01 widgets and the P-05 preset buttons (alpha 0.5, 2, 10), and plays the video.",
+    "sees": "Live widgets and a local iframe working from file:// with no network (net-log audit: 0 remote requests), the video, the C-15 still (.497, .398, .250) and M-01 at 4.16 (J = 50) to 7.82 (J = 2000), plus a slide that shows why inline OJS needs a web server.",
+    "engine": "Quarto revealjs 1.9.37 (preload-iframes, MathML) + classic-script widget bundles + iframe + mp4",
+    "page": "pages/applications/talk-fallbacks.html",
+    "embed": null,
+    "step": "Step 4.10",
+    "thumb": "catalog/thumbs/A-15.png",
+    "status": "done"
+  },
+  {
+    "id": "A-16",
+    "name": "Two videos: the CRP at alpha = 1 and 5, the K prior by J",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "The default alpha against a larger one in the Chinese restaurant, and the drift of the Gamma(1, 1) prior on K_J with J, fixed as narrated videos with no runtime dependency.",
+    "does": "The viewer plays a 13-second video on the page or in a slide.",
+    "sees": "79 arrivals at alpha = 1 (5 tables, one with 51 customers) next to alpha = 5 (15 tables) with a K_N counter and E[K_N | alpha]; then the Gamma(1, 1) pmf of K_J for J = 10 to 500 (mean 2.65 to 6.44) with Pr(W_SB > .5) = .591 unchanged (media/k_prior_by_J.mp4).",
+    "engine": "gganimate 1.0.11 + ffmpeg 8.1.2 (H.264) + theme_DPprior and moments from DPprior 2.0.0 (load_all)",
+    "page": "pages/media.html",
+    "embed": null,
+    "media": "media/crp_growth.mp4",
+    "step": "Step 10.1",
+    "thumb": "catalog/thumbs/A-16.png",
+    "status": "done"
+  },
+  {
+    "id": "C-01",
+    "name": "TSMM parity table (R vs browser)",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "The browser engine's TSMM Newton solves the same calibration targets as the DPprior R package and agrees with it, including the target that has no solution.",
+    "does": "The viewer chooses a row (J = 50; J = 100 at four VIF levels; STAR, Bangert-Drowns, vocabulary; [3, 10] at 80% and 95%) to see the browser's Newton path.",
+    "sees": "R and browser (a, b) side by side with the largest difference (at most 2.9e-8), Newton steps and status, J = 50 (5, 10) -> (1.4082, 1.0770) and STAR (5.134, 4.939), and a 'no solution' badge for [3, 10] at 95% (minimum variance 4.52 at alpha* = 1.386).",
+    "engine": "dp-core tsmm + tsmm_fits.json (DPprior 2.0.0 golden)",
+    "page": "pages/dpprior/tsmm-parity.html",
+    "embed": "embed/tsmm-parity-table.html",
+    "step": "Step 8.3",
+    "thumb": "catalog/thumbs/C-01.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 50 worked example",
+        "query": "?preset=J50"
+      },
+      {
+        "label": "the infeasible target",
+        "query": "?preset=J100_3to10_95"
+      }
+    ]
+  },
+  {
+    "id": "C-02",
+    "name": "Live TSMM calibrator",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "A count target (mu_K, sigma^2) at J units determines one Gamma(a, b) hyperprior, found in milliseconds by two-stage moment matching, unless the target is outside the support (at or above (mu_K - 1)(J - mu_K)) or at or below the profile minimum variance; just above that minimum the exact prior is nearly a point mass.",
+    "does": "The viewer moves J (10 to 500), mu_K and sigma^2 (or picks a VIF of 1.25, 1.5, 2.5 or 5), or chooses an example, and presses Calibrate (or Enter).",
+    "sees": "Status, (a, b), E(alpha), CV(alpha), the achieved mean and variance of K_J against the target with the residual, the alpha density and the implied K_J pmf: J = 50 (5, 10) -> Gamma(1.4082, 1.0770), STAR J = 79 (5, 5.48) -> Gamma(5.134, 4.939), J = 100 VIF 2.5 -> Gamma(1.666, 1.646); [3, 10] at 95% shows 'no solution' against the profile bound.",
+    "engine": "dp-core tsmm + Observable Plot 0.6.17",
+    "page": "pages/dpprior/calibrator.html",
+    "embed": "embed/tsmm-calibrator.html",
+    "step": "Step 8.4",
+    "thumb": "catalog/thumbs/C-02.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 50 example",
+        "query": "?preset=j50"
+      },
+      {
+        "label": "STAR",
+        "query": "?J=79&mu=5&var=5.48"
+      },
+      {
+        "label": "no solution",
+        "query": "?preset=imposs"
+      }
+    ]
+  },
+  {
+    "id": "C-03",
+    "name": "VIF sensitivity (Table 2)",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "With the target mean fixed, the confidence (VIF) changes the variance of alpha: majority dominance hardly moves, while extreme dominance and the mass near alpha = 0 grow.",
+    "does": "The viewer picks VIF 1.25, 1.5, 2.5 or 5 (or any value on a log slider) at J = 100 and mu_K = 5.",
+    "sees": "Gamma(a, b) from (7.13, 7.41) to (0.62, 0.56), Pr(W_SB > .5) .53 to .61, Pr(W_SB > .9) .15 to .36 and Pr(alpha < .1) 0 to .18 in tiles and in a recomputed Table 2, with the calibrated prior shown in the C-04 two-lenses panels.",
+    "engine": "dp-core tsmm + two-lenses.js (C-04, imported unchanged) + Observable Plot 0.6.17",
+    "page": "pages/dpprior/vif-sensitivity.html",
+    "embed": "embed/vif-sensitivity.html",
+    "step": "Step 8.5",
+    "thumb": "catalog/thumbs/C-03.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "VIF 2.5 (medium)",
+        "query": "?preset=2.5"
+      },
+      {
+        "label": "VIF 5 (low confidence)",
+        "query": "?preset=5"
+      }
+    ]
+  },
+  {
+    "id": "C-04",
+    "name": "One alpha, two lenses",
+    "axis": "dpprior",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "One concentration alpha, fixed or under a Gamma(a, b) prior, sets both the count view (the pmf of K_J, which depends on J) and the weight view (the W_SB density and E(rho), which do not).",
+    "does": "The viewer switches between a Gamma(a, b) prior and a fixed alpha (log slider 0.01 to 100), picks the presets Gamma(1, 1), Gamma(2, 4) or Gamma(1, 3), and moves J from 10 to 500.",
+    "sees": "The K_J pmf with its mean and 90% interval on the left, the alpha density in the middle, and the W_SB density with the areas above .5 and .9 shaded plus an E(rho) gauge on the right; moving J changes only the left panel.",
+    "engine": "dp-core + Observable Plot 0.6.17 (vendored)",
+    "page": "pages/bridge/two-lenses.html",
+    "embed": "embed/two-lenses.html",
+    "step": "Step 5.3",
+    "thumb": "catalog/thumbs/C-04.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1), J = 100",
+        "query": "?a=1&b=1&J=100"
+      },
+      {
+        "label": "Gamma(1, 3)",
+        "query": "?a=1&b=3&J=100"
+      },
+      {
+        "label": "fixed alpha = 0.5, J = 50",
+        "query": "?alpha=0.5&J=50"
+      }
+    ]
+  },
+  {
+    "id": "C-05",
+    "name": "Elicitation form: three routes",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "A statement about K_J (an interval with a probability, a confidence level or a CV) fixes a count target (mu_K, sigma^2), which TSMM turns into Gamma(a, b); the implied weights are then checked against the dominance trigger Pr(W_SB > .5) > .40.",
+    "does": "The viewer picks a route (interval, VIF or CV), types J, the expected count and the interval, probability, VIF or CV, or presses STAR, Bangert-Drowns, Vocabulary or the [3, 10] examples.",
+    "sees": "Live (mu_K, sigma^2), Gamma(a, b), E(alpha), CV(alpha), the K_J pmf and the W_SB density, with a red trigger badge when Pr(W_SB > .5) > .40: STAR (5, 5.48) -> Gamma(5.134, 4.939), .510 triggers; [3, 10] at 80% -> Gamma(6.82, 4.82), .400/.070; at 95% sigma^2 = 3.19 is below 4.52 and shows 'no solution' with the largest workable probability.",
+    "engine": "dp-core elicit + tsmm + Observable Plot 0.6.17",
+    "page": "pages/dpprior/elicitation.html",
+    "embed": "embed/elicitation-form.html",
+    "step": "Step 8.6",
+    "thumb": "catalog/thumbs/C-05.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "STAR (J = 79)",
+        "query": "?preset=star"
+      },
+      {
+        "label": "[3, 10] at 95%: no solution",
+        "query": "?preset=i95"
+      }
+    ]
+  },
+  {
+    "id": "C-06",
+    "name": "Feasibility map (mu_K, sigma^2)",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "A count target has a Gamma hyperprior only between two curves: the profile bound v_J(alpha*) below (no mixture over alpha is tighter than the point mass alpha* with the same mean) and (mu_K - 1)(J - mu_K) above (no count on 1..J varies more).",
+    "does": "The viewer picks J (50, 79, 100, 500) or an example ([3, 10] at 80% or 95%, STAR) and drags the target point, or moves the mu_K and sigma^2 sliders.",
+    "sees": "The red no-Gamma region under the profile bound, the grey no-count region, the gold edge where the exact prior is nearly a point mass (CV(alpha) < .01), and the target with its status and (a, b): at J = 100 the curve passes 4.52 at mu_K = 6.5 (alpha* = 1.386); (6.5, 3.19) falls in the red region, (6.5, 7.46) gives Gamma(6.82, 4.82).",
+    "engine": "dp-core tsmm (profileBound, tsmmMoments, tsmmFit) + elicit + D3 7.9 (drag)",
+    "page": "pages/dpprior/feasibility.html",
+    "embed": "embed/feasibility-map.html",
+    "step": "Step 8.7",
+    "thumb": "catalog/thumbs/C-06.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "[3, 10] at 80%: feasible",
+        "query": "?preset=i80"
+      },
+      {
+        "label": "[3, 10] at 95%: no Gamma prior",
+        "query": "?preset=i95"
+      }
+    ]
+  },
+  {
+    "id": "C-07",
+    "name": "Stage 1 -> Stage 2 Newton path",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "TSMM starts from a closed form that is exact under a negative-binomial proxy (Stage 1, A1) and then runs Newton on the exact moments of K_J (Stage 2); the residual falls quadratically.",
+    "does": "The viewer drags the Newton step slider (0 to 5) or presses Play, and toggles the R path, the browser path, the exact pmf and the Stage 1 proxy.",
+    "sees": "Contours of log10 |F| over (log a, log b) with the path from (2.667, 2.608) to (1.4082, 1.0770); at step 0 the exact moments are 4.415 and 5.618 (residual -0.59, -4.38) while the proxy has 5 and 10; |F| 4.42 -> 3.55 -> 0.41 -> 0.009 -> 5e-6 -> 1e-11 in R and the browser alike.",
+    "engine": "dp-core tsmm + mixing + Observable Plot 0.6.17 (contour) + data/released/newton_trace.json",
+    "page": "pages/dpprior/stage1-stage2.html",
+    "embed": "embed/newton-path.html",
+    "step": "Step 8.8",
+    "thumb": "catalog/thumbs/C-07.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "The A1 start",
+        "query": "?t=0"
+      },
+      {
+        "label": "The first Newton step",
+        "query": "?t=1"
+      }
+    ]
+  },
+  {
+    "id": "C-08",
+    "name": "Dual-Anchor lambda frontier",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Weighing the count anchor by lambda and a weight anchor by 1 - lambda trades the count target for less dominance; the paper takes the largest lambda whose prior is at or below the .40 trigger, and reports the hard bound .25 only as a sensitivity analysis.",
+    "does": "The viewer moves the lambda slider over the 29 grid values, picks TSMM, the paper's choice or the hard bound, or selects an application's Dual-Anchor or hard prior.",
+    "sees": "Pr(W_SB > .5) and E K_50 along lambda with the .40 and .25 lines, eligible points in colour and ineligible ones in grey: lambda = .30 -> Gamma(2.3158, 1.4204), .398, E K 5.88; lambda = 1 -> Gamma(1.4082, 1.0770), .497, 5.00; hard -> Gamma(5.2745, 2.3059), .250, 7.49; STAR and Vocabulary hard bounds nearly point masses at alpha = 2.",
+    "engine": "dp-core mixing + weights + Observable Plot 0.6.17 + data/released/dual_anchor_grid.json, app_priors.json",
+    "page": "pages/dpprior/dual-anchor.html",
+    "embed": "embed/dual-anchor-frontier.html",
+    "step": "Step 8.9",
+    "thumb": "catalog/thumbs/C-08.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "The paper's choice, lambda = .30",
+        "query": ""
+      },
+      {
+        "label": "The hard bound",
+        "query": "?preset=hard"
+      }
+    ]
+  },
+  {
+    "id": "C-09",
+    "name": "Reconcile dashboard: TSMM to Dual-Anchor",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "One Gamma prior drives the prior on alpha, the count K_J, the weights and co-clustering at once; the Dual-Anchor refinement trades about one expected cluster for a large drop in dominance.",
+    "does": "The viewer presses 'TSMM → Dual-Anchor' (or 'Back to TSMM') and fine-tunes a and b with sliders.",
+    "sees": "The alpha density, the K_50 pmf with the target 5, the W_SB density with Pr(W_SB > .5) on a bar against the .40 trigger and the .25 hard bound, and the E(rho) gauge animate together: E K 5.00 -> 5.88, Pr(W_SB > .5) .497 -> .398, E(rho) .518 -> .439; immediate under reduced motion.",
+    "engine": "dp-core mixing + weights + Observable Plot 0.6.17 + D3 7.9 transition",
+    "page": "pages/dpprior/two-anchors.html",
+    "embed": "embed/reconcile-dashboard.html",
+    "step": "Step 8.10",
+    "thumb": "catalog/thumbs/C-09.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "TSMM",
+        "query": ""
+      },
+      {
+        "label": "Dual-Anchor, lambda = .30",
+        "query": "?preset=da"
+      }
+    ]
+  },
+  {
+    "id": "C-10",
+    "name": "Why it is cheap: K_J as a Bernoulli sum",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "Given alpha, K_J is a sum of independent Bernoulli(alpha / (alpha + i - 1)) draws, so its pmf is an O(J^2) convolution equal to the Stirling (Antoniak) pmf, and its mean and variance are finite sums.",
+    "does": "The viewer sets J (10 to 500) and alpha, moves the 'units added' slider or presses Play convolution.",
+    "sees": "The success probabilities fill in unit by unit while the pmf builds up by convolution toward the exact pmf (dots); tiles show E K = sum p_i and Var K = sum p_i (1 - p_i); at J = 500 and alpha = 1 the convolution matches the Stirling pmf within 1e-10 and E K = H_500 = 6.79; immediate under reduced motion.",
+    "engine": "dp-core count (condPmf) + Observable Plot 0.6.17 + D3 7.9 transition",
+    "page": "pages/dpprior/why-fast.html",
+    "embed": "embed/bernoulli-sum.html",
+    "step": "Step 8.11",
+    "thumb": "catalog/thumbs/C-10.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "J = 500, alpha = 1",
+        "query": "?J=500&alpha=1"
+      },
+      {
+        "label": "Halfway: 250 units",
+        "query": "?J=500&alpha=1&n=250"
+      }
+    ]
+  },
+  {
+    "id": "C-11",
+    "name": "Timing badges vs grid search and MCMC",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "Because moments of K_J are one pass over an alpha grid, a TSMM calibration takes milliseconds, so design sweeps over J and mu_K need no MCMC; MCMC is for fitting the model to data.",
+    "does": "The viewer presses Run Newton, pmf J = 500 or Sweep 150 targets.",
+    "sees": "Measured medians of five runs (TSMM Newton for J = 50 and the exact pmf of K_500), an estimate for a 200 x 200 grid search from the measured cost of one evaluation, the paper's MCMC design (57,151 admitted fits, four chains of 12,000 iterations), and a sweep of 150 calibrations with Pr(W_SB > .5) against J.",
+    "engine": "dp-core tsmm + mixing + Observable Plot 0.6.17",
+    "page": "pages/dpprior/why-fast.html",
+    "embed": "embed/timing-badges.html",
+    "step": "Step 8.12",
+    "thumb": "catalog/thumbs/C-11.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Timings",
+        "query": ""
+      },
+      {
+        "label": "With the sweep",
+        "query": "?preset=sweep"
+      }
+    ]
+  },
+  {
+    "id": "C-12",
+    "name": "Gamma mixing: nodes to marginal pmf",
+    "axis": "dpprior",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "The marginal pmf of K_J is the prior-weighted average of the conditional pmfs at alpha nodes on log alpha, and the number of nodes sets its accuracy.",
+    "does": "The viewer drags the node count from 20 to 400, sets a and b (presets Gamma(1, 1) and Gamma(1.60, 1.22)) and J, switches between mixing and a single alpha at the prior mean, and hovers over one node.",
+    "sees": "Thin conditional pmfs drawn as dark as their slice probabilities adding up to the thick marginal pmf against the dashed exact one, an error panel on the 20-node scale with the L1 gap, and the hovered node's alpha, weight and distance from the marginal.",
+    "engine": "dp-core mixing + D3 7.9.0 transitions",
+    "page": "pages/bridge/gamma-mixing.html",
+    "embed": "embed/gamma-mixing.html",
+    "step": "Step 5.4",
+    "thumb": "catalog/thumbs/C-12.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1), J = 100, 20 nodes",
+        "query": "?a=1&b=1&J=100&n=20"
+      },
+      {
+        "label": "400 nodes",
+        "query": "?a=1&b=1&J=100&n=400"
+      },
+      {
+        "label": "paper Fig. 1 prior",
+        "query": "?a=1.6&b=1.22&J=50"
+      }
+    ]
+  },
+  {
+    "id": "C-13",
+    "name": "Workflow stepper",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "The DPprior workflow is six fixed steps: state (J, mu_K, sigma^2), calibrate with TSMM, diagnose K_J and the weights, check the .40 trigger, refine with the Dual-Anchor rule or keep TSMM, and report the .25 hard bound separately.",
+    "does": "The viewer clicks a step (or moves with Tab, Enter and the arrow keys) and presses 'Fill in the J = 50 example'.",
+    "sees": "The six-box flow fills with (5, 10) -> Gamma(1.4082, 1.0770) -> Pr(W_SB > .5) = .497 > .40 (the branch to refinement lights up) -> lambda = .30, Gamma(2.3158, 1.4204), .398 -> hard bound Gamma(5.2745, 2.3059), .250; each step has a small live chart and a link to its tool (C-05, C-02, C-09, C-08).",
+    "engine": "SVG (D3 7.9) + dp-core + Observable Plot 0.6.17",
+    "page": "pages/dpprior/workflow.html",
+    "embed": "embed/workflow-stepper.html",
+    "step": "Step 8.13",
+    "thumb": "catalog/thumbs/C-13.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Blank",
+        "query": ""
+      },
+      {
+        "label": "J = 50 example filled in",
+        "query": "?preset=j50"
+      }
+    ]
+  },
+  {
+    "id": "C-14",
+    "name": "Reporting checklist and paragraph generator",
+    "axis": "dpprior",
+    "section": "dpprior",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "A calibrated hyperprior is reported with eight items fixed before posterior simulation: J, the elicited statement and moments, (a, b) and software, the K_J interval, the weight diagnostics, the Dual-Anchor details when triggered, the separate hard bound, and a posterior sensitivity variant.",
+    "does": "The viewer fills in the eight-item form (or presses 'Fill in the J = 50 example'), clears an item to see the warning, and presses 'Copy the paragraph'.",
+    "sees": "A completeness strip and per-item marks, computed items 4 and 5 and the trigger decision, an aria-live warning listing missing items, and a paragraph that ends with the summary line J=50, Gamma(2.3158,1.4204), S(.5)=.398, lambda=.30.",
+    "engine": "dp-core mixing + weights + Clipboard API + Observable Plot 0.6.17",
+    "page": "pages/dpprior/checklist.html",
+    "embed": "embed/report-generator.html",
+    "step": "Step 8.14",
+    "thumb": "catalog/thumbs/C-14.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Blank form",
+        "query": ""
+      },
+      {
+        "label": "J = 50 example",
+        "query": "?preset=j50"
+      }
+    ]
+  },
+  {
+    "id": "C-16",
+    "name": "W_SB tail and the W_max band",
+    "axis": "dpprior",
+    "section": "bridge",
+    "rung": null,
+    "audience": [
+      "beginner",
+      "researcher",
+      "course"
+    ],
+    "concept": "For t of one half or more, Pr(W_SB > t) <= Pr(W_max > t) <= min(1, S(t)/t) (Proposition 1), so the size-biased tail is a lower bound for the largest-weight tail, which dp-core also computes exactly.",
+    "does": "The viewer picks Gamma(1, 1), Gamma(1, 3), the J = 50 Dual-Anchor prior or the STAR Dual-Anchor prior (or sets a and b), moves t from .5 to .99, and switches on the STAR posterior panel.",
+    "sees": "The band between S(t) and min(1, S(t)/t) with the exact Pr(W_max > t) inside (at t = .5 under Gamma(1, 1): .591, .728, 1), and, with the switch, four STAR posterior dominance summaries for five priors read from app_priors.json with a read-not-recomputed caption.",
+    "engine": "dp-core weights + Observable Plot 0.6.17 + released JSON (app_priors)",
+    "page": "pages/bridge/dominance.html",
+    "embed": "embed/wmax-bounds.html",
+    "step": "Step 5.7",
+    "thumb": "catalog/thumbs/C-16.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Gamma(1, 1), t = .5",
+        "query": "?preset=g11&t=0.5"
+      },
+      {
+        "label": "STAR Dual-Anchor + posterior",
+        "query": "?preset=star-da"
+      }
+    ]
+  },
+  {
+    "id": "A-01",
+    "name": "STAR 79-school caterpillar",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In Project STAR the school-level treatment effects hardly depend on the prior on alpha: switching from Vague to the Dual-Anchor prior moves the posterior means by about .009 RMS.",
+    "does": "The viewer switches the prior (Vague, DORO-Unif, TSMM, Dual-Anchor lambda = .20, hard bound), sorts by the raw estimate, the posterior mean or the school number, and turns on the shift arrows.",
+    "sees": "79 posterior means and 95% intervals moving by a D3 transition, the intervals that exclude 0 in red, raw estimates as rings, and badges computed from star_units.json: RMS shift .0088 and largest .049 under Dual-Anchor.",
+    "engine": "D3 7.9 transition + data/released/star_units.json + app-captions.js",
+    "page": "pages/applications/star.html",
+    "embed": "embed/star-caterpillar.html",
+    "step": "Step 9.2",
+    "thumb": "catalog/thumbs/A-01.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Vague",
+        "query": ""
+      },
+      {
+        "label": "Dual-Anchor",
+        "query": "?preset=da"
+      }
+    ]
+  },
+  {
+    "id": "A-02",
+    "name": "STAR prior K strip and posterior tiles (Table 4)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In STAR the five priors imply very different beliefs about K_79, and the posterior number of clusters and the collapse probability follow the prior, while the school effects (A-01) do not move.",
+    "does": "The viewer switches the prior (in step with A-01 on the same page) and toggles between the prior pmf of K and the prior-versus-posterior intervals.",
+    "sees": "Prior pmfs of K_79 computed with dp-core (Vague 4.61 [1, 11] .591, Dual-Anchor 6.24 [3, 10] .385, hard bound 7.93 [4, 12] .250, nearly a point mass), and posterior tiles read from app_priors.json: E(K | data) 1.96 -> 4.47, collapse .560 -> .064, largest observed share .920 -> .724.",
+    "engine": "dp-core mixing + weights + Observable Plot 0.6.17 + data/released/app_priors.json",
+    "page": "pages/applications/star.html",
+    "embed": "embed/app-prior-strip.html",
+    "step": "Step 9.3",
+    "thumb": "catalog/thumbs/A-02.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Vague",
+        "query": ""
+      },
+      {
+        "label": "Dual-Anchor",
+        "query": "?preset=da"
+      }
+    ]
+  },
+  {
+    "id": "A-03",
+    "name": "Bangert-Drowns 48-study forest",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In the writing-to-learn meta-analysis, as in STAR, the study effects and moderator slopes hardly depend on the prior on alpha, while the posterior number of clusters and the collapse probability follow it.",
+    "does": "The viewer switches the prior, sorts by the reported effect, the standard error or the study number, and turns on the moderator summary.",
+    "sees": "48 reported effects with 95% CIs next to posterior means and 95% intervals, the posterior intervals that exclude 0 (13 of 48 under Vague and Dual-Anchor) in red, a REML random-effects diamond .222 [.132, .312] with I² 58.4% computed from the released effects, header tiles E(K | data) 1.89 -> 3.31 and collapse .548 -> .190, and posterior slopes on grade and length.",
+    "engine": "D3 7.9 transition + Observable Plot 0.6.17 + data/released/bd_units.json, app_priors.json, bd_moderator.json",
+    "page": "pages/applications/bangert-drowns.html",
+    "embed": "embed/bd-forest.html",
+    "step": "Step 9.4",
+    "thumb": "catalog/thumbs/A-03.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Vague",
+        "query": ""
+      },
+      {
+        "label": "Dual-Anchor with moderators",
+        "query": "?preset=da"
+      }
+    ]
+  },
+  {
+    "id": "A-04",
+    "name": "Rasch K_500 posterior pmf (Fig. 8)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In the vocabulary Rasch application the prior on alpha sets how many ability groups the mixture uses: from 3.51 (Gamma(1, 3)) to 8.99 (the hard bound) in posterior expectation.",
+    "does": "The viewer checks priors on and off, switches between an overlay and small multiples, and turns on the Count-25 sensitivity.",
+    "sees": "Posterior pmfs of K_500 with the elicited 5 dotted, 95% intervals ([2, 10] Vague, [3, 12] Dual-Anchor, [5, 14] hard), Pr(2 <= K <= 10) tiles and E(alpha | y) badges (.38 to 2.00); the Count-25 sensitivity ends at 11.72.",
+    "engine": "Observable Plot 0.6.17 + data/released/rasch_pmf.json, rasch_posterior.json",
+    "page": "pages/applications/vocabulary-rasch.html",
+    "embed": "embed/rasch-kpmf.html",
+    "step": "Step 9.5",
+    "thumb": "catalog/thumbs/A-04.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Main arm",
+        "query": ""
+      },
+      {
+        "label": "With the Count-25 sensitivity",
+        "query": "?preset=count25"
+      }
+    ]
+  },
+  {
+    "id": "A-05",
+    "name": "Rasch ability density bands and WLE scores",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In the vocabulary Rasch model the prior on alpha changes the number of ability groups (A-04) but neither the fitted ability distribution (densities within .002 of each other) nor the person scores.",
+    "does": "The viewer checks priors on and off (in step with A-04 on the same page), toggles the Gaussian benchmark and the respondent dots, and hovers over a respondent.",
+    "sees": "Density bands under five priors that overlap almost exactly, flatter than the grey Gaussian benchmark; 500 respondents' WLE scores by raw score (hover: raw score, WLE, SE) with the 63 perfect scores in gold and score-group WLE plus or minus one SE (1.73 at 13); tiles: largest posterior-ability shift .031 logits (Dual-Anchor) and WLE shift at most .006.",
+    "engine": "Observable Plot 0.6.17 + data/released/rasch_density.json, rasch_gaussian.json, rasch_wle.json, rasch_respondents.json, rasch_posterior.json",
+    "page": "pages/applications/vocabulary-rasch.html",
+    "embed": "embed/rasch-density.html",
+    "step": "Step 9.6",
+    "thumb": "catalog/thumbs/A-05.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "With the Gaussian benchmark",
+        "query": ""
+      },
+      {
+        "label": "Without it",
+        "query": "?preset=no-gaussian"
+      }
+    ]
+  },
+  {
+    "id": "A-06",
+    "name": "Simulation dashboard (Fig. 4)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "Across the paper's simulation cells the prior on alpha moves the posterior number of clusters, the collapse rate and the coverage of K*, but not the error of the site effects.",
+    "does": "The viewer picks a metric (posterior mean K_J, collapse, coverage, RMSE), checks priors on and off, switches the grand-mean prior (N(0, 1), N(0, .01), N(0, 100)) and hovers over a cell.",
+    "sees": "Nine small panels (K* by I) with five priors each: at K* = 5, I = .2 Vague 1.50 / .725, TSMM 1.75 / .616, Dual-Anchor 3.00 / .315, SSI-Weight 3.41 / .383 (E K / collapse); RMSE .234 to .238 at I = .2; SSI-Weight coverage 0 at K* = 30; retained 8,607 of 9,000 fits.",
+    "engine": "Observable Plot 0.6.17 (facets) + data/released/cell_summary.json",
+    "page": "pages/applications/simulation.html",
+    "embed": "embed/sim-dashboard.html",
+    "step": "Step 9.7",
+    "thumb": "catalog/thumbs/A-06.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Posterior mean K",
+        "query": ""
+      },
+      {
+        "label": "Collapse",
+        "query": "?preset=collapse"
+      }
+    ]
+  },
+  {
+    "id": "A-07",
+    "name": "Effects vs partition tiles",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "In one simulation cell the site-effect RMSE is the same under every prior while the collapse rate and the number of clusters are not; the same holds with unequal cluster weights and with a fixed Dual-Anchor lambda.",
+    "does": "The viewer picks the data (headline, unequal weights, fixed lambda), the cell and whether the partition is shown as collapse or E K_J.",
+    "sees": "Two bar panels side by side: RMSE bars within a few thousandths of each other against collapse bars from .31 to .73; with fixed lambda .16 / .5 / .9 the posterior K is 2.47 / 1.76 / 1.54 and the RMSE moves by less than .001.",
+    "engine": "Observable Plot 0.6.17 + data/released/headline_primary.json, unequal_weights.json, fixed_lambda.json",
+    "page": "pages/applications/simulation.html",
+    "embed": "embed/effects-vs-partition-tiles.html",
+    "step": "Step 9.7",
+    "thumb": "catalog/thumbs/A-07.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Headline cells",
+        "query": ""
+      },
+      {
+        "label": "Fixed lambda",
+        "query": "?preset=fixed"
+      }
+    ]
+  },
+  {
+    "id": "A-08",
+    "name": "Elicited-mean misspecification (Fig. 5)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "When the elicited mean mu_K is off by a factor of two, the posterior number of clusters follows mu_K, not the true K*: cells that share mu_K give the same posterior whatever K* is.",
+    "does": "The viewer picks K*, I, the metric and the horizontal axis (r or mu_K), switches priors on and off, moves the r slider and hovers over a cell.",
+    "sees": "Trajectories on a log r axis (TSMM at K* = 10, I = .2: 1.51, 3.41, 15.03), the cells (K* = 5, r = 2) and (K* = 10, r = 1) joined by a highlight line at 3.41, one curve for all K* on the mu_K axis, and crosses where the calibration was rejected at mu_K = 2.5.",
+    "engine": "Observable Plot 0.6.17 + data/released/misspecification.json",
+    "page": "pages/applications/simulation.html",
+    "embed": "embed/misspecification.html",
+    "step": "Step 9.8",
+    "thumb": "catalog/thumbs/A-08.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "r axis",
+        "query": ""
+      },
+      {
+        "label": "mu_K axis",
+        "query": "?preset=mu"
+      }
+    ]
+  },
+  {
+    "id": "A-09",
+    "name": "Design size J = 25 to 200 (Fig. 6)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "Adding sites does not rescue the default prior: Vague stays collapsed at J = 200, Dual-Anchor moves toward the reference count as its selected lambda falls, and SSI-Weight ignores the design.",
+    "does": "The viewer moves the J slider from 25 to 200, picks K*, I and the metric, and switches priors on and off.",
+    "sees": "Trajectories over J (log axis): Vague collapse at least .765 even at J = 200, Dual-Anchor 1.53 to 3.50 and SSI-Weight 2.17 to 2.99 at K* = 5, I = .2, and four lambda badges .70, .30, .16, .09 with the one at the slider's J highlighted.",
+    "engine": "Observable Plot 0.6.17 + data/released/design_size.json",
+    "page": "pages/applications/simulation.html",
+    "embed": "embed/design-size.html",
+    "step": "Step 9.9",
+    "thumb": "catalog/thumbs/A-09.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Posterior mean K",
+        "query": ""
+      },
+      {
+        "label": "Collapse",
+        "query": "?preset=collapse"
+      }
+    ]
+  },
+  {
+    "id": "A-11",
+    "name": "The partition moves, the effects do not (2 x 3 grid)",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher",
+      "course"
+    ],
+    "concept": "Fitted to the same data, Vague, TSMM and Dual-Anchor give clearly different posterior partitions but nearly the same unit effects: the prior on alpha is a statement about the partition.",
+    "does": "The viewer switches between Project STAR and Bangert-Drowns and between two top views (K_J = 1, 2, 3 or more, or the largest weight), and hovers over or pins a column.",
+    "sees": "Three columns: coloured partition bars on top that change with the prior against a dashed Vague outline (STAR Pr(K_J = 1) .560, .200, .064), and grey unit dot-whiskers below that barely move (RMS shift from Vague: STAR TSMM .0071 and Dual-Anchor .0088; Bangert-Drowns Dual-Anchor .0071).",
+    "engine": "D3 + data/released/app_sensitivity.json, app_priors.json, star_units.json, bd_units.json",
+    "page": "pages/applications/partition-vs-effects.html",
+    "embed": "embed/partition-vs-effects.html",
+    "step": "Step 9.10",
+    "thumb": "catalog/thumbs/A-11.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Project STAR",
+        "query": ""
+      },
+      {
+        "label": "Bangert-Drowns",
+        "query": "?app=bd"
+      }
+    ]
+  },
+  {
+    "id": "A-12",
+    "name": "Specification sensitivity: wide scale and HC3",
+    "axis": "evidence",
+    "section": "applications",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "The model specification can move the partition summaries as much as the prior: a wide-scale grand-mean prior and the schoolwise OLS/HC3 input change the Figure 7 summaries and the unit effects.",
+    "does": "The viewer switches the application and the specification (primary, wide scale N(0, 100), OLS/HC3 input for STAR).",
+    "sees": "Figure 7-style dot-intervals (E(K_J | y) with 95% interval, largest observed share, largest atom weight, .5 guide) with the primary fit as grey rings: STAR Dual-Anchor 4.47 to 2.85 clusters and collapse .064 to .318 under the wide scale; unit means moving by RMS .169 to .174 under HC3, about 20 times the prior effect.",
+    "engine": "Observable Plot 0.6.17 + data/released/app_sensitivity.json",
+    "page": "pages/applications/partition-vs-effects.html",
+    "embed": "embed/spec-sensitivity.html",
+    "step": "Step 9.10",
+    "thumb": "catalog/thumbs/A-12.png",
+    "status": "done",
+    "presets": [
+      {
+        "label": "Wide scale",
+        "query": "?preset=wide_scale"
+      },
+      {
+        "label": "HC3 input",
+        "query": "?preset=hc3"
+      }
+    ]
+  },
+  {
+    "id": "C-17",
+    "name": "Studio-lite (shinylive)",
+    "axis": "dpprior",
+    "section": "tools",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "The DPprior R code running in the browser without a server, giving the same Gamma(a, b) as the R package, Studio and the site's calibrator.",
+    "does": "The viewer would enter J, mu_K and a confidence level, press Fit and compare the answer with C-02.",
+    "sees": "Not built yet: installing shinylive and the Quarto shinylive extension waits for the site owner's approval; the hosted DPprior Studio is linked meanwhile.",
+    "engine": "shinylive (R, webR) + quarto-ext/shinylive (not installed)",
+    "page": "pages/tools.html",
+    "embed": null,
+    "step": "Step 10.3",
+    "thumb": "catalog/thumbs/C-17.png",
+    "status": "planned"
+  },
+  {
+    "id": "X-01",
+    "name": "Observable Framework: defaults by J",
+    "axis": "complementary",
+    "section": "tools",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "The same default-prior drift as M-01 rebuilt as an Observable Framework page with an R data loader, to judge when Framework beats Quarto.",
+    "does": "The viewer would pick a prior and move J on a log slider.",
+    "sees": "Not built yet: npm create @observablehq needs a new tool and network access, which wait for the site owner's approval.",
+    "engine": "Observable Framework + R data loader (not installed)",
+    "page": "pages/tools.html",
+    "embed": null,
+    "step": "Step 10.2",
+    "thumb": "catalog/thumbs/X-01.png",
+    "status": "planned"
+  },
+  {
+    "id": "X-02",
+    "name": "The alpha sweep in plotly and ggiraph",
+    "axis": "complementary",
+    "section": "tools",
+    "rung": null,
+    "audience": [
+      "researcher"
+    ],
+    "concept": "The conditional pmf of K_100 and the size-biased weight density across alpha, made with R htmlwidgets to compare that route with the site's dp-core widgets.",
+    "does": "The viewer plays or drags the plotly frame slider over 40 values of alpha and reads the ggiraph chart and the measured cost table.",
+    "sees": "The pmf of K_100 moving right and the weight density moving toward 0 as alpha grows (E[K_100 | alpha = 1] = 5.19), the ggiraph chart as a picture (its JavaScript is GPL-3 and is not shipped), and a measured size table (plotly.js 3.5 MB).",
+    "engine": "plotly 4.12 + ggiraph 0.9.6 + htmlwidgets 1.6.4 (R), data from DPprior 2.0.0",
+    "page": "pages/dpprior/plotly-alpha-sweep.html",
+    "embed": null,
+    "media": null,
+    "step": "Step 10.4",
+    "thumb": "catalog/thumbs/X-02.png",
+    "status": "done"
+  }
+]

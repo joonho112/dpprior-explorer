@@ -1,0 +1,49 @@
+---
+title: "The EPPF: why the order of arrival does not matter"
+subtitle: "Catalog P-14 · rung 6 · after Broderick (MLSS 2016, part II; 2012 tutorial)"
+description: "The probability of a seating is a product of Chinese restaurant factors, and every arrival order gives the same product."
+toc: false
+---
+
+Seat eight customers by the [Chinese restaurant rule](crp.qmd) and end with the tables
+{1, 2, 7, 8}, {3, 5, 6} and {4}. The probability of that seating is a product of one factor
+per customer: alpha/(alpha + n − 1) when customer n opens a table, m/(alpha + n − 1) when
+it joins a table of m. The numerators collect alpha once per table and (|C| − 1)! for each
+table C; the denominators are the same in any order. So the product is the *exchangeable
+partition probability function*
+
+P(Π_N) = alpha^K ∏_C (|C| − 1)! / ∏_{n = 1}^{N} (alpha + n − 1),
+
+which depends only on the table sizes.
+
+```{=html}
+<div id="w-eppf" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/eppf-panel.js"></script>
+<script>
+  window.__dpxEppf = DPX["eppf-panel"].mountWidget(document.getElementById("w-eppf"), {});
+</script>
+```
+
+## What to try
+
+- **Shuffle arrival order** (or Enter). The factors under the customers change; the product
+  does not. At alpha = 1 it is 1/3360 = .000298 in every order.
+- **alpha.** All orders still agree, now at a different value.
+- **New seating** draws another partition of eight customers from the restaurant;
+  **Broderick's example** brings back {1, 2, 7, 8}, {3, 5, 6}, {4}.
+- **The exercise** below the panel asks for E[K_8], the expected number of tables, and
+  checks the answer with the engine.
+
+Exchangeability is what lets a multisite analysis treat the units' labels as arbitrary:
+only the sizes of the clusters carry information about alpha. The same product, summed
+over all partitions with K tables, gives the prior pmf of K_J used everywhere on this site.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part II; 2012 tutorial); the mathematics is re-implemented and
+no code is copied.
+:::
+
+Standalone version: [embed/eppf-panel.html](../../embed/eppf-panel.html), for example
+`?alpha=2`.

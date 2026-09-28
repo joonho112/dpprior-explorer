@@ -1,0 +1,97 @@
+---
+title: "The simulation: what the prior moves and what it does not"
+subtitle: "Catalog A-06 and A-07"
+description: "The paper's simulation in nine cells: the prior on alpha moves the posterior number of clusters, the collapse rate and the coverage of the true K, while the error of the site effects stays the same."
+toc: false
+---
+
+The paper simulates multisite trials with J = 100 sites, a generating number of
+components K* of 5, 10 or 30, and three levels of information I (how much each site's data say about its own
+effect). Each cell is fitted 200 times under five priors on alpha.
+
+```{=html}
+<div id="w-simdash" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/sim-dashboard.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxSim = DPX["sim-dashboard"].mountWidget(document.getElementById("w-simdash"), spec);
+  })();
+</script>
+```
+
+- **The number of clusters follows the prior.** At K* = 5 and I = .2 the posterior mean of K_J is
+  1.50 under Vague and 3.41 under SSI-Weight, and the chance of a single cluster falls from .725
+  to .315 (Dual-Anchor).
+- **The site effects do not.** In every cell at I = .2 the RMSE of the site effects stays between
+  .234 and .238, whatever the prior.
+- **When the truth is far from the prior**, K* = 30, the SSI-Weight prior never covers it.
+
+## The effects stay, the partition moves
+
+```{=html}
+<div id="w-evp" class="dpx-host column-page"></div>
+<script src="../../js/bundles/effects-vs-partition-tiles.js"></script>
+<script>
+  window.__dpxEvp = DPX["effects-vs-partition-tiles"].mountWidget(document.getElementById("w-evp"), {});
+</script>
+```
+
+- **Fixed lambda.** Holding the Dual-Anchor lambda at .16 (the selected value), .5 or .9 moves the
+  posterior number of clusters from 2.47 to 1.76 to 1.54, and the RMSE by less than .001.
+- **Unequal weights.** With one cluster holding 60% of the sites the pattern is the same: the RMSE
+  is flat across priors, the collapse rate is not.
+
+## When the elicited mean is wrong
+
+The paper's misspecification grid states the target mean as r = mu_K / K* times the truth, with
+r = .5, 1 or 2 (medium confidence, J = 100, grand-mean prior N(0, 100)).
+
+```{=html}
+<div id="w-misspec" class="dpx-host column-page"></div>
+<script src="../../js/bundles/misspecification.js"></script>
+<script>
+  window.__dpxMis = DPX["misspecification"].mountWidget(document.getElementById("w-misspec"), {});
+</script>
+```
+
+- **The posterior follows the elicited mean.** Under TSMM at K* = 10 and I = .2 the posterior mean
+  of K_J moves from 1.51 to 3.41 to 15.03 as mu_K goes from 5 to 10 to 20.
+- **Same mean, same answer.** The cells (K* = 5, r = 2) and (K* = 10, r = 1) share mu_K = 10 and
+  both give 3.41, with collapse .391 in both, although the true counts differ by a factor of two.
+  Switch the horizontal axis to mu_K and the trajectories for different K* fall on one curve.
+- **The weight anchor matters only at small mu_K.** At mu_K = 5 (K* = 10, r = .5) Dual-Anchor
+  raises the posterior mean from 1.51 to 2.48; from mu_K = 10 on, the trigger does not fire and
+  Dual-Anchor coincides with TSMM.
+
+## More sites do not fix the default
+
+The design-size grid runs the same priors at J = 25, 50, 100 and 200 sites (K* = 5 or 10,
+I = .2 or .8, grand-mean prior N(0, 100)).
+
+```{=html}
+<div id="w-design" class="dpx-host column-page"></div>
+<script src="../../js/bundles/design-size.js"></script>
+<script>
+  window.__dpxDes = DPX["design-size"].mountWidget(document.getElementById("w-design"), {});
+</script>
+```
+
+- **The default stays collapsed.** Under Vague the posterior mean of K_J stays between 1.18 and
+  1.46 and the collapse probability is at least .765 even at J = 200.
+- **Dual-Anchor moves toward the reference count.** At K* = 5 and I = .2 its posterior mean goes
+  from 1.53 at J = 25 to 3.50 at J = 200 (collapse .716 to .271) while TSMM stays near 1.5; the
+  selected lambda changes from .70 to .30, .16 and .09 along the way, so this is a policy
+  trajectory, not a sample-size effect alone.
+- **SSI-Weight ignores the design.** Its trajectories are the same at K* = 5 and K* = 10
+  (2.17 to 2.99 and 2.16 to 2.99 at I = .2), with collapse near .5.
+- At I = .8 and J = 200 only 30 to 93 of 200 fits pass the diagnostics; those points are hollow.
+
+Standalone versions: [embed/sim-dashboard.html](../../embed/sim-dashboard.html) (for example
+`?preset=collapse`) and [embed/effects-vs-partition-tiles.html](../../embed/effects-vs-partition-tiles.html)
+(for example `?preset=fixed`) and
+[embed/misspecification.html](../../embed/misspecification.html) (for example `?preset=mu`) and
+[embed/design-size.html](../../embed/design-size.html) (for example `?preset=collapse`).

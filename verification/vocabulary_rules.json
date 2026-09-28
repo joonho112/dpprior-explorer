@@ -1,0 +1,16 @@
+{
+  "about": "Terminology rules of pages/vocabulary.qmd, checked by verification/scan_vocabulary.mjs (Step 11.2) on page prose, widget strings, catalog entries and embed captions. Patterns are JavaScript regular expressions (case-insensitive unless noted).",
+  "forbidden": [
+    { "id": "significance", "pattern": "\\bsignifican(?:t|ce)\\b", "except": "significant (?:digits|figures)", "why": "no significance language: the site reports posterior summaries and prior statements" },
+    { "id": "p-value", "pattern": "\\bp[- ]values?\\b", "why": "no p-values on this site" },
+    { "id": "true-number-of-clusters", "pattern": "\\btrue number of clusters\\b", "why": "K* is the generating number of components; clusters are the components that units occupy, so K_J can be smaller" }
+  ],
+  "scoped": [
+    { "id": "K_N", "pattern": "\\bK_N\\b", "case": true, "allowed": ["pages/dpm/", "pages/vocabulary.qmd", "pages/media.qmd", "js/widgets/crp-growth.js", "js/widgets/dp-atoms.js", "js/widgets/dpmm-generator.js", "js/widgets/eppf-panel.js", "js/widgets/paintbox.js", "id:P-", "id:A-16", "embed:crp-growth", "embed:dp-atoms", "embed:dpmm", "embed:eppf-panel", "embed:paintbox", "embed:finite-mixture"], "why": "K_N is Broderick's notation for N customers; the site's count is K_J (Part 1 introduces the alias)" },
+    { "id": "rho_k", "pattern": "\\brho_k\\b", "case": true, "allowed": ["pages/dpm/", "pages/vocabulary.qmd", "js/widgets/finite-mixture.js", "js/widgets/lollipop.js", "js/widgets/paintbox.js", "id:P-"], "why": "the site's population weight is w_k; rho_k is Broderick's name, used only where Part 1 introduces it (rho alone is the co-clustering probability)" }
+  ],
+  "misuse": [
+    { "id": "W_SB-is-largest", "pattern": "W_SB(?:,|\\s+is|\\s*\\(|:)\\s*(?:the\\s+)?largest|largest (?:population )?weight,?\\s+W_SB", "case": true, "why": "W_SB is the size-biased first weight, not the largest weight (W_max)" },
+    { "id": "K_J-components", "pattern": "K_J,?\\s+(?:is\\s+)?the number of components", "case": true, "why": "K_J counts occupied clusters (fitted components), not all components" }
+  ]
+}

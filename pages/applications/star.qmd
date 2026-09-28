@@ -1,0 +1,56 @@
+---
+title: "Project STAR: 79 schools"
+subtitle: "Catalog A-01 and A-02"
+description: "The Tennessee STAR class-size experiment, school by school: posterior effects under five priors on alpha barely move, while the implied number of clusters and the dominance of one cluster change a lot."
+toc: false
+---
+
+Project STAR randomised pupils to small and regular classes within 79 Tennessee schools. The
+paper fits the Dirichlet process mixture to the 79 school-level effects under five priors on
+alpha. Switch the prior below: the schools hardly move.
+
+```{=html}
+<div id="w-star-cat" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/unit-caterpillar.js"></script>
+<script src="../../js/bundles/app-prior-strip.js"></script>
+```
+
+- **The effects are stable.** From Vague to the Dual-Anchor prior the school means move by
+  about .009 in root mean square, and never by more than .05; the same three schools have
+  intervals that exclude zero.
+- **Shift arrows** draw each school's move from its Vague posterior mean. At true scale they
+  are nearly invisible; "draw shifts 10x longer" makes them visible and says so.
+
+## The number of clusters does depend on the prior
+
+The same five priors imply very different beliefs about K_79, the number of fitted components
+among the 79 schools, and the data do not wash that out. The selector below follows the one
+above.
+
+```{=html}
+<div id="w-star-strip" class="dpx-host column-page"></div>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), cat, strip;
+    var specCat = { app: "star", onPrior: function (p) { if (strip) strip.update({ prior: p }); } };
+    var specStrip = { app: "star", onPrior: function (p) { cat.update({ prior: p }); } };
+    if (q.get("preset")) { specCat.preset = q.get("preset"); specStrip.preset = q.get("preset"); }
+    cat = DPX["unit-caterpillar"].mountWidget(document.getElementById("w-star-cat"), specCat);
+    strip = DPX["app-prior-strip"].mountWidget(document.getElementById("w-star-strip"), specStrip);
+    window.__dpxStarCat = cat; window.__dpxStarStrip = strip;
+  })();
+</script>
+```
+
+- **The prior on K_79.** Vague expects 4.61 clusters (90% interval [1, 11]) with Pr(W_SB > .5)
+  = .591; the Dual-Anchor prior (lambda = .20) expects 6.24 [3, 10] with .385; the hard bound
+  is nearly a point mass at alpha = 2 (a above 3 million), with 7.93 and .250.
+- **What the data leave.** The posterior E(K | data) goes from 1.96 under Vague to 4.47 under
+  the Dual-Anchor prior, and the chance of a single cluster for all 79 schools from .560 to
+  .064. The largest observed share falls from .920 to .724. These posterior numbers come from
+  the replication package; only the prior side is computed here.
+
+Standalone versions: [embed/star-caterpillar.html](../../embed/star-caterpillar.html) and
+[embed/app-prior-strip.html](../../embed/app-prior-strip.html) (for example `?preset=da`).

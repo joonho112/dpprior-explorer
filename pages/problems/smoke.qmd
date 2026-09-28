@@ -1,0 +1,18 @@
+---
+title: "Pipeline smoke page"
+description: "Not linked from the navigation. Checks that a sub-page mounts a widget bundle by relative path after rendering."
+toc: false
+search: false
+---
+
+This page is a build check (Step 3.2). It mounts the pipeline widget from `../../js/`.
+
+```{=html}
+<div id="w-smoke" class="dpx-host"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/smoke-pmf.js"></script>
+<script>
+  window.__dpxSmoke = DPX["smoke-pmf"].mountWidget(document.getElementById("w-smoke"), { a: 1.6, b: 1.22, J: 50 });
+</script>
+```

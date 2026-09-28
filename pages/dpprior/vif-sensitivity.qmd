@@ -1,0 +1,46 @@
+---
+title: "Confidence moves the tails, not the middle"
+subtitle: "Catalog C-03 (with C-04)"
+description: "Table 2 of the paper, live: the same target mean with four levels of confidence gives four Gamma priors whose majority dominance barely moves while extreme dominance and the mass near zero change a lot."
+toc: false
+---
+
+The elicited mean is the same in every row, "about 5 clusters among 100 units". Only the
+confidence changes, through the variance inflation factor: sigma^2 = VIF (mu_K − 1), so
+VIF 1.25, 1.5, 2.5 and 5 ask for a variance of 5, 6, 10 and 20.
+
+```{=html}
+<div id="w-vif" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/vif-sensitivity.js"></script>
+<script>
+  window.__dpxVif = DPX["vif-sensitivity"].mountWidget(document.getElementById("w-vif"), {});
+</script>
+```
+
+- **The prior on alpha widens.** From VIF 1.25 to 5 the calibrated prior goes from
+  Gamma(7.13, 7.41) to Gamma(0.62, 0.56): its mean stays near 1 (0.96 to 1.11) but its spread
+  grows.
+- **The mean drives majority dominance.** Pr(W_SB > .5) moves only from .53 to .61.
+- **The variance drives extreme dominance and collapse.** Pr(W_SB > .9) moves from .15 to .36,
+  and the mass near zero, Pr(alpha < .1), from 0 to .18: a low-confidence count target quietly
+  allows one cluster to take almost everything.
+- The two-lenses panels (C-04) show the same prior as a count distribution and as a weight
+  distribution; J changes only the count.
+
+::: {.callout-note appearance="simple"}
+Every row is solved in the browser by TSMM (dp-core `tsmmFit`) and matches the paper's
+Table 2 and OSM Table F.4 (checked against DPprior 2.0.0 on [the parity page](tsmm-parity.qmd)).
+The lens panels are the widget of [One alpha, two lenses](../bridge/two-lenses.qmd), reused
+unchanged.
+:::
+
+::: {.callout-tip appearance="simple"}
+**In DPprior Studio.** For a whole grid of target means and confidence levels at once, use the Sensitivity panel of [DPprior Studio](https://joonho.shinyapps.io/dpprior-studio/), the Shiny app that
+accompanies the package (built on DPprior 1.1.0; it may take a moment to wake up). This site does
+not rebuild what Studio already does.
+:::
+
+Standalone version: [embed/vif-sensitivity.html](../../embed/vif-sensitivity.html)
+(for example `?preset=5`).

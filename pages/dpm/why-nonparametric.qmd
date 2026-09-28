@@ -1,0 +1,49 @@
+---
+title: "Why nonparametric Bayes?"
+subtitle: "Catalog P-00 · rung 0 · after Broderick (MLSS 2016, part I)"
+description: "A finite mixture must fix its number of cells before seeing data; a Dirichlet process keeps room for cells nobody has used yet."
+toc: false
+---
+
+The units in a multisite study, the respondents of a test, the studies of a meta-analysis:
+we usually treat them as exchangeable, so their order carries no information. De Finetti's
+theorem then says the data behave as if drawn from a common distribution that is itself
+unknown. A convenient way to put a prior on that unknown distribution is a *mixture*: each
+unit belongs to one of several cells (clusters), and each cell has its own centre.
+
+The question is how many cells. A finite mixture answers it before any data arrive: K = 2,
+say, with weights rho_1 and rho_2 = 1 − rho_1. The widget draws such a mixture in two
+dimensions: the weights from a Dirichlet distribution, the cell centres around the origin,
+the points around their centres.
+
+```{=html}
+<div id="w-finite" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/finite-mixture.js"></script>
+<script>
+  window.__dpxFinite = DPX["finite-mixture"].mountWidget(document.getElementById("w-finite"), {});
+</script>
+```
+
+## What to try
+
+- **K = 2, then K = 5.** Move N from 10 to 500. The points spread over the fixed cells and
+  the bottom bar approaches the weights on top, but no point can ever start a sixth cell.
+- **K = ∞.** Now the weights come from breaking a stick (the Dirichlet process with
+  alpha = 1). The dashed piece is the part of the stick not yet broken. A point that lands
+  there opens a new cell, so the number of occupied cells keeps growing with N, slowly.
+- **Redraw** (or Enter) draws new weights, centres and points.
+
+The rest of this ladder builds the K = ∞ case step by step: the Beta and Dirichlet
+distributions for the weights, the paintbox and stick-breaking constructions, the urn and
+the Chinese restaurant process for the cells, and the Dirichlet process mixture itself.
+
+::: {.callout-note appearance="simple"}
+After Broderick (MLSS 2016, part I; 2012 tutorial); the mathematics is re-implemented and
+no code is copied. In the rest of the site, K_J is the number of fitted components
+(occupied cells) among the J units.
+:::
+
+Standalone version: [embed/finite-mixture.html](../../embed/finite-mixture.html), for
+example `?K=5&n=300` or `?preset=inf&n=500`.

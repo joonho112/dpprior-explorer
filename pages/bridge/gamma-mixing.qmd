@@ -1,0 +1,49 @@
+---
+title: "Gamma mixing: from alpha nodes to the marginal pmf"
+subtitle: "Catalog C-12"
+description: "A Gamma prior on alpha turns many conditional pmfs of K_J into one marginal pmf, and the number of alpha nodes sets the accuracy."
+toc: false
+---
+
+Given alpha, the number of clusters K_J has the Antoniak pmf
+P(K_J = k | alpha) = |s(J, k)| alpha^k Γ(alpha) / Γ(alpha + J), where |s(J, k)| are
+unsigned Stirling numbers of the first kind. With a Gamma(a, b) prior on alpha, the prior
+pmf of K_J averages these conditional pmfs over the prior:
+P(K_J = k) = ∫ P(K_J = k | alpha) Gamma(alpha; a, b) d alpha.
+
+The widget computes the average in the plainest way. It cuts log alpha into n equal
+slices, puts a node at the centre of each slice, and weights that node's pmf by the prior
+probability of its slice. Every thin line is one node; the thick line is the weighted sum.
+
+```{=html}
+<div id="w-mixing" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/gamma-mixing.js"></script>
+<script>
+  window.__dpxMixing = DPX["gamma-mixing"].mountWidget(document.getElementById("w-mixing"), {});
+</script>
+```
+
+## What to try
+
+- **Drag the node count from 20 to 400** under Gamma(1, 1) at J = 100. With 20 nodes
+  the sum misses the exact marginal pmf by an L1 distance of .023 and its mean is 4.90.
+  With 400 nodes the gap is 5.0e-5 and the mean is 4.838, against the exact 4.837.
+  Each doubling of the node count cuts the gap about fourfold (the error panel keeps
+  the 20-node scale, so the bars shrink).
+- **Hover over a thin line, or over a tick in the strip below it** (or focus the strip and
+  use the arrow keys). Small alpha puts almost all mass on K_J = 1; large alpha spreads
+  it over many clusters. No single node looks like the marginal pmf.
+- **Switch to "one alpha = E(alpha)".** Gamma(1, 1) has prior mean alpha = 1, and at
+  alpha = 1 alone E K_100 = 5.19 with variance 3.55. Mixing over the prior gives mean
+  4.84 and variance 13.2: the uncertainty about alpha widens the count view.
+
+::: {.callout-note appearance="simple"}
+The engine behind every widget on this site uses the same idea with a finer grid: at
+least 400 nodes on log alpha plus end corrections, checked against DPprior in R (pmf
+entries to 1e-8, moments to 1e-4). That is why a full pmf of K_J takes milliseconds.
+:::
+
+Standalone version: [embed/gamma-mixing.html](../../embed/gamma-mixing.html), for example
+`?a=1.6&b=1.22&J=50&n=40`.

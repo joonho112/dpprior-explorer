@@ -1,0 +1,59 @@
+---
+title: "A vocabulary test: 500 respondents, 13 words"
+subtitle: "Catalog A-04 and A-05"
+description: "A Rasch model with a Dirichlet process mixture for ability: the prior on alpha changes how many ability groups the model uses, from 3.5 to 9 in expectation."
+toc: false
+---
+
+The third application is psychometric. A 13-word vocabulary checklist (Open-Source Psychometrics
+Project, via the Item Response Warehouse) is fitted with a Rasch model whose ability
+distribution is a Dirichlet process mixture, for 500 respondents. The elicited statement is
+"about five latent groups, between 2 and 10 with 80% probability".
+
+```{=html}
+<div id="w-rasch-k" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/rasch-kpmf.js"></script>
+
+```
+
+- **The prior sets the number of groups.** The posterior mean of K_500 is 3.51 under the
+  literature default Gamma(1, 3), 4.43 under Vague (95% interval [2, 10]), 6.73 under the
+  Dual-Anchor prior ([3, 12]) and 8.99 under the hard bound ([5, 14]).
+- **The elicited range holds under the soft priors.** Pr(2 ≤ K ≤ 10) is .97 to .99 for Vague,
+  Gamma(1, 3) and TSMM, .94 for Dual-Anchor, and .74 for the hard bound.
+- **A target of 25 is pulled back.** The Count-25 sensitivity (TSMM with mu_K = 25) ends at 11.72:
+  the data can move K, but not all the way.
+- E(alpha | y) runs from 0.38 (Gamma(1, 3)) to 2.00 (the hard bound, nearly a point mass).
+
+## The groups change, the person scores do not
+
+The same fits describe the ability distribution and score the people. Below, the fitted
+densities follow the priors checked above. Neither the distribution nor the 500 respondents'
+scores move with the prior; only the number of groups does.
+
+```{=html}
+<div id="w-rasch-dens" class="dpx-host column-page"></div>
+<script src="../../js/bundles/rasch-density.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {}, dens;
+    if (q.get("preset")) spec.preset = q.get("preset");
+    spec.onSelect = function (on) { if (dens) dens.update({ on: on }); };
+    window.__dpxRaschK = DPX["rasch-kpmf"].mountWidget(document.getElementById("w-rasch-k"), spec);
+    dens = DPX["rasch-density"].mountWidget(document.getElementById("w-rasch-dens"), {});
+    window.__dpxRaschDens = dens;
+  })();
+</script>
+```
+
+- **The ability distribution** is the same under every prior: the fitted densities differ from
+  the Vague one by at most .002. The stronger priors use more groups to describe the same shape.
+  The Gaussian benchmark (grey) is flatter.
+- **The person scores** stay put: a score group's posterior ability moves by .031 logits under the
+  Dual-Anchor prior, and the WLE scores by at most .006. The 63 perfect scores have a WLE SE of
+  1.73, the widest in the sample.
+
+Standalone versions: [embed/rasch-kpmf.html](../../embed/rasch-kpmf.html) (for example
+`?preset=count25`) and [embed/rasch-density.html](../../embed/rasch-density.html).

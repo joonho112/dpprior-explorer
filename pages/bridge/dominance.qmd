@@ -1,0 +1,91 @@
+---
+title: "Dominance in stick-breaking rows"
+subtitle: "Catalog M-17, M-18, C-16"
+description: "Fifty stick-breaking draws under a hyperprior show how often the first piece takes more than half of the stick, and why the first piece is not always the largest."
+toc: false
+---
+
+Stick-breaking builds the cluster weights one piece at a time: V_k ~ Beta(1, alpha) and
+w_k = V_k × (what is left of the stick). The first piece has a special reading. It is the
+*size-biased* weight W_SB: the population share of the cluster that a randomly chosen unit
+belongs to. Its tail has a closed form under a Gamma(a, b) hyperprior,
+S(t) = Pr(W_SB > t) = (b / (b − log(1 − t)))^a.
+
+## M-17 · How often does the first piece take more than half?
+
+Each row below draws its own alpha from the hyperprior and then breaks one stick. The first
+piece is in colour; a red dot marks the rows where it passes one half. Press **Redraw**
+(or Enter) a few times: the running share settles near S(.5).
+
+```{=html}
+<div id="w-ribbon" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/dominance-ribbon.js"></script>
+<script>
+  window.__dpxRibbon = DPX["dominance-ribbon"].mountWidget(document.getElementById("w-ribbon"), {});
+</script>
+```
+
+- **Gamma(1, 1):** S(.5) = .591. More than half of the rows have a first piece above one
+  half.
+- **Gamma(1, 3):** S(.5) = .812. The hyperprior puts more mass near alpha = 0, and most
+  sticks break almost whole at the first cut.
+- **Dual-Anchor Gamma(2.32, 1.42):** S(.5) = .398. This is the J = 50 worked example's
+  Dual-Anchor prior ([Part 4](../dpprior/worked-example-j50.qmd)), which keeps "about five
+  clusters" while bringing S(.5) under its .40 trigger.
+
+## M-18 · The first piece is not always the largest
+
+The same draws again, each row shown twice: in breaking order (top) and sorted by size
+(bottom). A red dot marks rows where the first piece to break off is not the largest.
+
+```{=html}
+<div id="w-sbrank" class="dpx-host column-page"></div>
+<script>
+  window.__dpxSbRank = DPX["dominance-ribbon"].mountWidget(document.getElementById("w-sbrank"), { mode: "sb-vs-ranked" });
+</script>
+```
+
+When the first piece is above one half, the other pieces share less than one half, so the
+first piece is the largest. The reverse fails: the largest piece can break off later. That
+is why Pr(W_SB > .5) is a *lower bound* for Pr(W_max > .5), the probability that the
+largest cluster holds more than half of the population.
+
+## C-16 · How far apart can W_SB and W_max be?
+
+Proposition 1 of the paper turns the M-18 argument into a band. For t of one half or more,
+
+S(t) ≤ Pr(W_max > t) ≤ min(1, S(t) / t),
+
+and the engine also computes the middle term exactly (a one-dimensional integral after the
+substitution u = −log(1 − w)). Under Gamma(1, 1) at t = .5 the band is [.591, 1] and the
+exact value is .728. As t grows the two tails meet: a random unit falls in a piece larger
+than t with probability at least t, so at t = .9 the tails are .303 (W_SB) and .309 (W_max).
+
+```{=html}
+<div id="w-wmax" class="dpx-host column-page"></div>
+<script src="../../js/bundles/wmax-bounds.js"></script>
+<script>
+  window.__dpxWmax = DPX["wmax-bounds"].mountWidget(document.getElementById("w-wmax"), {});
+</script>
+```
+
+The **STAR posterior** switch adds the application's released posterior summaries (paper
+Table 5) for the five STAR priors. They are posterior quantities, conditional on the 79
+schools, and are read from the replication package, not recomputed. Under the vague
+Gamma(1, 1) prior the largest occupied cluster holds .920 of the schools on average and the
+posterior probability that the largest population weight exceeds one half is .963; under the
+Dual-Anchor prior these drop to .724 and .804, and the alpha-only size-biased probability
+drops from .797 to .419.
+
+::: {.callout-note appearance="simple"}
+W_SB is the share of a random unit's cluster, never "the largest weight". Size-biased
+dominance and W_max are named separately throughout this site. These are prior
+statements. Stick-breaking rows after Broderick (MLSS 2016; 2012 tutorial), with the
+mathematics re-implemented.
+:::
+
+Standalone versions: [embed/dominance-ribbon.html](../../embed/dominance-ribbon.html)
+(`?preset=g11`, `g13` or `da`), [embed/sb-vs-ranked.html](../../embed/sb-vs-ranked.html) and
+[embed/wmax-bounds.html](../../embed/wmax-bounds.html) (`?preset=star-da` opens the STAR panel).

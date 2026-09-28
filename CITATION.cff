@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "Please cite the paper when you use these visualizations; cite the site itself only when you reuse its code or figures."
+type: software
+title: "DPprior Explorer: Interactive visualizations for design-conditional prior elicitation in Dirichlet process mixtures"
+version: 1.1.0
+date-released: "2026-09-28"
+authors:
+  - family-names: Lee
+    given-names: JoonHo
+    email: jlee296@ua.edu
+    affiliation: "The University of Alabama"
+repository-code: "https://github.com/joonho112/dpprior-explorer"
+url: "https://joonho112.github.io/dpprior-explorer/"
+license: MIT
+abstract: "A pool of 72 interactive visualizations that teaches Dirichlet process mixtures, shows what hyperpriors on the concentration parameter imply for cluster counts and cluster sizes, walks through the DPprior calibration workflow and presents the paper's evidence from released summaries. Prior quantities are computed in the browser and checked against the DPprior R package (version 2.0.0) and independent R integrals; posterior and simulation results are read from the replication package's released tables, never recomputed."
+keywords:
+  - multisite trials
+  - education research
+  - Dirichlet process
+  - prior elicitation
+  - Chinese restaurant process
+  - stick-breaking
+  - visualization
+preferred-citation:
+  type: article
+  title: "Design-Conditional Prior Elicitation for Dirichlet Process Mixtures: A Unified Framework for Cluster Counts and Weight Control"
+  authors:
+    - family-names: Lee
+      given-names: JoonHo
+      email: jlee296@ua.edu
+  year: 2026
+  journal: "arXiv"
+  doi: "10.48550/arXiv.2602.06301"
+  url: "https://arxiv.org/abs/2602.06301"
+references:
+  - type: software
+    title: "Replication Materials for Design-Conditional Prior Elicitation for Dirichlet Process Mixtures"
+    authors:
+      - family-names: Lee
+        given-names: JoonHo
+    repository-code: "https://github.com/joonho112/DPprior-paper-replication"

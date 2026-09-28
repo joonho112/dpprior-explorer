@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- P-00 (catalog). Written by scripts/make_embed.mjs from embed/_template.html; edit embed/embeds.json. -->
+<title>Why nonparametric Bayes? · DPprior Explorer</title>
+<script>
+  // ?theme=light|dark overrides prefers-color-scheme (CONTRACT.md section 4)
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<link rel="stylesheet" href="../styles/tokens.css">
+<link rel="stylesheet" href="../styles/widgets.css">
+</head>
+<body class="dpx-embed">
+<main>
+  <h1 class="dpx-embed-title">Why nonparametric Bayes?</h1>
+  <div id="w" class="dpx-host"></div>
+  <p class="dpx-caption">A mixture with K = 2 or K = 5 cells keeps every point in its fixed cells; with K = ∞ (a Dirichlet process) unbroken stick mass lets new cells open as N grows. Use ?K=2|5, ?preset=inf and ?n=. Enter redraws.</p>
+  <p class="dpx-attrib">DPprior Explorer · <a href="https://arxiv.org/abs/2602.06301">Lee (2026)</a> · after Broderick (MLSS 2016; 2012 tutorial)</p>
+</main>
+<!-- classic scripts only: this page must work from file:// (CONTRACT.md section 1) -->
+<script src="../js/vendor/d3.min.js"></script>
+<script src="../js/vendor/plot.min.js"></script>
+<script src="../js/bundles/finite-mixture.js"></script>
+<script>
+  (function () {
+    // numeric query parameters become the initial spec; unparseable values are ignored
+    var q = new URLSearchParams(location.search), spec = {};
+    ["a", "b", "J", "K", "I", "r", "alpha", "t", "n", "seed", "mu", "var"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && v !== "" && isFinite(+v)) spec[k] = +v;
+    });
+    // short word parameters (an application, a prior, a view) pass through when they are plain words;
+    // each widget checks them against its own list
+    ["app", "prior", "sort", "view", "branch"].forEach(function (k) {
+      var v = q.get(k);
+      if (v !== null && /^[A-Za-z0-9_ ()-]{1,40}$/.test(v)) spec[k] = v;
+    });
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxWidget = DPX["finite-mixture"].mountWidget(document.getElementById("w"), spec);
+  })();
+</script>
+</body>
+</html>

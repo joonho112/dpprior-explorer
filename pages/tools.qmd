@@ -1,0 +1,24 @@
+---
+title: "Complementary tools"
+subtitle: "Phase 10: when to reach for something other than a dp-core widget"
+description: "Status of the complementary-tool studies: gganimate videos, an R htmlwidgets page, and the two that wait for the user's approval to install tools (Observable Framework, shinylive)."
+toc: false
+---
+
+The site's widgets are written in JavaScript on top of dp-core, so they compute the model live
+and work offline. Phase 10 tries four other routes to the same pictures and records when each is
+worth it.
+
+::: {.dpx-table-scroll tabindex="0" role="region" aria-label="Complementary tools and their status, scrollable table"}
+| Catalog | Tool | Status | Where |
+|---|---|---|---|
+| A-16 (and P-17) | gganimate videos (R, ffmpeg) | done | [Videos for talks](media.qmd) |
+| X-02 | plotly animation frames and ggiraph hover (R htmlwidgets) | done | [The alpha sweep in plotly and ggiraph](dpprior/plotly-alpha-sweep.qmd) |
+| X-01 | Observable Framework mini-site with an R data loader | waiting: needs `npm create @observablehq` (a new tool and network access), which the site owner has to approve | not built |
+| C-17 | shinylive "Studio-lite" (the DPprior R code in the browser) | waiting: needs `install.packages("shinylive")` and `quarto add quarto-ext/shinylive`, which the site owner has to approve | not built; the hosted [DPprior Studio](https://joonho.shinyapps.io/dpprior-studio/) covers it meanwhile |
+:::
+
+What the two waiting studies would add: X-01 would show whether an Observable Framework site with
+an R data loader is simpler to maintain than this Quarto site for a one-page explainer; C-17
+would show the R package, Studio and the site's widgets giving the same Gamma(a, b) for the same
+target, without a server.

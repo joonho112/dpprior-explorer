@@ -1,0 +1,24 @@
+---
+title: "Part 5 · Evidence and real data"
+---
+
+> Default concentration hyperpriors can strongly shape conclusions about heterogeneity; our
+> design-conditional framework makes those choices explicit by calibrating the prior to an expected
+> cluster count and checking its implied cluster sizes.
+
+The pages below show that statement in released results. In every application the prior moves the
+partition (the number of clusters, the chance of a single cluster, the largest weight) while the
+unit effects stay put ([A-11](partition-vs-effects.qmd)), and the model specification can matter as
+much as the prior ([A-12](partition-vs-effects.qmd#the-specification-matters-too)). Simulation
+results and three applications (STAR, J = 79 schools; Bangert-Drowns, J = 48 studies; a vocabulary
+checklist, N = 500), drawn only from released summaries.
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| [Project STAR: 79 schools](star.qmd) | A-01, A-02 | School effects under five priors move by .009 RMS, while the posterior number of clusters follows the prior (posterior mean 1.96 → 4.47) |
+| [Bangert-Drowns: 48 studies](bangert-drowns.qmd) | A-03 | A meta-analysis with the same pattern: posterior mean 1.89 → 3.31 clusters, collapse .548 → .190; effects and moderator slopes stay put |
+| [A vocabulary test: 500 respondents](vocabulary-rasch.qmd) | A-04, A-05 | The prior sets the number of ability groups (posterior K_500 3.51 → 8.99), not the person scores (shift ≤ .031 logits) |
+| [The partition moves, the effects do not](partition-vs-effects.qmd) | A-11, A-12 | Vague, TSMM and Dual-Anchor side by side (unit RMS shift .0088 STAR, .0071 Bangert-Drowns); the wide-scale prior and the HC3 input move the summaries too |
+| [The simulation](simulation.qmd) | A-06 to A-09 | Nine cells, five priors: the number of clusters and collapse follow the prior, the site-effect RMSE stays .234–.238; a wrong elicited mean moves the posterior with it, and more sites do not fix the default |
+| [Released data](data.qmd) | A-13 | The summary tables the evidence pages read: source, level, size, licence |
+| [Static fallbacks for talks](talk-fallbacks.qmd) | A-14, A-15 | Widget stills at presentation presets and paper Figures 4 and 7; embedding in slides |

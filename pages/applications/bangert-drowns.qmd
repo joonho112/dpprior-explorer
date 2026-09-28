@@ -1,0 +1,45 @@
+---
+title: "Bangert-Drowns: 48 writing-to-learn studies"
+subtitle: "Catalog A-03"
+description: "A meta-analysis under five priors on alpha: the study effects and the moderator slopes stay put, while the posterior number of clusters and the chance that all studies share one cluster follow the prior."
+toc: false
+---
+
+The second application is a meta-analysis: 48 studies of writing-to-learn interventions
+(Bangert-Drowns, Hurley, and Wilkinson, 2004). The same Dirichlet process mixture treats the
+study effects as draws from an unknown distribution of effects. The paper's target for the
+number of clusters is "about 4, between 1 and 8 with 80% probability".
+
+```{=html}
+<div id="w-bd" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/bd-forest.js"></script>
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), spec = {};
+    if (q.get("preset")) spec.preset = q.get("preset");
+    window.__dpxBd = DPX["bd-forest"].mountWidget(document.getElementById("w-bd"), spec);
+  })();
+</script>
+```
+
+- **The same pattern as STAR.** From Vague to the Dual-Anchor prior the posterior number of
+  clusters goes from 1.89 to 3.31, and the chance that all 48 studies share one cluster from
+  .548 to .190, while the study effects move by less than .01 in root mean square and the
+  same 13 posterior intervals exclude zero.
+- **A classical benchmark.** The random-effects estimate (REML) from the reported effects is
+  .222 with a 95% interval [.132, .312] and I² = 58.4%: a heterogeneous literature, which is
+  why the number of clusters is worth a prior at all.
+- **Moderators.** The slopes of the study effects on grade and on length hardly change with the
+  prior (a descriptive alignment, not causal moderation).
+
+::: {.callout-note appearance="simple"}
+Study-level effects and standard errors: `metadat::dat.bangertdrowns2004` (metadat 1.6-0, GPL
+&ge; 2), as used by the replication package; posterior summaries and moderator slopes: the
+replication package (CC BY 4.0). The random-effects benchmark is computed in the browser from the
+released effects and standard errors; it is not a posterior quantity.
+:::
+
+Standalone version: [embed/bd-forest.html](../../embed/bd-forest.html) (for example
+`?preset=da` or `?preset=moderators`).

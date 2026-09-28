@@ -1,0 +1,122 @@
+---
+title: "Other defaults: flat, diffuse and objective priors"
+subtitle: "Catalog M-12, M-13, M-14, M-19"
+description: "The quasi-degenerate Gamma(eps, eps) expects a single cluster; the K_n-diffuse priors of the 1990s are tied to one n and rule out dominance; the Jeffreys prior contradicts DORO; the Stirling-gamma pins the count and moves the weights."
+toc: true
+---
+
+Four more families of default hyperpriors, each chosen to look uninformative (or stable) in
+one sense and each informative in another. The Gamma numbers on this page are recomputed in
+the browser; the Jeffreys and Stirling-gamma priors, which are not Gamma, are integrated in R.
+
+## Quasi-degenerate Gamma(eps, eps) {#quasi-degenerate}
+
+Setting a = b = eps gives a Gamma with mean 1 and variance 1 / eps. As eps shrinks the prior
+approaches p(alpha) ∝ 1 / alpha and looks flat on the log scale, which is why Gamma(0.001,
+0.001) became a reference default (Escobar and West, 1995, let a and b go to 0; BUGS uses
+Gamma(0.001, 0.001)). The flat stretch runs off toward alpha = 0, where every unit shares one
+cluster.
+
+```{=html}
+<div id="w-quasi" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/quasi-degenerate.js"></script>
+<script>
+  window.__dpxQuasi = DPX["quasi-degenerate"].mountWidget(document.getElementById("w-quasi"), { mode: "eps" });
+</script>
+```
+
+- At eps = 0.037 (the SCAL shortcut at m = 100, rounded) a third of the prior mass lies below
+  alpha = 1e-12 and P(K_100 = 1) = .834: the prior is 83% sure that all 100 units form one
+  cluster.
+- At eps = 0.001, 97% of the mass lies below alpha = 1e-12 and P(K_J = 1) = .992 for J = 50,
+  100 and 500 alike.
+- The prior that looks least informative about alpha is the most informative about K.
+
+## K_n-diffuse priors {#kn-diffuse}
+
+In the 1990s the Gamma was chosen by eye so that K_n spread over a wide range at the study's
+n: Gamma(5, 0.5) at n = 74 (West and Escobar, 1993) and Gamma(3.5, 0.5) at n = 53 (West,
+Müller and Escobar, 1994); Vicentini and Jermyn (2025) illustrate the idea with Gamma(10, 1).
+Drawn on the relative axis k / n, the same prior is wide at one n and narrow at another.
+
+```{=html}
+<div id="w-kn" class="dpx-host column-page"></div>
+<script src="../../js/bundles/quasi-degenerate.js"></script>
+<script>
+  window.__dpxKn = DPX["quasi-degenerate"].mountWidget(document.getElementById("w-kn"), { mode: "relative" });
+</script>
+```
+
+- Gamma(5, 0.5) at n = 74: E K = 21.0 with a 90% interval of [11, 32], the "wide range" it
+  was chosen for. Gamma(10, 1) covers [5, 9] of 10 units but [15, 34] of 100.
+- The large E(alpha) (7 to 10) that spreads K rules out a dominant cluster:
+  Pr(W_SB > .5) = .013 for Gamma(5, 0.5) and .005 for Gamma(10, 1), against .591 for
+  Gamma(1, 1). Diffuse in K means extreme in the weights.
+- There is no rule behind the choice, so nothing tells you what (a, b) to use at another n.
+
+## The Jeffreys prior against DORO {#objective-priors}
+
+Rodriguez (2013) proposed the Jeffreys prior for alpha: p(alpha) proportional to the square
+root of the Fisher information of the partition at n units. It depends on n and on nothing
+else, which makes it "objective" in one sense; DORO's flat target on the number of clusters
+is "objective" in another. The two disagree.
+
+```{=html}
+<div id="w-obj" class="dpx-host column-page"></div>
+<script src="../../js/bundles/objective-priors.js"></script>
+<script>
+  window.__dpxObj = DPX["objective-priors"].mountWidget(document.getElementById("w-obj"), {});
+</script>
+```
+
+- At n = 100 the Jeffreys prior implies a K_100 that is symmetric about n / 2: P(K = 1) = .054
+  (all units in one cluster) and P(K = 100) = .054 (every unit alone), five times the flat
+  1/100, over a nearly flat floor near .007. Its mean, 49.8, is close to the flat target's,
+  but its ends are not. DORO's best Gamma, for its part, spikes at 1 and humps near 90.
+- Its tail in alpha falls off like alpha^(−3/2), so it has no finite mean, and 4.3% of the
+  prior mass lies above alpha = 1e4. That mass matters: a grid cut at alpha = 1e4 reports
+  E K_100 = 47.6 instead of 49.8.
+- Neither prior allows much dominance: Pr(W_SB > .5) = .132 for Jeffreys at n = 100 (.302 at
+  n = 10) and .088 for DORO's fit.
+
+## The Stirling-gamma prior against Gamma(2, 4) {#stirling-gamma}
+
+Zito, Rigon and Dunson (2024) built a prior on alpha that keeps the expected count where you
+put it: the Stirling-gamma Sg(a, b, m) has E(K_m) = a / b exactly at its reference size m.
+With m = n it pins E K_n at every n, where the Gamma(2, 4) they compare with drifts. It is
+the one existing prior that is count-stable across designs; the paper did not compare it,
+and its weight implications were not reported.
+
+```{=html}
+<div id="w-sg" class="dpx-host column-page"></div>
+<script src="../../js/bundles/stirling-gamma.js"></script>
+<script>
+  window.__dpxSg = DPX["stirling-gamma"].mountWidget(document.getElementById("w-sg"), {});
+</script>
+```
+
+- **Counts.** Sg(4, 1, n) and Sg(1, 0.25, n) keep E K_n = 4 from n = 10 to 2000.
+  Gamma(2, 4) gives 2.86 at n = 50, 3.20 at 100, 4.35 at 1,000 and 5.51 at 10,000.
+- **Weights.** To hold the count at 4 as n grows, the Sg prior moves alpha toward 0, and the
+  chance that a random unit sits in a majority-mass cluster rises: for Sg(4, 1, n) from .31 at
+  n = 10 to .64 at 100 and .77 at 2000. Gamma(2, 4) keeps .726 at every n. Pinning one lens
+  moves the other.
+
+::: {.callout-note appearance="simple"}
+Prior statements only; K_J (K_n) is the number of fitted components among the J (n) units.
+The quasi-degenerate and K_n-diffuse read-outs repeat their moments with twice the alpha
+quadrature nodes; the change is below 1e-13. The Jeffreys prior is not a Gamma: its values
+and the Stirling-gamma values are integrated in R over the whole alpha line
+(`r-export/06_jeffreys_sg_grid.R`, n = 10 to 2000 for Sg). Rodriguez
+(2013) is cited through Vicentini and Jermyn (2025, Sec. 3.1.4), not from the original.
+Other sources: Escobar and West (1995); West and Escobar (1993), through Vicentini and
+Jermyn (2025, footnote 1); West, Müller and Escobar (1994), through Dorazio (2009).
+:::
+
+Standalone versions: [embed/quasi-degenerate.html](../../embed/quasi-degenerate.html)
+(for example `?a=0.001`), [embed/kn-diffuse.html](../../embed/kn-diffuse.html)
+(for example `?preset=g10&n=100`), [embed/objective-priors.html](../../embed/objective-priors.html)
+(for example `?n=10&preset=density`) and [embed/stirling-gamma.html](../../embed/stirling-gamma.html)
+(for example `?n=100`).

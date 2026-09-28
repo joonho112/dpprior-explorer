@@ -1,0 +1,46 @@
+---
+title: "Collapse: everyone at the first table"
+subtitle: "Catalog M-06"
+description: "Prior mass near alpha = 0 gives a non-trivial prior probability that all units share one cluster. Prior collapse, P(K_J = 1), is not posterior collapse, Pr(K_J = 1 | data)."
+toc: false
+---
+
+In the [restaurant](../dpm/crp.qmd), customer n + 1 opens a new table with probability
+alpha / (alpha + n). When alpha is close to 0 that almost never happens, and every
+customer ends up at the first table:
+P(K_J = 1 | alpha) = ∏ i / (i + alpha) over i = 1, …, J − 1, which is .906 for
+J = 79 and alpha = 0.02. A Gamma(a, b) prior on alpha keeps some mass near 0, so it
+assigns a prior probability to this *collapse*: all J units in one cluster.
+
+```{=html}
+<div id="w-collapse" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/collapse.js"></script>
+<script>
+  window.__dpxCollapse = DPX["collapse"].mountWidget(document.getElementById("w-collapse"), {});
+</script>
+```
+
+## Reading the panels
+
+- **A. Mass near 0.** Gamma(1, 1) puts Pr(alpha < .1) = .095 below alpha = .1. The TSMM
+  prior for "about five clusters" at J = 100 with the widest confidence setting (VIF 5,
+  paper Table 2) puts .182 there: a vaguer statement about the number of clusters buys more
+  mass near alpha = 0.
+- **B. Prior collapse.** Under Gamma(1, 1), P(K_J = 1) is .192 at J = 50, .175 at J = 79,
+  .168 at J = 100 and .132 at J = 500. Under the VIF 5 prior it is .262, .247, .240 and
+  .204.
+- **C. The restaurant at small alpha.** Press **Play** (or Enter): at alpha = 0.02 all 79
+  customers usually share one table. Switch the restaurant alpha to 0.1 or 1 and play again.
+
+::: {.callout-note appearance="simple"}
+**Prior versus posterior collapse.** P(K_J = 1) is a prior statement, made before any data.
+Pr(K_J = 1 | data) is a posterior statement about a fitted model. For STAR (79 schools)
+under Gamma(1, 1) the prior value is .175 and the released posterior value is .560; the
+widget reads the posterior value from the replication package and does not recompute it.
+K_J is the number of fitted components (occupied clusters) among the J units.
+:::
+
+Standalone version: [embed/collapse.html](../../embed/collapse.html), for example
+`?preset=vif5` or `?a=0.5&b=0.5`.

@@ -1,0 +1,14 @@
+---
+title: "Visualization catalog"
+description: "Every visualization in the pool, with what the viewer does and sees."
+toc: false
+---
+
+Each visualization has a catalog id (P- DPM teaching, M- method problems, C- DPprior
+principle, A- evidence and real data, X- complementary tools), one sentence for what the
+viewer **does** and one for what the viewer **sees**, the engine it runs on, and links
+to its page and to a standalone version for slides or iframes. Filter by section, ladder
+rung or audience; the [learning paths](learning-paths.qmd) string them into timed routes.
+Ids are stable.
+
+{{< include _catalog-cards.md >}}

@@ -1,0 +1,48 @@
+---
+title: "The unintended prior in 1000 restaurants"
+subtitle: "Catalog M-05"
+description: "Simulating the Chinese restaurant process under Gamma(1.60, 1.22) shows about five tables per restaurant and, in most restaurants, one table holding more than half of the customers."
+toc: false
+---
+
+[Part 3](../problems/unintended-prior.qmd) read the Gamma(1.60, 1.22) hyperprior of
+paper Figure 1 through two formulas. Here the same prior runs as a process. Each
+restaurant draws its own alpha from Gamma(1.60, 1.22), then seats J = 50 customers by the
+[Chinese restaurant rule](../dpm/crp.qmd): an occupied table with probability proportional
+to its size, a new table with probability proportional to alpha. The widget repeats this
+for 1000 restaurants.
+
+```{=html}
+<div id="w-crpu" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/crp-unintended.js"></script>
+<script>
+  window.__dpxCrpUnintended = DPX["crp-unintended"].mountWidget(document.getElementById("w-crpu"), {});
+</script>
+```
+
+## What the restaurants say
+
+- **About five tables.** The table counts pile up around five; the dots are the exact
+  prior pmf of K_50 (mean 5.05), and with seed 1 the 1000 restaurants average 5.04 tables.
+- **One table often seats most of the room.** In about 63% of the restaurants the largest
+  table holds more than 25 of the 50 customers. The analyst asked for "about five
+  clusters" and also got, without asking, a prior in which one cluster usually dominates.
+- **Two probabilities, two questions.** Pr(W_SB > .5) = .487 asks whether the table of a
+  *randomly chosen customer* holds more than half of the population. Pr(W_max > .5) = .636
+  asks whether the *largest* table does. The second is always at least the first
+  (Proposition 1 of the paper bounds it between S(.5) and 2 S(.5)); the red share in the
+  simulation estimates a 50-customer version of it.
+
+Press **Simulate 1000 restaurants** (or Enter) for a new seed, hover over the wall of
+squares to open one restaurant, or move a and b: at Gamma(1, 3) most restaurants have one
+or two tables and the red squares take over.
+
+::: {.callout-note appearance="simple"}
+These are prior statements: no data have been seen. K_J is the number of fitted
+components (occupied clusters) among the J units.
+:::
+
+Standalone version: [embed/crp-unintended.html](../../embed/crp-unintended.html), for
+example `?a=1&b=1&J=100` or `?seed=7`.

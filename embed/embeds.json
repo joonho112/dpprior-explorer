@@ -1,0 +1,581 @@
+[
+  {
+    "name": "defaults-drift",
+    "ids": [
+      "M-01",
+      "M-02"
+    ],
+    "title": "Same default, different J",
+    "caption": "A fixed Gamma default lets E K_J drift with J while Pr(W_SB > .5) stays flat (paper Fig. 2). K_J is the number of fitted components (occupied clusters) among the J units."
+  },
+  {
+    "name": "unintended-prior",
+    "ids": [
+      "M-03"
+    ],
+    "title": "The unintended prior",
+    "caption": "Gamma(1.60, 1.22) at J = 50: about five clusters, and a .49 chance that a random unit sits in a majority cluster (paper Fig. 1). K_J is the number of fitted components (occupied clusters) among the J units."
+  },
+  {
+    "name": "stick-breaking",
+    "ids": [
+      "P-05"
+    ],
+    "title": "Stick-breaking: how alpha splits the stick",
+    "caption": "V_k ~ Beta(1, alpha) and w_k = V_k x (what is left). Small alpha: one piece takes most of the stick; large alpha: many small pieces. Enter draws again.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "worked-example",
+    "ids": [
+      "C-15"
+    ],
+    "title": "Worked example, J = 50: TSMM, Dual-Anchor, hard bound",
+    "caption": "State (about 5 clusters, medium confidence), calibrate (TSMM), diagnose (Pr(W_SB > .5) = .497 > .40), decide (Dual-Anchor .398; hard bound .250 as sensitivity). Paper Sec. 3.5."
+  },
+  {
+    "name": "crp",
+    "ids": [
+      "P-07"
+    ],
+    "title": "The Chinese restaurant process",
+    "caption": "Customer n + 1 joins table k with probability n_k / (alpha + n) and opens a new table with probability alpha / (alpha + n). Enter seats one more.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "crp-growth",
+    "ids": [
+      "P-08"
+    ],
+    "title": "How K_N grows",
+    "caption": "K_N is the number of occupied tables after N customers. E[K_N] = sum alpha/(alpha + n - 1), close to alpha log N; at fixed N its distribution is the Antoniak pmf, the prior of K_J for J = N units. Use ?alpha=&J= for alpha and N.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "method-problems-strip",
+    "ids": [
+      "M-04"
+    ],
+    "title": "DORO, SCAL and SSI side by side",
+    "caption": "Three published hyperprior rules and the vague default: DORO-Unif cannot be flat, SCAL pins P(K = 1) at .34 while its shortcut drifts to .834, SSI-Weight fixes the weight tails while E K_J keeps growing. Prior statements; K_J is the number of fitted components among the J units."
+  },
+  {
+    "name": "two-lenses",
+    "ids": [
+      "C-04"
+    ],
+    "title": "One alpha, two lenses",
+    "caption": "The same alpha (fixed, or with a Gamma(a, b) prior) sets the count view K_J and the weight view W_SB. Change J: only the count view moves. K_J is the number of fitted components (occupied clusters) among the J units."
+  },
+  {
+    "name": "gamma-mixing",
+    "ids": [
+      "C-12"
+    ],
+    "title": "Gamma mixing: from alpha nodes to the marginal pmf",
+    "caption": "Each thin line is P(K_J = k | alpha) at one alpha node, weighted by the prior probability of its slice of log alpha; the thick line is their sum. More nodes, smaller gap to the exact marginal pmf. Use ?n= for the node count."
+  },
+  {
+    "name": "crp-unintended",
+    "ids": [
+      "M-05"
+    ],
+    "title": "The unintended prior in 1000 restaurants",
+    "caption": "Each restaurant draws alpha from Gamma(1.60, 1.22) and seats J = 50 customers. About five tables per restaurant, and in most restaurants one table seats more than half of the customers. Enter simulates again with a new seed.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "dominance-ribbon",
+    "ids": [
+      "M-17"
+    ],
+    "title": "Dominance ribbon: 50 sticks, first piece highlighted",
+    "caption": "Each row draws alpha from the hyperprior and breaks one stick; the first piece is W_SB. The share of rows whose first piece passes one half estimates Pr(W_SB > .5). Use ?preset=g11|g13|da; Enter redraws.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "sb-vs-ranked",
+    "ids": [
+      "M-18"
+    ],
+    "title": "Order of appearance versus size",
+    "bundle": "dominance-ribbon",
+    "spec": {
+      "mode": "sb-vs-ranked"
+    },
+    "caption": "The same stick-breaking draws in breaking order and sorted by size: the first piece (W_SB) is often not the largest (W_max), but a first piece above one half always is. Enter redraws.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "wmax-bounds",
+    "ids": [
+      "C-16"
+    ],
+    "title": "The largest weight between two bounds",
+    "caption": "For t of one half or more, S(t) = Pr(W_SB > t) <= Pr(W_max > t) <= min(1, S(t)/t) (Proposition 1); the red line is the exact value. The STAR switch shows released posterior summaries, read, not recomputed. Use ?preset=g11|g13|da|star-da and ?t=."
+  },
+  {
+    "name": "collapse",
+    "ids": [
+      "M-06"
+    ],
+    "title": "Collapse: everyone at the first table",
+    "caption": "Prior mass near alpha = 0 makes the prior collapse probability P(K_J = 1) non-trivial: .095 below alpha = .1 and P(K_100 = 1) = .168 under Gamma(1, 1). Prior collapse is not posterior collapse, Pr(K_J = 1 | data). Enter plays 79 customers.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "prior-implications",
+    "ids": [
+      "M-07"
+    ],
+    "title": "What Gamma(1, 1) actually says",
+    "caption": "Five readings of one hyperprior: the mass of alpha at or below .5, the pmf of K_J at the chosen J, the J-free tail Pr(W_SB > t), twenty simulated sets of 79 sites, and the prior collapse probability P(K_J = 1). Vague in alpha is not vague in clusters. Use ?preset=g11|g24|g13|scal and ?J=."
+  },
+  {
+    "name": "finite-mixture",
+    "ids": [
+      "P-00"
+    ],
+    "title": "Why nonparametric Bayes?",
+    "caption": "A mixture with K = 2 or K = 5 cells keeps every point in its fixed cells; with K = ∞ (a Dirichlet process) unbroken stick mass lets new cells open as N grows. Use ?K=2|5, ?preset=inf and ?n=. Enter redraws.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "beta-lollipop",
+    "ids": [
+      "P-01"
+    ],
+    "title": "Beta lollipop",
+    "bundle": "lollipop",
+    "spec": {
+      "K": 2
+    },
+    "caption": "rho_1 ~ Beta(a_1, a_2) and rho_2 = 1 - rho_1: small a gives nearly all-or-nothing draws, large a nearly even ones. The inset shows the Beta density with this draw marked. Enter draws again.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "dirichlet-lollipop",
+    "ids": [
+      "P-02"
+    ],
+    "title": "Dirichlet lollipop and ternary view",
+    "bundle": "lollipop",
+    "spec": {
+      "K": 3
+    },
+    "caption": "rho ~ Dirichlet(a_1, ..., a_K) for K = 2 to 12. At K = 3 each draw is a point in a triangle: a = 0.5 sends draws to the corners, a = 5 to the centre, a = (40, 10, 10) towards rho_1 = 2/3. Use ?preset=corners|centre|tilted.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "paintbox",
+    "ids": [
+      "P-03",
+      "P-04"
+    ],
+    "title": "Paintbox and the order of appearance",
+    "caption": "rho ~ Dirichlet(a, ..., a) cuts the unit interval into K = 1000 pieces; uniform drops turn the pieces they hit blue. Components (K) and clusters (occupied pieces) are different numbers, and new clusters appear ever more rarely. Use ?K=&a=&n=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "hoppe-urn",
+    "ids": [
+      "P-06"
+    ],
+    "title": "From the Hoppe urn to stick-breaking",
+    "caption": "One black ball of mass alpha creates new colours; the colour shares settle down to one stick-breaking draw, and over 1000 urns the first colour's share follows Beta(1, alpha). Enter draws one ball. Use ?alpha=&n=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "dpmm",
+    "ids": [
+      "P-09"
+    ],
+    "title": "The Dirichlet process mixture, generated",
+    "bundle": "dpmm-generator",
+    "caption": "Lazy stick-breaking creates pieces and their means only when a point's u needs them. N, the components created and the clusters grow at different speeds, and some components stay empty. Enter adds one point. Use ?alpha=&n=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "distributions-ladder",
+    "ids": [
+      "P-10"
+    ],
+    "title": "Distributions ladder: Beta, Dirichlet, GEM, DP",
+    "caption": "One concentration alpha drives four random distributions whose support grows from {1, 2} to {1, ..., 10} to {1, 2, ...} to the real line; row 4 moves the GEM weights of row 3 to random locations. Enter redraws all rows. Use ?alpha=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "dp-atoms",
+    "ids": [
+      "P-11"
+    ],
+    "title": "A draw G from the Dirichlet process",
+    "caption": "G = sum of w_k at phi_k: the GEM weights by index, the same weights at locations phi_k ~ N(0, sigma0^2), and N draws from G that land on atoms and repeat. Enter draws a new G. Use ?alpha=&n=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "dp-or-not",
+    "ids": [
+      "P-12"
+    ],
+    "title": "DP or not: finite Dirichlet weights against stick-breaking",
+    "bundle": "dp-atoms",
+    "spec": {
+      "mode": "compare"
+    },
+    "caption": "A finite Dirichlet mixture never uses more than its K components, while stick-breaking keeps supplying new ones: K_N stops at 5 or 50 but keeps growing like alpha log N for the Dirichlet process. ?preset=scaled gives the finite models the same total mass alpha. Enter redraws.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "crp-gibbs",
+    "ids": [
+      "P-13"
+    ],
+    "title": "A collapsed Gibbs sampler for the CRP mixture",
+    "caption": "One point at a time, a new cluster is chosen with probability proportional to the CRP prior weight times the fit. Start from one cluster, singletons or a random split; move alpha live. Enter resamples one point. Use ?preset=one|singletons|random, ?alpha=, ?n= (sweeps).",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "eppf-panel",
+    "ids": [
+      "P-14"
+    ],
+    "title": "The EPPF: why the order of arrival does not matter",
+    "caption": "The probability of the seating {1, 2, 7, 8}, {3, 5, 6}, {4} is a product of Chinese restaurant factors; shuffling the arrival order changes the factors but not the product, alpha^K prod (|C| - 1)! / prod (alpha + n - 1). Enter shuffles. Use ?alpha=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "kj-replicates",
+    "ids": [
+      "P-15"
+    ],
+    "title": "K_J is a random variable",
+    "caption": "Each dot is one simulated restaurant of J customers with a fixed alpha; the bars are the expected counts from the exact Antoniak pmf. K_J is the number of fitted components (occupied clusters) among the J units. Enter adds 100 replicates. Use ?J=&alpha=&n=.",
+    "attribution": "after Broderick (MLSS 2016; 2012 tutorial)"
+  },
+  {
+    "name": "method-timeline",
+    "ids": [
+      "M-08"
+    ],
+    "title": "Nine ways to choose the Gamma hyperprior, and what each gets wrong",
+    "caption": "Select a year to open its card: what the rule assumes, the count and the weights it implies, how it depends on J, its one-line error, the evidence and a link to its explorer. Arrow keys move between years; Enter or Space opens a card. Use ?preset= with antoniak, kdiffuse, moments, doro, scal, jeffreys, defaults, ssi or dpprior."
+  },
+  {
+    "name": "doro-explorer",
+    "ids": [
+      "M-09"
+    ],
+    "title": "DORO: a flat count target the Gamma cannot reach",
+    "caption": "Move n: the bars are the count distribution of the Gamma(a, b) closest in KL divergence to a flat target on 1 to n (dashed), solved live. The gap grows with n, b goes to 0, and E K_n follows n / 2 while a fixed Gamma grows like log n. Switch to DORO-Unif for a flat target on 1 to 2 mu_K - 1 at J = 100. Use ?n= or ?preset= with doro, unif5, unif10 or unif30.",
+    "attribution": "after Dorazio (2009)"
+  },
+  {
+    "name": "scal-explorer",
+    "ids": [
+      "M-10"
+    ],
+    "title": "SCAL: clamped count tails, free weights",
+    "caption": "Move m: the Gamma(a, b) solving P(K_m = 1) = .34 (red) and P(K_m >= ceil(2 ln m)) = .15 (gold) is recomputed live, so the tails stay put while Pr(W_SB > .5) drifts above the vague default's .591. Show the shortcut a = b = exp(-0.033 m) to watch it collapse (P(K_100 = 1) = .834). Use ?n= (m) or ?preset=shortcut.",
+    "attribution": "after Murugiah and Sweeting (2012)"
+  },
+  {
+    "name": "ssi-explorer",
+    "ids": [
+      "M-11"
+    ],
+    "title": "SSI: fixed weights, a count that never stops growing",
+    "caption": "The weight density (left) is the same at every J; E K_J (right) grows from 6.44 at J = 25 to 20.9 at J = 5000. Pick SSI-Weight, a Vicentini and Jermyn exemplar or your own two tails, and move J. Use ?J= or ?preset= with ssi, thirds, half or custom.",
+    "attribution": "after Vicentini and Jermyn (2025)"
+  },
+  {
+    "name": "ssi-truth",
+    "ids": [
+      "A-10"
+    ],
+    "title": "SSI-Weight against a true K* = 30",
+    "caption": "The paper's simulation at J = 100 (I = 0.2): under SSI-Weight the posterior mean of K stays near 3.4 whatever the truth, and the average 95% interval (1 to about 13.8) never covers K* = 30. Use ?K=5, 10 or 30 and ?J=.",
+    "bundle": "ssi-explorer",
+    "spec": {
+      "K": 30
+    },
+    "attribution": "simulation summaries from the DPprior replication package (CC BY 4.0)"
+  },
+  {
+    "name": "quasi-degenerate",
+    "ids": [
+      "M-12"
+    ],
+    "title": "Quasi-degenerate Gamma(eps, eps): flat on log alpha, sure of one cluster",
+    "caption": "Move eps from 1 to 0.001: the prior flattens on the log-alpha scale while P(K_J = 1) climbs toward 1 for J = 50, 100 and 500 (.834 at eps = 0.037, J = 100). Use ?a= for eps and ?J= for the read-out.",
+    "spec": {
+      "mode": "eps"
+    }
+  },
+  {
+    "name": "kn-diffuse",
+    "ids": [
+      "M-13"
+    ],
+    "title": "K_n-diffuse priors on the relative axis k / n",
+    "caption": "Gamma(10, 1), Gamma(5, 0.5) and Gamma(3.5, 0.5) drawn on k / n for n = 10, 53, 74 and 100: wide at the n they were chosen for, narrow and left-shifted elsewhere, and all but ruling out a dominant cluster. Use ?preset=g10, g5 or g35 and ?n=.",
+    "bundle": "quasi-degenerate",
+    "spec": {
+      "mode": "relative"
+    }
+  },
+  {
+    "name": "objective-priors",
+    "ids": [
+      "M-14"
+    ],
+    "title": "Jeffreys vs DORO: two objective priors that disagree",
+    "caption": "The Jeffreys prior for alpha (bars) implies a K_n symmetric about n / 2, with spikes at one cluster and at all singletons over a nearly flat floor; DORO asks for a flat K_n (dashed) and its best Gamma cannot deliver it (line). Switch n (10, 100) and the view (implied count or prior on alpha). Jeffreys after Rodriguez (2013), as described by Vicentini and Jermyn (2025). Use ?n= and ?preset=pmf or density.",
+    "attribution": "Jeffreys prior after Rodriguez (2013), via Vicentini and Jermyn (2025)"
+  },
+  {
+    "name": "stirling-gamma",
+    "ids": [
+      "M-19"
+    ],
+    "title": "Stirling-gamma vs Gamma(2, 4): a pinned count, moving weights",
+    "caption": "Sg(4, 1, n) and Sg(1, 0.25, n) keep E K_n = 4 at every n, where Gamma(2, 4) drifts like log n (3.20 at 100, 4.35 at 1,000, 5.51 at 10,000). The weights, not examined by the Sg papers, move instead: Pr(W_SB > .5) rises from about .3 to .77 by n = 2000. Use ?n=.",
+    "attribution": "after Zito, Rigon and Dunson (2024)"
+  },
+  {
+    "name": "method-map",
+    "ids": [
+      "M-15"
+    ],
+    "title": "The method map: expected clusters against majority-mass probability",
+    "caption": "Every catalog prior at J = 50, 100 or 500: E K_J (log scale) against Pr(W_SB > .5). The shaded box asks for E K between 2 and 10 with Pr(W_SB > .5) at most .40; at J = 500 only the Dual-Anchor is inside. Hover or choose a prior for its strip and a link to the M-07 dashboard. Use ?J= or ?preset=headline."
+  },
+  {
+    "name": "transported-vs-recalibrated",
+    "ids": [
+      "M-16"
+    ],
+    "title": "Transported versus recalibrated count priors",
+    "caption": "The target 'about 5 clusters, between 2 and 10 with 80% probability' calibrated at each J (solid) keeps E K_J at 5 while Pr(W_SB > .5) rises from .495 (J = 50) to .652 (J = 500); calibrated once at a reference J and carried (dashed), it expects 2.36 clusters at J = 10. Use ?J= for the reference J (25, 50, 100, 500) and ?preset=noband."
+  },
+  {
+    "name": "tsmm-parity-table",
+    "ids": [
+      "C-01"
+    ],
+    "title": "TSMM in the browser, checked against R",
+    "caption": "Ten calibration targets solved by DPprior 2.0.0 in R and by the page's engine: the nine feasible ones agree to about 3e-8, and the [3, 10] at 95% target has no Gamma solution in either. Choose a row for the browser's Newton path. Use ?preset= with a target name, for example STAR or J50."
+  },
+  {
+    "name": "tsmm-calibrator",
+    "ids": [
+      "C-02"
+    ],
+    "title": "Calibrate a count target",
+    "caption": "Choose J, the target mean mu_K and the variance (or a VIF): TSMM solves Gamma(a, b) at once and reports E(alpha), CV(alpha), the Newton steps and the residual, or why no Gamma prior fits. Enter recalibrates. Use ?J=&mu=&var= or ?preset= with j50, star, table2 or imposs."
+  },
+  {
+    "name": "elicitation-form",
+    "ids": [
+      "C-05"
+    ],
+    "title": "From what you expect to a prior",
+    "caption": "State K_J as an interval with a probability, a confidence level (VIF) or a CV: the form converts it to (mu_K, sigma^2), solves Gamma(a, b) by TSMM as you type and flags Pr(W_SB > .5) above .40. Use ?preset= with star, bd, vocab, i80, i95 or j50, or ?J=&mu=."
+  },
+  {
+    "name": "feasibility-map",
+    "ids": [
+      "C-06"
+    ],
+    "title": "Where a Gamma prior exists",
+    "caption": "The (mu_K, sigma^2) plane at J = 50, 79, 100 or 500: red, below the profile bound, no Gamma prior; grey, above (mu_K - 1)(J - mu_K), no count at all. Drag the target (or use the sliders) and TSMM re-solves. Use ?preset= with i80, i95 or star, or ?J=&mu=&var=."
+  },
+  {
+    "name": "newton-path",
+    "ids": [
+      "C-07"
+    ],
+    "title": "Stage 1, then Stage 2: the Newton path",
+    "caption": "J = 50, target (5, 10): the A1 start Gamma(2.667, 2.608) gives E K = 4.415 and Var K = 5.618; Newton on (log a, log b) reaches Gamma(1.4082, 1.0770) in five steps, in R and in the browser. Use ?t=0 to 5 for a step."
+  },
+  {
+    "name": "dual-anchor-frontier",
+    "ids": [
+      "C-08"
+    ],
+    "title": "The Dual-Anchor frontier",
+    "caption": "J = 50, target (5, 10): Pr(W_SB > .5) and E K_50 for 29 values of lambda. The largest lambda at or below the .40 trigger is .30, Gamma(2.3158, 1.4204), .398 and E K 5.88; TSMM (lambda = 1) gives .497 and 5.00; the hard bound .25 gives Gamma(5.2745, 2.3059) and E K 7.49. Use ?preset=hard or a lambda such as ?preset=0.5.",
+    "attribution": "Dual-Anchor grid and application priors: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "reconcile-dashboard",
+    "ids": [
+      "C-09"
+    ],
+    "title": "Two anchors, one prior",
+    "caption": "J = 50: TSMM, Gamma(1.4082, 1.0770), to the Dual-Anchor choice, Gamma(2.3158, 1.4204), in four linked views: E K 5.00 -> 5.88, Pr(W_SB > .5) .497 -> .398 against the .40 trigger, E(rho) .518 -> .439. Use ?preset=da, or ?a=&b= for any prior.",
+    "attribution": "TSMM and Dual-Anchor endpoints: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "bernoulli-sum",
+    "ids": [
+      "C-10"
+    ],
+    "title": "K_J as a sum of Bernoulli draws",
+    "caption": "Given alpha, unit i opens a new cluster with probability alpha / (alpha + i - 1); the pmf of K_J is the convolution of these J coins and equals the Stirling (Antoniak) pmf; E K_J and Var K_J are sums. Press Play convolution. Use ?J=&alpha= (and ?n= for the units added)."
+  },
+  {
+    "name": "timing-badges",
+    "ids": [
+      "C-11"
+    ],
+    "title": "Calibration in milliseconds",
+    "caption": "Medians of five runs in this browser: a TSMM Newton solve (J = 50, target (5, 10)) and the exact pmf of K_500, next to a grid search estimate and the MCMC design of the paper's simulation. Sweep calibrates 150 targets. Use ?preset=sweep to start with the sweep."
+  },
+  {
+    "name": "workflow-stepper",
+    "ids": [
+      "C-13"
+    ],
+    "title": "The workflow, step by step",
+    "spec": {
+      "base": "../pages/dpprior/"
+    },
+    "caption": "Six steps: state the target, calibrate with TSMM, diagnose the weights, check the .40 trigger, refine with the Dual-Anchor rule (or keep TSMM), and report the .25 hard bound separately. The J = 50 example fills them in. Use ?preset=j50 to start filled in.",
+    "attribution": "Dual-Anchor and hard-bound priors: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "report-generator",
+    "ids": [
+      "C-14"
+    ],
+    "title": "Reporting the prior",
+    "caption": "The paper's eight-item reporting checklist as a form: items 4 and 5 and the trigger are computed with dp-core from J and (a, b); missing items are flagged; the paragraph can be copied. Use ?preset=j50 to fill in the J = 50 example."
+  },
+  {
+    "name": "vif-sensitivity",
+    "ids": [
+      "C-03"
+    ],
+    "title": "Confidence moves the tails, not the middle",
+    "caption": "J = 100 and a target mean of 5 with VIF 1.25, 1.5, 2.5 or 5: TSMM gives Gamma(7.13, 7.41) to Gamma(0.62, 0.56); Pr(W_SB > .5) moves .53 to .61 while Pr(W_SB > .9) moves .15 to .36 and Pr(alpha < .1) 0 to .18. The lens panels are C-04. Use ?preset=1.25, 1.5, 2.5 or 5."
+  },
+  {
+    "name": "data-lineage-card",
+    "ids": [
+      "A-13"
+    ],
+    "title": "Released data: lineage and licence",
+    "spec": {
+      "dataBase": "../data/released/"
+    },
+    "caption": "Every table the evidence pages read, with its source in the replication package, level, rows, columns, licence, fixed caption and checksum; only rasch_respondents.json is on the respondent-level allowlist. Use ?preset= with applications, simulation, calibration or rasch.",
+    "attribution": "Released summaries: DPprior-paper-replication (CC BY 4.0 for the author's contribution; upstream terms kept, see each card); vocabulary respondents: Open-Source Psychometrics Project via the Item Response Warehouse (CC BY 4.0)."
+  },
+  {
+    "name": "star-caterpillar",
+    "ids": [
+      "A-01"
+    ],
+    "title": "Project STAR: 79 schools under five priors",
+    "bundle": "unit-caterpillar",
+    "spec": {
+      "app": "star"
+    },
+    "caption": "School-level posterior means and 95% intervals from the replication package (read, not recomputed) under Vague, DORO-Unif, TSMM, Dual-Anchor and the hard bound; the schools barely move (RMS shift .009 from Vague). Use ?preset=da or ?preset=hard.",
+    "attribution": "Posterior summaries: DPprior-paper-replication (CC BY 4.0); school estimates from Project STAR via mlmRev (upstream terms kept)."
+  },
+  {
+    "name": "app-prior-strip",
+    "ids": [
+      "A-02"
+    ],
+    "title": "STAR: the prior on K_79 and what the data leave",
+    "spec": {
+      "app": "star"
+    },
+    "caption": "Prior pmf of K_79 under five hyperpriors computed with dp-core (mean, 90% interval, Pr(W_SB > .5); the hard bound as the point mass alpha = 2), and the posterior summaries read from the replication package: E(K | data) 1.96 -> 4.47, collapse .560 -> .064 from Vague to Dual-Anchor. Use ?preset=da or ?preset=hard.",
+    "attribution": "Posterior summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "bd-forest",
+    "ids": [
+      "A-03"
+    ],
+    "title": "Bangert-Drowns: 48 studies under five priors",
+    "caption": "Reported effects with 95% CIs and posterior means with 95% intervals (read, not recomputed) under Vague, DORO-Unif, TSMM, Dual-Anchor and the hard bound; posterior E(K | data) 1.89 -> 3.31 and collapse .548 -> .190 from Vague to Dual-Anchor; REML benchmark .222 [.132, .312], I² 58.4%. Use ?preset=da, ?preset=hard or ?preset=moderators.",
+    "attribution": "Study data: Bangert-Drowns et al. (2004) via metadat::dat.bangertdrowns2004 (GPL >= 2 package; upstream terms kept); posterior summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "rasch-kpmf",
+    "ids": [
+      "A-04"
+    ],
+    "title": "Vocabulary Rasch: the posterior number of ability groups",
+    "caption": "Posterior pmf of K_500 under Gamma(1, 3), Vague, TSMM, Dual-Anchor and the hard bound (read from the replication package): means 3.51, 4.43 [2, 10], 4.30, 6.73 [3, 12] and 8.99 [5, 14] with 95% intervals; the Count-25 sensitivity ends at 11.72. Use ?preset=count25.",
+    "attribution": "Vocabulary data: Open-Source Psychometrics Project via the Item Response Warehouse (CC BY 4.0); posterior summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "rasch-density",
+    "ids": [
+      "A-05"
+    ],
+    "title": "Vocabulary Rasch: ability densities and person scores",
+    "caption": "Fitted ability densities under five priors and the Gaussian benchmark (read from the replication package), and the 500 respondents' WLE scores with the 63 perfect scores highlighted: a score group's posterior ability moves by .031 logits under Dual-Anchor, the WLE scores by at most .006. Use ?preset=no-gaussian to hide the benchmark.",
+    "attribution": "Vocabulary data: Open-Source Psychometrics Project via the Item Response Warehouse (CC BY 4.0); posterior summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "sim-dashboard",
+    "ids": [
+      "A-06"
+    ],
+    "title": "The simulation, cell by cell",
+    "caption": "J = 100 sites, K* in {5, 10, 30} by I in {.2, .5, .8}, five priors, 200 replications per cell (read from the replication package): posterior mean K_J with its 10%-90% range, collapse, coverage of K* or the RMSE of the site effects; three grand-mean branches. Use ?preset= with EK, collapse, coverage or rmse.",
+    "attribution": "Simulation summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "effects-vs-partition-tiles",
+    "ids": [
+      "A-07"
+    ],
+    "title": "The effects stay, the partition moves",
+    "caption": "One simulation cell: the RMSE of the site effects under each prior (nearly equal) next to the collapse rate or the posterior number of clusters (far apart); also unequal weights and fixed lambda (2.47 / 1.76 / 1.54 at lambda .16 / .5 / .9, RMSE within .001). Use ?preset=unequal or ?preset=fixed.",
+    "attribution": "Simulation summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "misspecification",
+    "ids": [
+      "A-08"
+    ],
+    "title": "When the elicited mean is wrong",
+    "caption": "Medium-confidence misspecification grid (J = 100, N(0, 100) grand-mean prior): the posterior mean of K_J or the collapse rate against r = mu_K / K* on a log axis, one trajectory per K*; cells with the same mu_K are joined by a highlight line. Use ?preset=mu for the mu_K axis or ?preset=collapse.",
+    "attribution": "Simulation summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "design-size",
+    "ids": [
+      "A-09"
+    ],
+    "title": "More sites do not fix the default",
+    "caption": "Design-size grid (J = 25 to 200, K* in {5, 10}, I in {.2, .8}, five priors, N(0, 100) grand-mean prior): trajectories of the posterior mean of K_J or the collapse rate, a J slider, and the Dual-Anchor lambda picked at each J. Use ?preset=collapse, or K=, I=, J=.",
+    "attribution": "Simulation summaries: DPprior-paper-replication (CC BY 4.0)."
+  },
+  {
+    "name": "partition-vs-effects",
+    "ids": [
+      "A-11"
+    ],
+    "title": "The partition moves, the effects do not",
+    "caption": "Vague, TSMM and Dual-Anchor on the same data (Project STAR or Bangert-Drowns): the posterior partition (Pr(K_J = 1, 2, 3 or more) or the largest weight) on top, the unit posterior means with 95% intervals below. Use ?app=bd or ?preset=weight.",
+    "attribution": "Application summaries: DPprior-paper-replication (CC BY 4.0); unit estimates from Project STAR via mlmRev and from Bangert-Drowns et al. (2004) via metadat (upstream terms kept)."
+  },
+  {
+    "name": "spec-sensitivity",
+    "ids": [
+      "A-12"
+    ],
+    "title": "The specification matters too",
+    "caption": "The paper's Figure 7 summaries (E(K_J | y) with 95% interval, largest observed share, largest atom weight) under the primary fits, the wide-scale grand-mean prior N(0, 100) or the OLS/HC3 input (STAR). Use ?preset=wide_scale or ?preset=hc3, and ?app=bd.",
+    "attribution": "Application summaries: DPprior-paper-replication (CC BY 4.0)."
+  }
+]

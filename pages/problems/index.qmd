@@ -1,0 +1,73 @@
+---
+title: "Part 3 · What default hyperpriors imply"
+description: "Nine published ways to choose the Gamma hyperprior on alpha, what each implies for the number of clusters and for their sizes, and where each goes wrong."
+---
+
+Every rule for choosing the Gamma(a, b) hyperprior on alpha answers one question and leaves
+another open. Read through two lenses at once, the **count** (K_J, the number of fitted
+components among the J units) and the **weights** (W_SB, the share of the cluster that a
+randomly chosen unit belongs to), each published rule says something its users did not ask
+for. Select a year for its one-line error, the evidence and a link to its explorer.
+
+```{=html}
+<div id="w-timeline" class="dpx-host column-page"></div>
+<script src="../../js/vendor/d3.min.js"></script>
+<script src="../../js/vendor/plot.min.js"></script>
+<script src="../../js/bundles/method-timeline.js"></script>
+<script>
+  window.__dpxTimeline = DPX["method-timeline"].mountWidget(document.getElementById("w-timeline"), {});
+</script>
+```
+
+## The story in six steps
+
+1. **The vague default.** Gamma(1, 1) is vague about alpha, not about clusters. The
+   expected count drifts with the design (E K_J = 4.16 at J = 50, 6.44 at J = 500) while a
+   random unit's chance of sitting in a majority-mass cluster stays at .591 for every J.
+   The "conservative" defaults Gamma(1, 3) and Gamma(2, 4) raise that chance to .812 and
+   .726. See [Same default, different J](defaults-drift.qmd) and
+   [What Gamma(1, 1) actually says](../bridge/gamma11.qmd).
+2. **DORO** (Dorazio, 2009) projects onto a flat count target. A Gamma mixture cannot be
+   flat: the closest one is a spike at one cluster plus a hump near n, the gap grows with n,
+   and the prior ends up expecting about n / 2 clusters. See the [DORO explorer](doro.qmd).
+3. **SCAL** (Murugiah & Sweeting, 2012) fixes two count tails at every sample size, so the
+   prior probability of a single cluster stays at .34 forever, while the weights are left to
+   chance. Its shortcut a = b = exp(−0.033 m) collapses: at m = 100, P(K = 1) = .834. See the
+   [SCAL explorer](scal.qmd).
+4. **SSI** (Vicentini & Jermyn, 2025; the paper's SSI-Weight) fixes the weights and never
+   mentions J, so the expected count grows without bound: 6.44 clusters at J = 25, 20.9 at
+   J = 5000. See the [SSI explorer](ssi.qmd).
+5. **Other defaults.** The quasi-degenerate Gamma(eps, eps) looks flat on the log scale and
+   expects a single cluster; the K_n-diffuse priors of the 1990s rule out a dominant cluster;
+   the Jeffreys prior piles mass on one cluster and on all singletons; the Stirling-gamma
+   prior pins E(K_m) but leaves the weights unexamined. See [other defaults](other-defaults.qmd).
+6. **The method map.** Placed on one plane (expected count against the majority-mass
+   probability), the rules show that one alpha cannot buy few clusters and little dominance
+   for free. The DPprior Dual-Anchor makes that trade explicit at the design J. See [the method map](method-map.qmd).
+
+| Page | Catalog | What it shows |
+|---|---|---|
+| This page | M-08 | The method timeline: nine rules, their assumptions and one-line errors |
+| [Same default, different J](defaults-drift.qmd) | M-01, M-02 | E K_J drifts with J under a fixed default while Pr(W_SB > .5) does not; "conservative" defaults raise dominance |
+| [The unintended prior](unintended-prior.qmd) | M-03 | A prior calibrated to "about five clusters" also implies .49 majority dominance |
+| [DORO, SCAL and SSI side by side](method-problems-strip.qmd) | M-04 | A flat target the Gamma family cannot hit; a clamped P(K = 1); a count that grows without bound |
+| [DORO: a flat count target the Gamma cannot reach](doro.qmd) | M-09 | The KL-closest Gamma to a flat count is a spike plus a hump; the gap grows with n and E K_n follows n / 2 |
+| [SCAL: clamped count tails, free weights](scal.qmd) | M-10 | P(K = 1) stays at .34 at every m while Pr(W_SB > .5) drifts; the shortcut collapses to P(K_100 = 1) = .834 |
+| [SSI: fixed weights, a count that never stops growing](ssi.qmd) | M-11, A-10 | The weight density is the same at every J while E K_J grows from 6.44 to 20.9; the posterior never reaches a true K* = 30 |
+| [Other defaults](other-defaults.qmd) | M-12, M-13, M-14, M-19 | Gamma(eps, eps) is flat on log alpha and 83% sure of one cluster at eps = 0.037; K_n-diffuse priors change shape with n and rule out dominance; the Jeffreys prior spikes at one cluster and at all singletons against DORO's flat target; the Stirling-gamma pins E K_n at 4 while its dominance rises with n |
+| [The method map](method-map.qmd) | M-15, M-16 | Every catalog prior on (E K_J, Pr(W_SB > .5)): the corner of few clusters and little dominance is nearly empty (at J = 500 only the Dual-Anchor); a count prior carried across J misses the count, recalibrated it raises the dominance |
+
+The same problems in restaurant and stick-breaking language are in
+[Part 2](../bridge/index.qmd): the unintended prior in 1000 restaurants (M-05), dominance
+(M-17, M-18), collapse (M-06) and [what Gamma(1, 1) actually says](../bridge/gamma11.qmd)
+(M-07). See the [catalog](../../catalog.qmd).
+
+::: {.callout-note appearance="simple"}
+All statements on these pages are prior statements. The rules' (a, b) values are solved in
+`r-export/02_methods_catalog.R` (DPprior 2.0.0) and, for DORO, SCAL and SSI, again in the
+page's own engine; the timeline's Gamma numbers are recomputed in the browser. Sources:
+[`method_catalog_schema.md`](../../data/precomputed/method_catalog_schema.md).
+:::
+
+Standalone version: [embed/method-timeline.html](../../embed/method-timeline.html)
+(for example `?preset=scal`).
